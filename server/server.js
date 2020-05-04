@@ -11,7 +11,7 @@ const jsonBodyParser = bodyParser.json();
 
 // mongodb constants
 const uri =
-  "mongodb+srv://mat:J9512@matcluster-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://<username>:<password>@<clustername>-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
 const databaseName = "online_shopping";
 
 const setUpDatabase = async () => {
