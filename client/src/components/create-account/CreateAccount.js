@@ -5,6 +5,9 @@ import { withRouter } from "react-router-dom";
 const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -17,26 +20,46 @@ const CreateAccount = () => {
   };
 
   const handleEmailChange = (e) => {
-    // setter
+    //email validation
+    setEmail(e.target.value);
+    console.log(email);
   };
   const handlePasswordChange = (e) => {
-    // setter
+    //password validation (length, special character, capital etc.)
+    setPassword(e.target.value);
+    console.log(password);
   };
 
   const handleConfirmPasswordChange = (e) => {
-    // setter
+    // check it matches with password
+    setConfirmPassword(e.target.value);
+    console.log(confirmPassword);
   };
 
   const onSubmit = () => {
     console.log("Submit button clicked");
     //  validate fields
     //  submit to db
+    createUserAccount();
     console.log(`${firstName} ${lastName}`);
   };
 
+  // may have to change value name in key-value pair as same as key
   const user = {
-    fname: firstName,
-    lname: lastName,
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password,
+  };
+
+  const createUserAccount = () => {
+    fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
   };
 
   return (
@@ -58,7 +81,7 @@ const CreateAccount = () => {
         </FormGroup>
         <FormGroup>
           <Label>Confirm Password</Label>
-          <Input type="password" onChange={handlePasswordChange} />
+          <Input type="password" onChange={handleConfirmPasswordChange} />
         </FormGroup>
         <FormGroup>
           <Button color="primary" onClick={onSubmit}>

@@ -1,13 +1,17 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 
 // express
 const app = express();
 const port = 3001;
 
+// body-parser
+const jsonBodyParser = bodyParser.json();
+
 // mongodb constants
 const uri =
-  "mongodb+srv://<username>:<password>@<clustername>-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://mat:J9512@matcluster-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
 const databaseName = "online_shopping";
 
 const setUpDatabase = async () => {
@@ -29,7 +33,6 @@ const setUpDatabase = async () => {
 };
 
 // create DB
-// refactor
 const createDatabase = async (client) => {
   const db = client.db(databaseName);
 
@@ -41,11 +44,11 @@ const createDatabase = async (client) => {
           bsonType: "object",
           required: ["first_name", "last_name", "email", "password"],
           properties: {
-            first_name: {
+            firstName: {
               bsonType: "string",
               description: "must be a string and is required",
             },
-            last_name: {
+            lastName: {
               bsonType: "string",
               description: "must be a string and is required",
             },
@@ -71,6 +74,19 @@ const createDatabase = async (client) => {
   console.log("[MongoDB]: database created");
 };
 
+// create collections
+const createUserCollection = () => {};
+
+// insert documents into collections
+app.post("/api/users", jsonBodyParser, (req, res) => {
+  console.log("inside app.post for users");
+  console.log(req.body);
+
+  // insert data into user collection
+});
+
 setUpDatabase();
 
-app.listen(port);
+app.listen(port, () => {
+  console.log("im listening...");
+});
