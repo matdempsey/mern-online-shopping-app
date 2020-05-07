@@ -2,24 +2,23 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 
-// express
 const app = express();
 const port = 3001;
 
-// body-parser
 const jsonBodyParser = bodyParser.json();
 
 // mongodb constants
 const uri =
-  "mongodb+srv://<username>:<password>@<clustername>-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://mat:<password>@<cluster>-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
 const databaseName = "online_shopping";
 
-const setUpDatabase = async () => {
-  const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+// instance
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
+const setUpDatabase = async () => {
   try {
     //connect to cluster
     await client.connect();
@@ -27,12 +26,11 @@ const setUpDatabase = async () => {
   } catch (err) {
     console.log(err);
   } finally {
-    client.close();
-    console.log("[MongoDB]: connection closed!");
+    //client.close();
+    //console.log("[MongoDB]: connection closed!");
   }
 };
 
-// create DB
 const createDatabase = async (client) => {
   const db = client.db(databaseName);
 
@@ -42,7 +40,7 @@ const createDatabase = async (client) => {
       validator: {
         $jsonSchema: {
           bsonType: "object",
-          required: ["first_name", "last_name", "email", "password"],
+          required: ["firstName", "lastName", "email", "password"],
           properties: {
             firstName: {
               bsonType: "string",
@@ -74,19 +72,32 @@ const createDatabase = async (client) => {
   console.log("[MongoDB]: database created");
 };
 
-// create collections
-const createUserCollection = () => {};
-
-// insert documents into collections
 app.post("/api/users", jsonBodyParser, (req, res) => {
-  console.log("inside app.post for users");
   console.log(req.body);
+  const userDetails = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+  };
+  console.log("user details: ", userDetails);
 
-  // insert data into user collection
+  client
+    .db(databaseName)
+    .collection("users")
+    .insertOne(userDetails, (err, res) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        console.log(
+          "[MongoDB]: document has been inserted into the users collection"
+        );
+      }
+    });
 });
 
 setUpDatabase();
 
 app.listen(port, () => {
-  console.log("im listening...");
+  console.log("[Express]: server is running on localhost:", `${port}`);
 });

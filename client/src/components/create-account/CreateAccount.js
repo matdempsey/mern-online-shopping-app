@@ -44,8 +44,7 @@ const CreateAccount = () => {
     console.log(`${firstName} ${lastName}`);
   };
 
-  // may have to change value name in key-value pair as same as key
-  const user = {
+  const userDetails = {
     firstName: firstName,
     lastName: lastName,
     email: email,
@@ -58,8 +57,10 @@ const CreateAccount = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
-    });
+      body: JSON.stringify(userDetails),
+    })
+      .then(console.log("POST request sucessful"))
+      .catch((e) => console.log("error:", e.message));
   };
 
   return (
