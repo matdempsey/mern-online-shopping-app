@@ -7,9 +7,13 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const logInDetails = {
+    email: email,
+    password: password,
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -21,12 +25,19 @@ const Login = (props) => {
 
   const onLoginClick = () => {
     if (email === "" || password === "") {
-      // set state to true for error component
       setShowError(true);
       setErrorMessage("Please enter your email address and password.");
     }
 
-    fetch("");
+    fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(logInDetails),
+    })
+      .then()
+      .catch((err) => console.log(err));
   };
 
   const onCreateAccountClick = () => {

@@ -9,6 +9,13 @@ const CreateAccount = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const userDetails = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password,
+  };
+
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
     console.log(firstName);
@@ -42,13 +49,6 @@ const CreateAccount = () => {
     //  submit to db
     createUserAccount();
     console.log(`${firstName} ${lastName}`);
-  };
-
-  const userDetails = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password,
   };
 
   const createUserAccount = () => {

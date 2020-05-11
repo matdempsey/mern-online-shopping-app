@@ -73,14 +73,12 @@ const createDatabase = async (client) => {
 };
 
 app.post("/api/users", jsonBodyParser, (req, res) => {
-  console.log(req.body);
   const userDetails = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
   };
-  console.log("user details: ", userDetails);
 
   client
     .db(databaseName)
@@ -92,6 +90,25 @@ app.post("/api/users", jsonBodyParser, (req, res) => {
         console.log(
           "[MongoDB]: document has been inserted into the users collection"
         );
+      }
+    });
+});
+
+app.post("/api/login", jsonBodyParser, (req, res) => {
+  const logInDetails = {
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  client
+    .db(databaseName)
+    .collection("users")
+    .findOne(logInDetails, (err, res) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        // return a response true/false if theres a match for provided account details
+        console.log(res);
       }
     });
 });
