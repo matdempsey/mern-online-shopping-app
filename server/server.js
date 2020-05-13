@@ -83,7 +83,7 @@ app.post("/api/users", jsonBodyParser, (req, res) => {
   client
     .db(databaseName)
     .collection("users")
-    .insertOne(userDetails, (err, res) => {
+    .insertOne(userDetails, (err) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
@@ -103,12 +103,14 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
   client
     .db(databaseName)
     .collection("users")
-    .findOne(logInDetails, (err, res) => {
+    .findOne(logInDetails, (err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        // return a response true/false if theres a match for provided account details
-        console.log(res);
+        console.log("[MongoDB]: findOne result =", result);
+        result === null
+          ? res.json({ matchFound: false })
+          : res.json({ matchFound: true });
       }
     });
 });

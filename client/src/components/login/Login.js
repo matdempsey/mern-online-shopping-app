@@ -27,17 +27,27 @@ const Login = (props) => {
     if (email === "" || password === "") {
       setShowError(true);
       setErrorMessage("Please enter your email address and password.");
+    } else {
+      // send user log in details to server
+      fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(logInDetails),
+      })
+        .then((res) => res.json())
+        .then((matchFound) => {
+          const match = Object.values(matchFound)[0];
+          if (!match) {
+            setShowError(true);
+            setErrorMessage("Incorrect details.");
+          } else {
+            history.push("/product-catalogue");
+          }
+        })
+        .catch((err) => console.log(err));
     }
-
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(logInDetails),
-    })
-      .then()
-      .catch((err) => console.log(err));
   };
 
   const onCreateAccountClick = () => {
