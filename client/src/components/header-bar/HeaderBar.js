@@ -14,7 +14,7 @@ const HeaderBar = (props) => {
 
     // if (history.location.pathname === "/login") {
     //   setShowHeader(false);
-    }
+    //}
   };
 
   const handleLogInText = () => {
