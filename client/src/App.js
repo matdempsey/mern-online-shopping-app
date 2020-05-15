@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import "./App.css";
 import HeaderBar from "./components/header-bar/HeaderBar.js";
+import NavBar from "./components/common/nav-bar/NavBar.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";
 import Login from "./components/login/Login.js";
 import ProductCatalogue from "./components/product-catalogue/product-catalogue.js";
@@ -12,6 +13,7 @@ const App = () => {
       <Router>
         <div className="App">
           <HeaderBar />
+          <NavBar />
           <h1>React Online Shopping App</h1>
         </div>
 

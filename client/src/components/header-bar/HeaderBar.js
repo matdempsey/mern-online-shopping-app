@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav, NavItem, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -7,9 +7,14 @@ import "./HeaderBar.css";
 
 const HeaderBar = (props) => {
   const { history } = props;
+  const [showHeader, setShowHeader] = useState(true);
 
   const handleOnClick = () => {
     history.push("/login");
+
+    // if (history.location.pathname === "/login") {
+    //   setShowHeader(false);
+    }
   };
 
   const handleLogInText = () => {
@@ -17,15 +22,17 @@ const HeaderBar = (props) => {
   };
 
   return (
-    <div className="header-bar">
-      <Nav>
-        <NavItem>
-          <Button color="success" onClick={handleOnClick}>
-            Login
-          </Button>
-        </NavItem>
-      </Nav>
-    </div>
+    showHeader && (
+      <div className="header-bar">
+        <Nav>
+          <NavItem>
+            <Button color="success" onClick={handleOnClick}>
+              Login
+            </Button>
+          </NavItem>
+        </Nav>
+      </div>
+    )
   );
 };
 

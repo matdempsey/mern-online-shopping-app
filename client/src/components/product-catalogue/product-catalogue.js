@@ -7,7 +7,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from "reactstrap";
-import SearchBar from "../search-bar/SearchBar";
+import SearchBar from "../common/search-bar/SearchBar.js";
 
 const ProductCatalogue = () => {
   return (
