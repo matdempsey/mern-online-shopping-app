@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { withRouter } from "react-router-dom";
 
 const CreateAccount = () => {
@@ -8,6 +8,9 @@ const CreateAccount = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState([]);
 
   const userDetails = {
     firstName: firstName,
@@ -18,37 +21,82 @@ const CreateAccount = () => {
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
-    console.log(firstName);
   };
 
   const handleLastNameChange = (e) => {
     setLastName(e.target.value);
-    console.log(lastName);
   };
 
   const handleEmailChange = (e) => {
-    //email validation
     setEmail(e.target.value);
-    console.log(email);
   };
   const handlePasswordChange = (e) => {
-    //password validation (length, special character, capital etc.)
     setPassword(e.target.value);
-    console.log(password);
   };
 
   const handleConfirmPasswordChange = (e) => {
-    // check it matches with password
     setConfirmPassword(e.target.value);
-    console.log(confirmPassword);
   };
 
   const onSubmit = () => {
-    console.log("Submit button clicked");
-    //  validate fields
-    //  submit to db
+    let errorMsgArr = [];
+
+    if (
+      firstName === "" &&
+      lastName === "" &&
+      email === "" &&
+      password === ""
+    ) {
+      errorMsgArr.push("Please fill in all fields.");
+    } else {
+      if (firstName.trim() === "") {
+        errorMsgArr.push("Please enter your first name.");
+      }
+
+      if (lastName.trim() === "") {
+        errorMsgArr.push("Please enter your last name.");
+      }
+
+      if (email.trim() === "") {
+        errorMsgArr.push("Please enter your email address.");
+      } else {
+        //check for @,
+        const charReg = /[@]/;
+        if (email.search(charReg) === -1)
+          errorMsgArr.push("Invalid email address. Please try again.");
+      }
+
+      //password validation block
+      if (password.trim() === "") {
+        errorMsgArr.push("Please enter your password.");
+      } else {
+        const capsReg = /[A-Z]/;
+        const numReg = /[\d]+/;
+
+        if (password.search(capsReg) === -1) {
+          errorMsgArr.push(
+            "Password must contain at least one capital letter."
+          );
+        }
+
+        if (password.search(numReg) === -1) {
+          errorMsgArr.push("Password must contain at least one number.");
+        }
+
+        if (password.length < 8) {
+          errorMsgArr.push("Password must be at least eight characters long.");
+        }
+
+        if (password !== confirmPassword) {
+          errorMsgArr.push("Passwords don't match. Please try again.");
+        }
+      }
+    }
+
+    setShowError(true);
+    setErrorMessage(errorMsgArr);
+
     createUserAccount();
-    console.log(`${firstName} ${lastName}`);
   };
 
   const createUserAccount = () => {
@@ -58,9 +106,7 @@ const CreateAccount = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userDetails),
-    })
-      .then(console.log("POST request sucessful"))
-      .catch((e) => console.log("error:", e.message));
+    }).catch((e) => console.log("error:", e.message));
   };
 
   return (
@@ -83,6 +129,15 @@ const CreateAccount = () => {
         <FormGroup>
           <Label>Confirm Password</Label>
           <Input type="password" onChange={handleConfirmPasswordChange} />
+        </FormGroup>
+        <FormGroup>
+          <Alert color="danger" isOpen={showError}>
+            <ul>
+              {errorMessage.map((ele) => (
+                <li>{ele}</li>
+              ))}
+            </ul>
+          </Alert>
         </FormGroup>
         <FormGroup>
           <Button color="primary" onClick={onSubmit}>
