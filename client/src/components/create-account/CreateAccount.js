@@ -60,7 +60,7 @@ const CreateAccount = () => {
       if (email.trim() === "") {
         errorMsgArr.push("Please enter your email address.");
       } else {
-        //check for @,
+        //check if there is at least one . after @
         const charReg = /[@]/;
         if (email.search(charReg) === -1)
           errorMsgArr.push("Invalid email address. Please try again.");
@@ -93,10 +93,17 @@ const CreateAccount = () => {
       }
     }
 
-    setShowError(true);
-    setErrorMessage(errorMsgArr);
+    if (errorMsgArr.length >= 1) {
+      setShowError(true);
+      setErrorMessage(errorMsgArr);
+    }
 
-    createUserAccount();
+    if (errorMsgArr.length === 0) {
+      if (showError) {
+        setShowError(false);
+      }
+      createUserAccount();
+    }
   };
 
   const createUserAccount = () => {
