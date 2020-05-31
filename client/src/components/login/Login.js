@@ -59,7 +59,7 @@ const Login = (props) => {
     <div>
       <Form>
         <FormGroup>
-          <Label>Email</Label>
+          <Label size="lg">Log-in</Label>
           <Input
             type="email"
             onChange={handleEmailChange}
@@ -67,7 +67,6 @@ const Login = (props) => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>password</Label>
           <Input
             type="password"
             onChange={handlePasswordChange}

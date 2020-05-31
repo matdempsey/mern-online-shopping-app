@@ -12,11 +12,14 @@ const CreateAccount = () => {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
 
-  const userDetails = {
+  let errorMsgArr = [];
+
+  const customerDetails = {
     firstName: firstName,
     lastName: lastName,
     email: email,
     password: password,
+    confirmPassword: confirmPassword,
   };
 
   const handleFirstNameChange = (e) => {
@@ -39,8 +42,6 @@ const CreateAccount = () => {
   };
 
   const onSubmit = () => {
-    let errorMsgArr = [];
-
     if (
       firstName === "" &&
       lastName === "" &&
@@ -94,8 +95,8 @@ const CreateAccount = () => {
     }
 
     if (errorMsgArr.length >= 1) {
-      setShowError(true);
       setErrorMessage(errorMsgArr);
+      setShowError(true);
     }
 
     if (errorMsgArr.length === 0) {
@@ -107,13 +108,20 @@ const CreateAccount = () => {
   };
 
   const createUserAccount = () => {
-    fetch("/api/users", {
+    fetch("/api/customers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userDetails),
-    }).catch((e) => console.log("error:", e.message));
+      body: JSON.stringify(customerDetails),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setErrorMessage(
+          errorMsgArr.push("An account with this email address already exists.")
+        );
+      })
+      .catch((e) => console.log("error:", e.message));
   };
 
   return (

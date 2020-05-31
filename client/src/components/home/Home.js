@@ -1,36 +1,18 @@
 import React from "react";
-import { Carousel } from "reactstrap";
-
-const slideItems = [
-  {
-    // src: image link, see -> https://reactstrap.github.io/components/carousel/
-    altText: "insert alt text",
-    caption: "insert capton text",
-  },
-  {
-    //src:
-    altText: "insert alt text",
-    caption: "insert capton text",
-  },
-  {
-    //src:
-    altText: "insert alt text",
-    caption: "insert capton text",
-  },
-  {
-    //src:
-    altText: "insert alt text",
-    caption: "insert capton text",
-  },
-  {
-    //src:
-    altText: "insert alt text",
-    caption: "insert capton text",
-  },
-];
+import HeaderBar from "../header-bar/HeaderBar.js";
+import NavBar from "../common/nav-bar/NavBar.js";
+import Slides from "../slides/Slides";
 
 const Home = () => {
-  return <div></div>;
+  return (
+    <>
+      <div>
+        <HeaderBar />
+        <NavBar />
+        <Slides />
+      </div>
+    </>
+  );
 };
 
 export default Home;

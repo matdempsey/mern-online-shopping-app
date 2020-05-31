@@ -35,7 +35,7 @@ const createDatabase = async (client) => {
   const db = client.db(databaseName);
 
   try {
-    await db.createCollection("users", {
+    await db.createCollection("customers", {
       autoIndexId: true,
       validator: {
         $jsonSchema: {
@@ -62,9 +62,9 @@ const createDatabase = async (client) => {
         },
       },
     });
-    console.log("[MongoDB]: users collection created.");
-    await db.createCollection("products", {});
-    console.log("[MongoDB]: products collection created.");
+    console.log("[MongoDB]: customers collection created.");
+    await db.createCollection("components", {});
+    console.log("[MongoDB]: components collection created.");
   } catch (err) {
     console.log(err);
   }
@@ -72,26 +72,46 @@ const createDatabase = async (client) => {
   console.log("[MongoDB]: database created");
 };
 
-app.post("/api/users", jsonBodyParser, (req, res) => {
-  const userDetails = {
+app.post("/api/customers", jsonBodyParser, (req, res) => {
+  const customerDetails = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
   };
 
-  client
+  // not working - need to fix
+  let r;
+  const accExist = client
     .db(databaseName)
-    .collection("users")
-    .insertOne(userDetails, (err) => {
+    .collection("customers")
+    .findOne({ email: customerDetails.email }, (err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log(
-          "[MongoDB]: document has been inserted into the users collection"
-        );
+        r = result !== null ? true : false;
       }
+      console.log("r = ", r);
+      return r;
     });
+
+  console.log("accExist value = ", accExist); // undefined
+  if (accExist) {
+    res.json({ matchFound: true });
+  } else {
+    client
+      .db(databaseName)
+      .collection("customers")
+      .insertOne(customerDetails, (err) => {
+        if (err) {
+          console.log("[MongoDB]:", err.message);
+        } else {
+          console.log(
+            "[MongoDB]: document has been inserted into the customers collection"
+          );
+        }
+      });
+  }
 });
 
 app.post("/api/login", jsonBodyParser, (req, res) => {
@@ -102,7 +122,7 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
 
   client
     .db(databaseName)
-    .collection("users")
+    .collection("customers")
     .findOne(logInDetails, (err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);

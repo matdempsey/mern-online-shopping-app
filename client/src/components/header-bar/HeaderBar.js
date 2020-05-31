@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Nav, NavItem, Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 import { withRouter } from "react-router-dom";
 
 import "./HeaderBar.css";
@@ -24,13 +23,9 @@ const HeaderBar = (props) => {
   return (
     showHeader && (
       <div className="header-bar">
-        <Nav>
-          <NavItem>
-            <Button color="success" onClick={handleOnClick}>
-              Login
-            </Button>
-          </NavItem>
-        </Nav>
+        <Button color="success" onClick={handleOnClick}>
+          Login
+        </Button>
       </div>
     )
   );
