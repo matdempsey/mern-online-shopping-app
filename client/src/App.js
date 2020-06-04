@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";
-import ProductCatalogue from "./components/product-catalogue/product-catalogue.js";
-import PartPicker from "./components/part-picker/PartPicker.js";
+import ProductCatalogue from "./components/product-catalogue/ProductCatalogue.js";
+import BuildPC from "./components/build-pc/BuildPC.js";
 
 import "./App.css";
 
@@ -21,7 +21,7 @@ const App = () => {
               path="/product-catalogue"
               component={ProductCatalogue}
             ></Route>
-            <Route path="/build-pc" component={PartPicker}></Route>
+            <Route path="/build-pc" component={BuildPC}></Route>
           </Switch>
         </Router>
       </div>

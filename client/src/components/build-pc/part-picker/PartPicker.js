@@ -1,9 +1,6 @@
 import React from "react";
-import { Form, FormGroup, Input, Label, Button } from "reactstrap";
-import NavBar from "../common/nav-bar/NavBar.js";
-import CasePicker from "../case-picker/CasePicker.js";
-
-import "./PartPicker.css";
+import { Form, FormGroup, Input, Label } from "reactstrap";
+import NavBar from "../../common/nav-bar/NavBar.js";
 
 const PartPicker = () => {
   const fetchComponents = () => {
@@ -19,14 +16,7 @@ const PartPicker = () => {
     <>
       <div>
         <Form>
-          <Label className="section-banner" size="lg">
-            1) SELECT A CASE
-          </Label>
-          <CasePicker />
           <FormGroup>
-            <Label className="section-banner" size="lg">
-              2) CHOOSE YOUR CORE COMPONENTS
-            </Label>
             <FormGroup>
               <Label size="lg">Motherboard</Label>
               <Input className="" type="select">
@@ -65,7 +55,6 @@ const PartPicker = () => {
             </FormGroup>
           </FormGroup>
         </Form>
-        <Button color="success">Confirm</Button>
       </div>
     </>
   );
