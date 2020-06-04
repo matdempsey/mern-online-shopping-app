@@ -21,7 +21,7 @@ const App = () => {
               path="/product-catalogue"
               component={ProductCatalogue}
             ></Route>
-            <Route path="/configure-pc" component={PartPicker}></Route>
+            <Route path="/build-pc" component={PartPicker}></Route>
           </Switch>
         </Router>
       </div>
