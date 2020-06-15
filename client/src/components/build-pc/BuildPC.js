@@ -3,6 +3,7 @@ import { Label } from "reactstrap";
 
 import CasePicker from "./case-picker/CasePicker.js";
 import PartPicker from "./part-picker/PartPicker.js";
+import Summary from "./summary/Summary.js";
 
 import "./BuildPC.css";
 
@@ -17,6 +18,10 @@ const BuildPC = () => {
         2) CHOOSE YOUR CORE COMPONENTS
       </Label>
       <PartPicker />
+      <Label className="section-banner" size="lg">
+        3) REVIEW COST
+      </Label>
+      <Summary />
     </>
   );
 };

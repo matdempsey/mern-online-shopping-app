@@ -58,12 +58,50 @@ const createDatabase = async (client) => {
               bsonType: "string",
               description: "must be a string and is required",
             },
+
+            // embedded document for orders
           },
         },
       },
     });
     console.log("[MongoDB]: customers collection created.");
-    await db.createCollection("components", {});
+    await db.createCollection("components", {
+      autoIndexId: true,
+      validator: {
+        $jsonSchema: {
+          bsonType: "object",
+          required: ["name", "type", "qty", "price"],
+          properties: {
+            name: {
+              bsonType: "string",
+              description: "must be a string and is required",
+            },
+            type: {
+              enum: [
+                "Motherboard",
+                "Processor",
+                "Graphics Card",
+                "Memory",
+                "Storage",
+                "Power Supply",
+                "Operating System",
+              ],
+            },
+            description: {
+              bsonType: "string",
+            },
+
+            qty: {
+              bsonType: "int",
+            },
+
+            price: {
+              bsonType: "double",
+            },
+          },
+        },
+      },
+    });
     console.log("[MongoDB]: components collection created.");
   } catch (err) {
     console.log(err);
@@ -127,10 +165,25 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log("[MongoDB]: findOne result =", result);
+        //console.log("[MongoDB]: login findOne result =", result);
         result === null
           ? res.json({ matchFound: false })
           : res.json({ matchFound: true });
+      }
+    });
+});
+
+app.get("/api/components", (req, res) => {
+  client
+    .db(databaseName)
+    .collection("components")
+    .find({})
+    .toArray((err, result) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        //console.log("[MongoDB]: component find result =", result);
+        res.json(result);
       }
     });
 });

@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
-import NavBar from "../../common/nav-bar/NavBar.js";
 
 const PartPicker = () => {
-  const fetchComponents = () => {
+  useEffect(() => {
     fetch("/api/components", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    });
-  };
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const components = res;
+        console.log("partpicker components", components);
+      });
+  }, []);
 
   return (
     <>
@@ -21,8 +25,6 @@ const PartPicker = () => {
               <Label size="lg">Motherboard</Label>
               <Input className="" type="select">
                 <option>1</option>
-                <option>2</option>
-                <option>3</option>
               </Input>
             </FormGroup>
             <FormGroup>
@@ -43,10 +45,6 @@ const PartPicker = () => {
             </FormGroup>
             <FormGroup>
               <Label size="lg">Power Supply</Label>
-              <Input type="select" />
-            </FormGroup>
-            <FormGroup>
-              <Label size="lg">Optical Drive</Label>
               <Input type="select" />
             </FormGroup>
             <FormGroup>
