@@ -3,3 +3,7 @@
   color: white;
   width: 100%;
 }
+
+.button-pos {
+  float: right;
+}

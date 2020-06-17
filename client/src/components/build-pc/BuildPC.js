@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "reactstrap";
+import { Label, Button } from "reactstrap";
 
 import CasePicker from "./case-picker/CasePicker.js";
 import PartPicker from "./part-picker/PartPicker.js";
@@ -22,6 +22,9 @@ const BuildPC = () => {
         3) REVIEW COST
       </Label>
       <Summary />
+      <div className="button-pos">
+        <Button color="success">Continue</Button>
+      </div>
     </>
   );
 };

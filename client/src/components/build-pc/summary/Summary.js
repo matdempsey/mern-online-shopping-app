@@ -1,7 +1,5 @@
 import React from "react";
-import { Label, Button } from "reactstrap";
-
-import "./Summary.css";
+import { Label } from "reactstrap";
 
 //rename folder, file & function
 const Summary = (props) => {
@@ -15,9 +13,6 @@ const Summary = (props) => {
       </div>
       <div>
         <Label size="lg">Finance: {""} p/m</Label>
-      </div>
-      <div className="button-pos">
-        <Button color="success">Continue</Button>
       </div>
     </>
   );

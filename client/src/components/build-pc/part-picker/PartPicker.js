@@ -1,7 +1,12 @@
-import React, { useEffect } from "react";
-import { Form, FormGroup, Input, Label } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { Form, FormGroup, Label } from "reactstrap";
+
+import DropdownList from "../../dropdown-list/DropdownList.js";
 
 const PartPicker = () => {
+  const [componentList, setComponentList] = useState([]);
+  const [loadingData, setLoadingData] = useState(true);
+
   useEffect(() => {
     fetch("/api/components", {
       method: "GET",
@@ -11,50 +16,54 @@ const PartPicker = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        const components = res;
-        console.log("partpicker components", components);
+        setComponentList(res);
+        setLoadingData(false);
       });
   }, []);
 
+  const filterComponents = (componentType) => {
+    return componentList
+      .filter((component) => component.type === componentType)
+      .map((component) => component.name);
+  };
+
   return (
-    <>
-      <div>
-        <Form>
-          <FormGroup>
+    !loadingData && (
+      <>
+        <div>
+          <Form>
             <FormGroup>
               <Label size="lg">Motherboard</Label>
-              <Input className="" type="select">
-                <option>1</option>
-              </Input>
+              <DropdownList content={filterComponents("Motherboard")} />
             </FormGroup>
             <FormGroup>
               <Label size="lg">Processor</Label>
-              <Input type="select" />
+              <DropdownList content={filterComponents("Processor")} />
             </FormGroup>
             <FormGroup>
               <Label size="lg">Memory</Label>
-              <Input type="select" />
+              <DropdownList content={filterComponents("Memory")} />
             </FormGroup>
             <FormGroup>
               <Label size="lg">Graphics Card</Label>
-              <Input type="select" />
+              <DropdownList content={filterComponents("Graphics Card")} />
             </FormGroup>
             <FormGroup>
               <Label size="lg">Storage</Label>
-              <Input type="select" />
+              <DropdownList content={filterComponents("Storage")} />
             </FormGroup>
             <FormGroup>
               <Label size="lg">Power Supply</Label>
-              <Input type="select" />
+              <DropdownList content={filterComponents("Power Supply")} />
             </FormGroup>
             <FormGroup>
               <Label size="lg">Operating System</Label>
-              <Input type="select" />
+              <DropdownList content={filterComponents("Operating System")} />
             </FormGroup>
-          </FormGroup>
-        </Form>
-      </div>
-    </>
+          </Form>
+        </div>
+      </>
+    )
   );
 };
 
