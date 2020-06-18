@@ -4,6 +4,8 @@ import { Modal, ModalHeader, Button } from "reactstrap";
 const FurtherInfo = () => {
   const [modal, setModal] = useState(false);
 
+  console.log("inside modal");
+
   const toggle = () => {
     setModal(true);
   };

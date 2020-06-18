@@ -23,16 +23,6 @@ const CasePicker = () => {
     { name: "", image: placeholderImage, desc: "" },
   ];
 
-  // open modal showing case information
-  const handleOnCaseImageClick = () => {
-    console.log("clickity click");
-    return (
-      <div>
-        <FurtherInfo />
-      </div>
-    );
-  };
-
   const cases = arr.map((ele, idx) => {
     return (
       <Card>
@@ -41,7 +31,7 @@ const CasePicker = () => {
           width=""
           src={ele.image}
           alt={ele.name ? ele.name : `case ${idx}`}
-          onClick={handleOnCaseImageClick}
+          onClick={""}
         />
         <CardBody>
           <CardTitle>{ele.name}</CardTitle>
