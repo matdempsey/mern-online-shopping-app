@@ -2,7 +2,7 @@ import React from "react";
 import { Label, Button } from "reactstrap";
 
 import CasePicker from "./case-picker/CasePicker.js";
-import PartPicker from "./part-picker/PartPicker.js";
+import ComponentPicker from "./component-picker/ComponentPicker.js";
 import Summary from "./summary/Summary.js";
 
 import "./BuildPC.css";
@@ -17,11 +17,11 @@ const BuildPC = () => {
       <Label className="section-banner" size="lg">
         2) CHOOSE YOUR CORE COMPONENTS
       </Label>
-      <PartPicker />
+      <ComponentPicker />
       <Label className="section-banner" size="lg">
         3) REVIEW COST
       </Label>
-      <Summary />
+      <Summary totalCost={""} perMonthCost={""} />
       <div className="button-pos">
         <Button color="success">Continue</Button>
       </div>
