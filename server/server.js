@@ -65,6 +65,7 @@ const createDatabase = async (client) => {
       },
     });
     console.log("[MongoDB]: customers collection created.");
+
     await db.createCollection("components", {
       autoIndexId: true,
       validator: {
@@ -103,12 +104,71 @@ const createDatabase = async (client) => {
       },
     });
     console.log("[MongoDB]: components collection created.");
+
+    await client.db(databaseName).createCollection("cases", {
+      autoIndexId: true,
+      validator: {
+        $jsonSchema: {
+          bsonType: "object",
+          required: [
+            "name",
+            "width",
+            "height",
+            "depth",
+            "formFactor",
+            "colour",
+            "maxGraphicsCardLength",
+            "suitability",
+            "description",
+            "qty",
+            "price",
+          ],
+          properties: {
+            name: {
+              bsonType: "string",
+            },
+            width: {
+              bsonType: "string",
+            },
+            height: {
+              bsonType: "string",
+            },
+            depth: {
+              bsonType: "string",
+            },
+            formFactor: {
+              enum: ["ATX", "Micro ATX", "Mini ITX"],
+            },
+            colour: {
+              bsonType: "string",
+            },
+            maxGraphicsCardLength: {
+              bsonType: "string",
+            },
+            suitability: {
+              enum: ["Office", "Gaming", "Office & Gaming"],
+            },
+            description: {
+              bsonType: "string",
+            },
+            qty: {
+              bsonType: "int",
+            },
+            price: {
+              bsonType: "double",
+            },
+          },
+        },
+      },
+    });
+    console.log("[MongoDB]: cases collection created.");
+    console.log("[MongoDB]: database created");
   } catch (err) {
     console.log(err);
   }
-
-  console.log("[MongoDB]: database created");
 };
+
+// request section
 
 app.post("/api/customers", jsonBodyParser, (req, res) => {
   const customerDetails = {
@@ -183,6 +243,21 @@ app.get("/api/components", (req, res) => {
         console.log("[MongoDB]:", err.message);
       } else {
         //console.log("[MongoDB]: component find result =", result);
+        res.json(result);
+      }
+    });
+});
+
+app.get("/api/cases", (req, res) => {
+  client
+    .db(databaseName)
+    .collection("cases")
+    .find({})
+    .toArray((err, result) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        console.log("[MongoDB]: cases find result =", result);
         res.json(result);
       }
     });
