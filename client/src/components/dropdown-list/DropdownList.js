@@ -2,15 +2,28 @@ import React from "react";
 import { Input } from "reactstrap";
 
 const DropdownList = (props) => {
-  const { content } = props;
+  const { items, totalCostFunc } = props;
 
-  const components = content.map((component, idx) => (
-    <option key={idx}>{component}</option>
+  const components = items.map((component, idx) => (
+    <option key={idx}>{component.name}</option>
   ));
+
+  const handleOnItemClick = (e) => {
+    // filter array so that new array only contains what the user selected in dropdown list
+    const filteredArr = items.filter((component) =>
+      component.name.includes(e.target.value)
+    );
+
+    //
+    const x = filteredArr.map((component) => component.price);
+    totalCostFunc(...x);
+  };
 
   return (
     <div>
-      <Input type="select">{components}</Input>
+      <Input onChange={(e) => handleOnItemClick(e)} type="select">
+        {components}
+      </Input>
     </div>
   );
 };

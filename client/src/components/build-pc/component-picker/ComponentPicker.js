@@ -3,7 +3,9 @@ import { Form, FormGroup, Label } from "reactstrap";
 
 import DropdownList from "../../dropdown-list/DropdownList.js";
 
-const ComponentPicker = () => {
+const ComponentPicker = (props) => {
+  const { totalCostFunc } = props;
+
   const [componentList, setComponentList] = useState([]);
 
   useEffect(() => {
@@ -22,7 +24,9 @@ const ComponentPicker = () => {
   const filterComponents = (componentType) => {
     return componentList
       .filter((component) => component.type === componentType)
-      .map((component) => component.name);
+      .map((component) => {
+        return { name: component.name, price: component.price };
+      });
   };
 
   return (
@@ -31,31 +35,49 @@ const ComponentPicker = () => {
         <Form>
           <FormGroup>
             <Label size="lg">Motherboard</Label>
-            <DropdownList content={filterComponents("Motherboard")} />
+            <DropdownList
+              items={filterComponents("Motherboard")}
+              totalCostFunc={totalCostFunc}
+            />
           </FormGroup>
           <FormGroup>
             <Label size="lg">Processor</Label>
-            <DropdownList content={filterComponents("Processor")} />
+            <DropdownList items={filterComponents("Processor")} />
           </FormGroup>
           <FormGroup>
             <Label size="lg">Memory</Label>
-            <DropdownList content={filterComponents("Memory")} />
+            <DropdownList
+              items={filterComponents("Memory")}
+              totalCostFunc={totalCostFunc}
+            />
           </FormGroup>
           <FormGroup>
             <Label size="lg">Graphics Card</Label>
-            <DropdownList content={filterComponents("Graphics Card")} />
+            <DropdownList
+              items={filterComponents("Graphics Card")}
+              totalCostFunc={totalCostFunc}
+            />
           </FormGroup>
           <FormGroup>
             <Label size="lg">Storage</Label>
-            <DropdownList content={filterComponents("Storage")} />
+            <DropdownList
+              items={filterComponents("Storage")}
+              totalCostFunc={totalCostFunc}
+            />
           </FormGroup>
           <FormGroup>
             <Label size="lg">Power Supply</Label>
-            <DropdownList content={filterComponents("Power Supply")} />
+            <DropdownList
+              items={filterComponents("Power Supply")}
+              totalCostFunc={totalCostFunc}
+            />
           </FormGroup>
           <FormGroup>
             <Label size="lg">Operating System</Label>
-            <DropdownList content={filterComponents("Operating System")} />
+            <DropdownList
+              items={filterComponents("Operating System")}
+              totalCostFunc={totalCostFunc}
+            />
           </FormGroup>
         </Form>
       </div>
