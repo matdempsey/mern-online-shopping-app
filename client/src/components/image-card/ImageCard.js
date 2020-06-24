@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input, Card, CardTitle, CardImg, CardBody } from "reactstrap";
 
 import placeHolderImage from "../../images/placeholder.png";
 
-//ToDo:
-// - if en radio button checked then clicked again, uncheck and visa versa
-// - uncheck other image cards (currently can check all)
-
 const ImageCard = (props) => {
-  const { name, price, idx, totalCostFunc } = props;
-  const [checked, setChecked] = useState(false);
+  const {
+    name,
+    price,
+    idx,
+    imageCardKey,
+    totalCostFunc,
+    onImageCardSelected,
+  } = props;
+
+  // if key matches index then this Image Card's radio button will be checked.
+  const checked = imageCardKey === idx;
+
+  console.log(`image card ${idx} is checked?: ${checked}`);
+
+  const handleOnRadioButtonClicked = (key, price) => {
+    totalCostFunc(price);
+    onImageCardSelected(key);
+  };
 
   return (
     <div>
@@ -23,9 +35,8 @@ const ImageCard = (props) => {
           <CardTitle>{name}</CardTitle>
           <Input
             type="radio"
-            onClick={() => {
-              totalCostFunc(price);
-            }}
+            checked={checked}
+            onChange={() => handleOnRadioButtonClicked(idx, price)}
           />
         </CardBody>
       </Card>

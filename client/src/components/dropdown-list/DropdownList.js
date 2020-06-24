@@ -9,12 +9,12 @@ const DropdownList = (props) => {
   ));
 
   const handleOnItemClick = (e) => {
-    // filter array so that new array only contains what the user selected in dropdown list
+    // filter array so that it returns an array that only contains component user selected in dropdown list
     const filteredArr = items.filter((component) =>
       component.name.includes(e.target.value)
     );
 
-    //
+    // get price of component and pass to function that was passed via props
     const x = filteredArr.map((component) => component.price);
     totalCostFunc(...x);
   };
