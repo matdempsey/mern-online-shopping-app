@@ -16,16 +16,9 @@ const DropdownList = (props) => {
     const x = filteredArr.map((component) => component.price);
     const selectedItemCost = x[0];
 
-    // works but could refactor to tidy it up
-    if (selectedItemCost >= prevItemCost) {
-      let costSurplus = selectedItemCost - prevItemCost;
-      setPrevItemCost(selectedItemCost);
-      selectedComponentCostFunc(costSurplus);
-    } else {
-      let costDeficit = selectedItemCost - prevItemCost;
-      setPrevItemCost(selectedItemCost);
-      selectedComponentCostFunc(costDeficit);
-    }
+    const difference = selectedItemCost - prevItemCost;
+    setPrevItemCost(selectedItemCost);
+    selectedComponentCostFunc(difference);
   };
 
   return (
