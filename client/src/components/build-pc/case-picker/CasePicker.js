@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import ImageCardDeck from "../../image-card/ImageCardDeck.js";
 
 const CasePicker = (props) => {
-  const { totalCostFunc } = props;
+  const { selectedCaseCostFunc } = props;
 
   const [casesArr, setCasesArr] = useState([]);
 
@@ -22,7 +22,10 @@ const CasePicker = (props) => {
 
   return (
     <div>
-      <ImageCardDeck cases={casesArr} totalCostFunc={totalCostFunc} />
+      <ImageCardDeck
+        selectedCaseCostFunc={selectedCaseCostFunc}
+        cases={casesArr}
+      />
     </div>
   );
 };

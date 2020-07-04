@@ -3,9 +3,13 @@ import { Label } from "reactstrap";
 
 //rename folder, file & function
 const Summary = (props) => {
-  const { totalCost } = props;
+  const { caseCost, componentCost } = props;
 
-  const perMonthCost = (totalCost / 100) * 11.5;
+  console.log("case cost:", caseCost);
+  console.log("current components cost:", componentCost);
+
+  const totalCost = caseCost + componentCost;
+  const perMonthCost = (componentCost / 100) * 11.5;
 
   return (
     <>

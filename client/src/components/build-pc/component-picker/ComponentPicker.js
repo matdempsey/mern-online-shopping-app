@@ -4,7 +4,7 @@ import { Form, FormGroup, Label } from "reactstrap";
 import DropdownList from "../../dropdown-list/DropdownList.js";
 
 const ComponentPicker = (props) => {
-  const { totalCostFunc } = props;
+  const { selectedComponentCostFunc } = props;
 
   const [componentList, setComponentList] = useState([]);
 
@@ -21,6 +21,23 @@ const ComponentPicker = (props) => {
       });
   }, []);
 
+  // logic correct, but types not in the order i.e. Mobo, processor, ram, graphics card, power supply, storage, OS
+  const findDistinctComponentTypes = () => {
+    let arr = [];
+
+    componentList.map((component, idx) => {
+      if (idx === 0) {
+        // required for initial comparison
+        arr.push(component.type);
+      } else if (!arr.includes(component.type)) {
+        arr.push(component.type);
+      }
+    });
+    return arr;
+  };
+
+  const distinctTypesArr = findDistinctComponentTypes();
+
   const filterComponents = (componentType) => {
     return componentList
       .filter((component) => component.type === componentType)
@@ -31,56 +48,21 @@ const ComponentPicker = (props) => {
 
   return (
     <>
-      <div>
-        <Form>
-          <FormGroup>
-            <Label size="lg">Motherboard</Label>
-            <DropdownList
-              items={filterComponents("Motherboard")}
-              totalCostFunc={totalCostFunc}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label size="lg">Processor</Label>
-            <DropdownList items={filterComponents("Processor")} />
-          </FormGroup>
-          <FormGroup>
-            <Label size="lg">Memory</Label>
-            <DropdownList
-              items={filterComponents("Memory")}
-              totalCostFunc={totalCostFunc}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label size="lg">Graphics Card</Label>
-            <DropdownList
-              items={filterComponents("Graphics Card")}
-              totalCostFunc={totalCostFunc}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label size="lg">Storage</Label>
-            <DropdownList
-              items={filterComponents("Storage")}
-              totalCostFunc={totalCostFunc}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label size="lg">Power Supply</Label>
-            <DropdownList
-              items={filterComponents("Power Supply")}
-              totalCostFunc={totalCostFunc}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label size="lg">Operating System</Label>
-            <DropdownList
-              items={filterComponents("Operating System")}
-              totalCostFunc={totalCostFunc}
-            />
-          </FormGroup>
-        </Form>
-      </div>
+      {distinctTypesArr.map((name, idx) => {
+        return (
+          <div>
+            <Form>
+              <FormGroup>
+                <Label size="lg">{name}</Label>
+                <DropdownList
+                  items={filterComponents(name)}
+                  selectedComponentCostFunc={selectedComponentCostFunc}
+                />
+              </FormGroup>
+            </Form>
+          </div>
+        );
+      })}
     </>
   );
 };

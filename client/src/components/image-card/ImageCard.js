@@ -9,8 +9,8 @@ const ImageCard = (props) => {
     price,
     idx,
     imageCardKey,
-    totalCostFunc,
     onImageCardSelected,
+    selectedCaseCostFunc,
   } = props;
 
   // if key matches index then this Image Card's radio button will be checked.
@@ -19,8 +19,8 @@ const ImageCard = (props) => {
   console.log(`image card ${idx} is checked?: ${checked}`);
 
   const handleOnRadioButtonClicked = (key, price) => {
-    totalCostFunc(price);
     onImageCardSelected(key);
+    selectedCaseCostFunc(price);
   };
 
   return (

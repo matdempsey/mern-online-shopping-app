@@ -4,7 +4,7 @@ import { CardDeck } from "reactstrap";
 import ImageCard from "./ImageCard.js";
 
 const ImageCardDeck = (props) => {
-  const { cases, totalCostFunc } = props;
+  const { cases, selectedCaseCostFunc } = props;
 
   const [imageCardKey, setImageCardKey] = useState(-1);
 
@@ -22,8 +22,8 @@ const ImageCardDeck = (props) => {
             name={ele.name}
             price={ele.price}
             imageCardKey={imageCardKey}
-            totalCostFunc={totalCostFunc}
             onImageCardSelected={handleOnImageCardSelected}
+            selectedCaseCostFunc={selectedCaseCostFunc}
           />
         ))}
       </CardDeck>
