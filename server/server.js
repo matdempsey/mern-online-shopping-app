@@ -9,7 +9,7 @@ const jsonBodyParser = bodyParser.json();
 
 // mongodb constants
 const uri =
-  "mongodb+srv://mat:<password>@<cluster>-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://mat:JM9512@matCluster-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
 const databaseName = "online_shopping";
 
 // instance

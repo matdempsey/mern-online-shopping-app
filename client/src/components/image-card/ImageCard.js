@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Card, CardTitle, CardImg, CardBody } from "reactstrap";
 
 import placeHolderImage from "../../images/placeholder.png";
+import CaseInfo from "../modals/CaseInfo.js";
 
 const ImageCard = (props) => {
   const {
@@ -13,6 +14,8 @@ const ImageCard = (props) => {
     selectedCaseCostFunc,
   } = props;
 
+  const [showModal, setShowModal] = useState(false);
+
   // if key matches index then this Image Card's radio button will be checked.
   const checked = imageCardKey === idx;
 
@@ -23,6 +26,12 @@ const ImageCard = (props) => {
     selectedCaseCostFunc(price);
   };
 
+  // modal opens initially but after closing, it won't reopen, possibly showModal state needs to change to cause a render
+  const handleOnCardImageClicked = () => {
+    console.log(showModal);
+    setShowModal(true);
+  };
+
   return (
     <div>
       <Card>
@@ -30,6 +39,7 @@ const ImageCard = (props) => {
           width=""
           src={placeHolderImage}
           alt={name ? name : "case"`${idx}`}
+          onClick={handleOnCardImageClicked}
         />
         <CardBody>
           <CardTitle>{name}</CardTitle>
@@ -40,6 +50,19 @@ const ImageCard = (props) => {
           />
         </CardBody>
       </Card>
+      {showModal ? (
+        <CaseInfo
+          name={""}
+          width={""}
+          height={""}
+          depth={""}
+          formFactor={""}
+          colour={""}
+          maxGraphicsCardLength={""}
+          suitability={""}
+          desc={""}
+        />
+      ) : null}
     </div>
   );
 };
