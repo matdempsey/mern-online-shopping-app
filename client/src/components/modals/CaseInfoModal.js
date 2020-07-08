@@ -21,7 +21,7 @@ const CaseInfoModal = (props) => {
 
   return (
     <div>
-      <Modal size="lg" isOpen={modal} centered={true}>
+      <Modal size="lg" isOpen={true} centered={true}>
         <ModalBody>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet
           orci turpis. Pellentesque eros velit, suscipit a interdum a, bibendum
