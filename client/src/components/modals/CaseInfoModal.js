@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, Button, ModalBody, ModalFooter } from "reactstrap";
 
-const CaseInfo = (props) => {
+const CaseInfoModal = (props) => {
   const {
     name,
     width,
@@ -12,18 +12,16 @@ const CaseInfo = (props) => {
     maxGraphicsCardLength,
     suitability,
     desc,
+    imageClicked,
   } = props;
-  const [modal, setModal] = useState(true);
 
-  const toggleModal = () => {
-    console.log("ssadads");
-    setModal(!modal);
+  const closeModal = () => {
+    imageClicked(false);
   };
 
   return (
     <div>
       <Modal size="lg" isOpen={modal} centered={true}>
-        <ModalHeader>Modal title</ModalHeader>
         <ModalBody>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet
           orci turpis. Pellentesque eros velit, suscipit a interdum a, bibendum
@@ -34,11 +32,11 @@ const CaseInfo = (props) => {
           fames ac turpis egestas. Vestibulum eu turpis lacus. Suspendisse
         </ModalBody>
         <ModalFooter>
-          <Button onClick={toggleModal}>Close</Button>
+          <Button onClick={closeModal}>Close</Button>
         </ModalFooter>
       </Modal>
     </div>
   );
 };
 
-export default CaseInfo;
+export default CaseInfoModal;
