@@ -1,38 +1,64 @@
-import React, { useState } from "react";
-import { Modal, ModalHeader, Button, ModalBody, ModalFooter } from "reactstrap";
+import React from "react";
+import {
+  Modal,
+  ModalHeader,
+  Button,
+  ModalBody,
+  ModalFooter,
+  Label,
+  Container,
+  Row,
+  Col,
+} from "reactstrap";
+
+import "./CaseInfoModal.css";
 
 const CaseInfoModal = (props) => {
-  const {
-    name,
-    width,
-    height,
-    depth,
-    formFactor,
-    colour,
-    maxGraphicsCardLength,
-    suitability,
-    desc,
-    imageClicked,
-  } = props;
+  const { caseObj, imageClickedFunc } = props;
+  const { name } = caseObj;
+
+  console.log("caseObj =", caseObj);
+
+  //todo: filter out id, qty, price from caseObj
+
+  const table = Object.entries(caseObj)
+    .filter(
+      (ele) =>
+        ele[0] !== "_id" &&
+        ele[0] !== "name" &&
+        ele[0] !== "qty" &&
+        ele[0] !== "price"
+    )
+    .map((ele, idx) => {
+      return (
+        <div key={idx}>
+          <Container>
+            <Row>
+              <Col className="key-col">
+                <Label>{ele[0]}</Label>
+              </Col>
+              <Col>
+                <Label>{ele[1]}</Label>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      );
+    });
 
   const closeModal = () => {
-    imageClicked(false);
+    imageClickedFunc(false);
   };
 
   return (
     <div>
-      <Modal size="lg" isOpen={true} centered={true}>
-        <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet
-          orci turpis. Pellentesque eros velit, suscipit a interdum a, bibendum
-          nec nunc. Class aptent taciti sociosqu ad litora torquent per conubia
-          nostra, per inceptos himenaeos. Nam mollis, nibh vel pellentesque
-          scelerisque, erat est varius lectus, eget venenatis nulla diam a leo.
-          Pellentesque habitant morbi tristique senectus et netus et malesuada
-          fames ac turpis egestas. Vestibulum eu turpis lacus. Suspendisse
-        </ModalBody>
+      <Modal size="lg" isOpen={true} centered={true} scrollable={true}>
+        <ModalHeader>{name}</ModalHeader>
+        <ModalBody>{table}</ModalBody>
         <ModalFooter>
-          <Button onClick={closeModal}>Close</Button>
+          <Button color="success" onClick={closeModal}>
+            Close
+          </Button>
         </ModalFooter>
       </Modal>
     </div>

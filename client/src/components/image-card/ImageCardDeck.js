@@ -15,12 +15,11 @@ const ImageCardDeck = (props) => {
   return (
     <div>
       <CardDeck>
-        {cases.map((ele, idx) => (
+        {cases.map((caseObj, idx) => (
           <ImageCard
             key={idx}
             idx={idx}
-            name={ele.name}
-            price={ele.price}
+            caseObj={caseObj}
             imageCardKey={imageCardKey}
             onImageCardSelected={handleOnImageCardSelected}
             selectedCaseCostFunc={selectedCaseCostFunc}

@@ -6,13 +6,14 @@ import CaseInfoModal from "../modals/CaseInfoModal.js";
 
 const ImageCard = (props) => {
   const {
-    name,
-    price,
     idx,
+    caseObj,
     imageCardKey,
     onImageCardSelected,
     selectedCaseCostFunc,
   } = props;
+
+  const { name, price } = caseObj;
 
   const [imageClicked, setImageClicked] = useState(false);
 
@@ -50,16 +51,8 @@ const ImageCard = (props) => {
       </Card>
       {imageClicked ? (
         <CaseInfoModal
-          name={""}
-          width={""}
-          height={""}
-          depth={""}
-          formFactor={""}
-          colour={""}
-          maxGraphicsCardLength={""}
-          suitability={""}
-          desc={""}
-          imageClicked={handleOnCardImageClicked}
+          caseObj={caseObj}
+          imageClickedFunc={handleOnCardImageClicked}
         />
       ) : null}
     </div>
