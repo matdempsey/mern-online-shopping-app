@@ -36,8 +36,6 @@ const ComponentPicker = (props) => {
     return arr;
   };
 
-  const distinctTypesArr = findDistinctComponentTypes();
-
   const filterComponents = (componentType) => {
     return componentList
       .filter((component) => component.type === componentType)
@@ -45,6 +43,8 @@ const ComponentPicker = (props) => {
         return { name: component.name, price: component.price };
       });
   };
+
+  const distinctTypesArr = findDistinctComponentTypes();
 
   return (
     <>
