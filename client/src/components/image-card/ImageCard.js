@@ -52,7 +52,7 @@ const ImageCard = (props) => {
       {imageClicked ? (
         <CaseInfoModal
           caseObj={caseObj}
-          imageClickedFunc={handleOnCardImageClicked}
+          cardImageClicked={handleOnCardImageClicked}
         />
       ) : null}
     </div>
