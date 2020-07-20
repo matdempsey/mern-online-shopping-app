@@ -43,7 +43,7 @@ const Login = (props) => {
             setShowError(true);
             setErrorMessage("Incorrect details.");
           } else {
-            history.push("/product-catalogue");
+            history.push("/");
           }
         })
         .catch((err) => console.log(err));

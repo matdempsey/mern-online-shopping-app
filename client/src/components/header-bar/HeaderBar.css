@@ -1,0 +1,13 @@
+#header-container {
+  background-color: black;
+}
+
+#centre {
+  width: 30%;
+  margin: 0 auto;
+}
+
+#right {
+  float: right;
+  margin-right: 1%;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { withRouter } from "react-router-dom";
+import SearchBar from "../common/search-bar/SearchBar.js";
 
 import "./HeaderBar.css";
 
@@ -22,11 +23,21 @@ const HeaderBar = (props) => {
 
   return (
     showHeader && (
-      <div className="header-bar">
-        <Button color="success" onClick={handleOnClick}>
-          Login
-        </Button>
-      </div>
+      <>
+        <div id="header-container">
+          {/* <div id="logo">
+            //
+          </div> */}
+          <div id="right">
+            <Button color="success" onClick={handleOnClick}>
+              Login
+            </Button>
+          </div>
+          <div id="centre">
+            <SearchBar />
+          </div>
+        </div>
+      </>
     )
   );
 };

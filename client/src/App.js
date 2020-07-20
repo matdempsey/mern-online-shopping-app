@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";
-import ProductCatalogue from "./components/product-catalogue/ProductCatalogue.js";
 import BuildPC from "./components/build-pc/BuildPC.js";
+import Search from "./components/search/Search.js";
 
 import "./App.css";
 
@@ -17,11 +17,8 @@ const App = () => {
             <Route exact path="/" component={Home}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/create-account" component={CreateAccount}></Route>
-            <Route
-              path="/product-catalogue"
-              component={ProductCatalogue}
-            ></Route>
             <Route path="/build-pc" component={BuildPC}></Route>
+            <Route path="/search" component={Search}></Route>
           </Switch>
         </Router>
       </div>

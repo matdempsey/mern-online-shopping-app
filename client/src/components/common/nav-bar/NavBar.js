@@ -9,10 +9,12 @@ import {
   Nav,
 } from "reactstrap";
 
+import "./NavBar.css";
+
 const NavBar = () => {
   return (
-    <div>
-      <Navbar color="dark" expand="md">
+    <div id="nav-bar-container">
+      <Navbar>
         <Nav>
           <NavItem>Nav Item 1</NavItem>
           <NavItem>Nav Item 2</NavItem>

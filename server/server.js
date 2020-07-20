@@ -9,7 +9,7 @@ const jsonBodyParser = bodyParser.json();
 
 // mongodb constants
 const uri =
-  "mongodb+srv://mat:JM9512@matCluster-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://mat:<password>@matCluster-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
 const databaseName = "online_shopping";
 
 // instance
@@ -258,6 +258,22 @@ app.get("/api/cases", (req, res) => {
         console.log("[MongoDB]:", err.message);
       } else {
         console.log("[MongoDB]: cases find result =", result);
+        res.json(result);
+      }
+    });
+});
+
+app.get(`/api/search/`, (req, res) => {
+  // currenly not working for partial search, has to be exact match to return data
+  client
+    .db(databaseName)
+    .collection("components")
+    .find({ name: req.query.q })
+    .toArray((err, result) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        console.log("[MongoDB]: search find result =", result);
         res.json(result);
       }
     });

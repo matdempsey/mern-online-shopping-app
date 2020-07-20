@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "reactstrap";
+import { withRouter, useHistory, useLocation } from "react-router-dom";
 
-const SearchBar = (props) => {
-  const onSearchTextChange = () => {
-    console.log("search text has changed");
+const SearchBar = () => {
+  const history = useHistory();
+
+  const onSearchTextChange = (e) => {
+    const searchText = e.target.value;
+    history.push(`/search/?q=${searchText}`);
   };
 
-  return <Input type="search" onChange={onSearchTextChange} />;
+  return (
+    <div>
+      <Input
+        type="search"
+        placeholder="What are you looking for?"
+        onChange={onSearchTextChange}
+      />
+    </div>
+  );
 };
 
-export default SearchBar;
+export default withRouter(SearchBar);
