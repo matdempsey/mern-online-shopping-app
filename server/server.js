@@ -264,11 +264,12 @@ app.get("/api/cases", (req, res) => {
 });
 
 app.get(`/api/search/`, (req, res) => {
-  // currenly not working for partial search, has to be exact match to return data
+  const re = new RegExp(req.query.q, "i"); // the i represents case insensitive in regex
+
   client
     .db(databaseName)
     .collection("components")
-    .find({ name: req.query.q })
+    .find({ name: re })
     .toArray((err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
