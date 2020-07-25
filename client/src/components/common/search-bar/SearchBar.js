@@ -6,7 +6,8 @@ const SearchBar = () => {
   const history = useHistory();
 
   const onSearchTextChange = (e) => {
-    const searchText = e.target.value;
+    const searchText = encodeURIComponent(e.target.value);
+
     history.push(`/search/?q=${searchText}`, { searchText: searchText });
   };
 
