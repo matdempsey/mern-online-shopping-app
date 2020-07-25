@@ -29,7 +29,7 @@ const Search = () => {
       <HeaderBar />
       <NavBar />
       <SearchResultsCount count={results.length} searchText={searchText} />
-      <SearchResultsList />
+      <SearchResultsList results={results} />
       <Footer />
     </div>
   );

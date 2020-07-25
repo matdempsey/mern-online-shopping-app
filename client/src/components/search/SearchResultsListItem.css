@@ -1,0 +1,12 @@
+#list-item {
+  background-color: #fafafa;
+}
+
+#product-name {
+  font-size: large;
+  font-weight: 500;
+}
+
+#alt-text {
+  color: grey;
+}
