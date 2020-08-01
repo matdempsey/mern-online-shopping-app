@@ -4,6 +4,8 @@ import { Input, Card, CardTitle, CardImg, CardBody } from "reactstrap";
 import placeHolderImage from "../../images/placeholder.png";
 import CaseInfoModal from "../modals/CaseInfoModal.js";
 
+import "./ImageCard.css";
+
 const ImageCard = (props) => {
   const {
     idx,
@@ -35,6 +37,7 @@ const ImageCard = (props) => {
     <div>
       <Card>
         <CardImg
+          id="image-card"
           width=""
           src={placeHolderImage}
           alt={name ? name : "case"`${idx}`}
