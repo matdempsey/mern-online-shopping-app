@@ -8,12 +8,12 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <>
+    <div>
       <HeaderBar />
       <NavBar />
       <Slides />
       <Footer />
-    </>
+    </div>
   );
 };
 

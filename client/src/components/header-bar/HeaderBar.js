@@ -24,17 +24,21 @@ const HeaderBar = (props) => {
   return (
     showHeader && (
       <>
-        <div id="header-container">
-          {/* <div id="logo">
-            //
-          </div> */}
-          <div id="right">
-            <Button color="success" onClick={handleOnClick}>
+        <div class="flex-hb-container">
+          <div className="company-logo">
+            <span>COMPANY NAME</span>
+          </div>
+          <div className="sb-container">
+            <SearchBar />
+          </div>
+          <div className="hb-login-btn-container">
+            <Button
+              className="hb-login-btn"
+              color="success"
+              onClick={handleOnClick}
+            >
               Login
             </Button>
-          </div>
-          <div id="centre">
-            <SearchBar />
           </div>
         </div>
       </>

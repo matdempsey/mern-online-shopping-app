@@ -1,13 +1,23 @@
-#header-container {
-  background-color: black;
+.flex-hb-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a232e;
+  padding: 20px 0px 20px 0px;
 }
 
-#centre {
-  width: 30%;
-  margin: 0 auto;
+.company-logo {
+  margin: 0px 25px 0px 25px;
+  color: #ffffff;
+  flex: 10%;
 }
 
-#right {
-  float: right;
-  margin-right: 1%;
+.sb-container {
+  margin: 0px 25px 0px 25px;
+  flex: 80%;
+}
+
+.hb-login-btn-container {
+  margin: 0px 25px 0px 25px;
+  flex: 10%;
 }

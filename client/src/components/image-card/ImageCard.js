@@ -37,7 +37,7 @@ const ImageCard = (props) => {
     <div>
       <Card>
         <CardImg
-          id="image-card"
+          class="image-card"
           width=""
           src={placeHolderImage}
           alt={name ? name : "case"`${idx}`}

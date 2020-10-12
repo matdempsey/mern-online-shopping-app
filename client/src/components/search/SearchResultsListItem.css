@@ -1,12 +1,30 @@
 #list-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #fafafa;
+  border-top: solid 2px darkgrey;
 }
 
-#product-name {
-  font-size: large;
-  font-weight: 500;
-}
-
-#alt-text {
+#img {
   color: grey;
+  width: 220px;
+  height: 220px;
+  cursor: pointer;
+}
+
+#product-name-link {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+}
+
+#product-name-link:hover {
+  text-decoration: none;
+  color: #4a4a4a;
+}
+
+#product-price {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
 }

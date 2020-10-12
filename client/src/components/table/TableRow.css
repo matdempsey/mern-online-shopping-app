@@ -1,5 +1,6 @@
 .key-col {
-  background-color: lightgray;
+  background-color: #eeeded;
   color: black;
   font-weight: 500;
+  border-right: 1px darkgrey solid;
 }

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Label, Button } from "reactstrap";
 
+import HeaderBar from "../header-bar/HeaderBar.js";
+import NavBar from "../common/nav-bar/NavBar.js";
 import CasePicker from "./case-picker/CasePicker.js";
 import ComponentPicker from "./component-picker/ComponentPicker.js";
 import Summary from "./summary/Summary.js";
@@ -22,6 +24,8 @@ const BuildPC = () => {
 
   return (
     <>
+      <HeaderBar />
+      <NavBar />
       <Label className="section-banner" size="lg">
         1) SELECT A CASE
       </Label>

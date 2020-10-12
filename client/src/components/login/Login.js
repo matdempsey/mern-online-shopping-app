@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Alert, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
 
+import "./Login.css";
+
 const Login = (props) => {
   const { history } = props;
 
@@ -56,37 +58,45 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <Form>
-        <FormGroup>
-          <Label size="lg">Log-in</Label>
-          <Input
-            type="email"
-            onChange={handleEmailChange}
-            placeholder="Email Address"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="password"
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Alert color="danger" isOpen={showError}>
-            {errorMessage}
-          </Alert>
-        </FormGroup>
-        <FormGroup>
-          <Button color="primary" onClick={onLoginClick}>
-            Log in
-          </Button>
-          <Button color="success" onClick={onCreateAccountClick}>
-            Create account
-          </Button>
-        </FormGroup>
-      </Form>
+    <div className="flex-login-container">
+      <div className="login-container">
+        <Form>
+          <FormGroup>
+            <Label size="lg">Log-in</Label>
+            <Input
+              className="login-input-field"
+              type="email"
+              onChange={handleEmailChange}
+              placeholder="Email Address"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              className="login-input-field"
+              type="password"
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Button
+              className="login-btn"
+              color="primary"
+              onClick={onLoginClick}
+            >
+              Log in
+            </Button>
+            <Button className="create-acc-btn" onClick={onCreateAccountClick}>
+              Create account
+            </Button>
+          </FormGroup>
+          <FormGroup>
+            <Alert color="danger" isOpen={showError}>
+              {errorMessage}
+            </Alert>
+          </FormGroup>
+        </Form>
+      </div>
     </div>
   );
 };

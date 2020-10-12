@@ -1,35 +1,53 @@
 import React from "react";
-import {
-  Navbar,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavItem,
-  Nav,
-} from "reactstrap";
+import { Link } from "react-router-dom";
 
 import "./NavBar.css";
 
+const navLinks = [
+  {
+    text: "Build Custom PC",
+    path: "/build-pc",
+  },
+  {
+    text: "Processors",
+    path: "/",
+  },
+  {
+    text: "Graphics Cards",
+    path: "/",
+  },
+  {
+    text: "Memory",
+    path: "/",
+  },
+  {
+    text: "Storage",
+    path: "/",
+  },
+  {
+    text: "Monitors",
+    path: "/",
+  },
+  {
+    text: "Peripherals",
+    path: "/",
+  },
+];
+
 const NavBar = () => {
   return (
-    <div id="nav-bar-container">
-      <Navbar>
-        <Nav>
-          <NavItem>Nav Item 1</NavItem>
-          <NavItem>Nav Item 2</NavItem>
-          <NavItem>Nav Item 3</NavItem>
-          <UncontrolledDropdown>
-            <DropdownToggle caret>options</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Item 1</DropdownItem>
-              <DropdownItem>Item 2</DropdownItem>
-              <DropdownItem>Item 3</DropdownItem>
-              <DropdownItem>Item 4</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Nav>
-      </Navbar>
+    <div className="navbar-container">
+      <ul className="flex-navbar">
+        {navLinks.map((link) => {
+          return (
+            <li className="navbar-li">
+              <Link className="navbar-link" to={link.path}>
+                {link.text}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

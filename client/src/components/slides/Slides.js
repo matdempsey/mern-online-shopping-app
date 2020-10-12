@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import noImageFound from "../../images/no-image-found.png";
+
 import {
   Carousel,
   CarouselIndicators,
@@ -7,6 +8,8 @@ import {
   CarouselItem,
   CarouselCaption,
 } from "reactstrap";
+
+import "./Slides.css";
 
 const slideItems = [
   {
@@ -19,11 +22,11 @@ const slideItems = [
     altText: "insert alt text 2",
     caption: "insert capton text 2",
   },
-  {
-    src: noImageFound,
-    altText: "insert alt text 3 ",
-    caption: "insert capton text 3",
-  },
+  // {
+  //   src: intelCpuChip,
+  //   altText: "insert alt text 3 ",
+  //   caption: "insert capton text 3",
+  // },
 ];
 
 const Slides = () => {
@@ -62,7 +65,7 @@ const Slides = () => {
         onExited={() => setAnimating(false)}
         key={idx}
       >
-        <img src={item.src} alt={item.altText} />
+        <img className="carousel-image" src={item.src} alt={item.altText} />
         <CarouselCaption
           captionText={item.captionText}
           captionHeader={item.captionText}
@@ -72,8 +75,13 @@ const Slides = () => {
   });
 
   return (
-    <div className="Slides">
-      <Carousel activeIndex={currentSlide} next={next} previous={previous}>
+    <div className="slides">
+      <Carousel
+        className="carousel"
+        activeIndex={currentSlide}
+        next={next}
+        previous={previous}
+      >
         <CarouselIndicators
           items={slideItems}
           activeIndex={currentSlide}

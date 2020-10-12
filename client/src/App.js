@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";
@@ -11,7 +11,7 @@ import "./App.css";
 const App = () => {
   return (
     <>
-      <div>
+      <div className="main-container">
         <Router>
           <Switch>
             <Route exact path="/" component={Home}></Route>

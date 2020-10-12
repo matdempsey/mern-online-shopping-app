@@ -1,46 +1,79 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Container, Col, Row } from "reactstrap";
 
 import "./SearchResultsListItem.css";
-import inStockImage from "./../../images/in-stock.png";
-import outOfStockImage from "./../../images/out-of-stock.png";
+import inStockImage from "./../../images/status/in-stock.png";
+import outOfStockImage from "./../../images/status/out-of-stock.png";
+import noImageFound from "./../../images/no-image-found.png";
 
 const SearchResultsListItem = (props) => {
   const { name, price, qty } = props;
 
   const inStock = qty > 0;
 
+  const handleOnProductClick = () => {
+    console.log("clickity click click!!");
+    // history.push() here
+  };
+
   return (
-    <div>
-      <Row id="list-item">
-        <Col>
-          <img id="alt-text" alt={name}></img>
-        </Col>
-        <Col>
-          <Row>
-            <p id="product-name">{name}</p>
-          </Row>
-          <Row>
-            <p>
-              {inStock ? (
-                <span style={{ color: "green" }}>
-                  <img src={inStockImage}></img>
-                  &nbsp;in stock
-                </span>
-              ) : (
-                <span style={{ color: "red" }}>
-                  <img src={outOfStockImage}></img>
-                  &nbsp;out of stock
-                </span>
-              )}
-            </p>
-          </Row>
-        </Col>
-        <Col>
-          <p>£{price}</p>
-        </Col>
-      </Row>
-    </div>
+    <>
+      <Container>
+        <Row id="list-item">
+          <Col xs="auto">
+            <img
+              src={noImageFound}
+              id="img"
+              alt={name}
+              onClick={handleOnProductClick}
+            ></img>
+          </Col>
+          <Col xs="auto">
+            <Row>
+              <Link id="product-name-link" onClick={handleOnProductClick}>
+                {name}
+              </Link>
+            </Row>
+            <Row>
+              <br></br>
+            </Row>
+            <Row>
+              <p>
+                {inStock ? (
+                  <span
+                    style={{
+                      fontWeight: "500",
+                      fontSize: "small",
+                      color: "#339933",
+                    }}
+                  >
+                    <img src={inStockImage}></img>
+                    &nbsp;in stock
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      fontWeight: "500",
+                      fontSize: "small",
+                      color: "#BD2F2F",
+                    }}
+                  >
+                    <img src={outOfStockImage}></img>
+                    &nbsp;out of stock
+                  </span>
+                )}
+              </p>
+            </Row>
+          </Col>
+          <Col xs="auto">
+            <Row>
+              <p id="product-price">£{price}</p>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

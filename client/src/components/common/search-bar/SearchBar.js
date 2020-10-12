@@ -2,6 +2,8 @@ import React from "react";
 import { Input } from "reactstrap";
 import { withRouter, useHistory } from "react-router-dom";
 
+import "./SearchBar.css";
+
 const SearchBar = () => {
   const history = useHistory();
 
@@ -14,6 +16,7 @@ const SearchBar = () => {
   return (
     <div>
       <Input
+        className="search-bar"
         type="search"
         placeholder="What are you looking for?"
         onChange={onSearchTextChange}
