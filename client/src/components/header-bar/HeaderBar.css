@@ -7,17 +7,50 @@
 }
 
 .company-logo {
+  display: flex;
+  justify-content: center;
   margin: 0px 25px 0px 25px;
   color: #ffffff;
-  flex: 10%;
+  flex: 15%;
 }
 
 .sb-container {
   margin: 0px 25px 0px 25px;
-  flex: 80%;
+  flex: 70%;
 }
 
-.hb-login-btn-container {
+.flex-hb-container-right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0px 25px 0px 25px;
-  flex: 10%;
+  flex: 15%;
+}
+
+.hb-link {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.hb-link:hover {
+  color: #b8b8b8;
+  text-decoration: none;
+  border-bottom: 2px solid #ffa500;
+}
+
+.basket {
+  margin-left: 25px;
+}
+
+.basket:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.basket-count {
+  position: absolute;
+  color: #ffa500;
+  font-size: 0.9rem;
+  left: 77%; /* needs fixing */
 }

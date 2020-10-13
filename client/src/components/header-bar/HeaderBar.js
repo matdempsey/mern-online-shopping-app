@@ -1,48 +1,46 @@
 import React, { useState } from "react";
-import { Button } from "reactstrap";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import SearchBar from "../common/search-bar/SearchBar.js";
+import basket from "./../../images/basket.png";
 
 import "./HeaderBar.css";
+
+//To Do:
+// - if user logged in replace link/create to "log-out"
 
 const HeaderBar = (props) => {
   const { history } = props;
   const [showHeader, setShowHeader] = useState(true);
 
-  const handleOnClick = () => {
-    history.push("/login");
+  const changeLogInText = () => {};
 
-    // if (history.location.pathname === "/login") {
-    //   setShowHeader(false);
-    //}
-  };
-
-  const handleLogInText = () => {
-    //change log in text based on if user is logged in or not
+  const handleOnBasketClick = () => {
+    history.push("/basket");
   };
 
   return (
-    showHeader && (
-      <>
-        <div class="flex-hb-container">
-          <div className="company-logo">
-            <span>COMPANY NAME</span>
-          </div>
-          <div className="sb-container">
-            <SearchBar />
-          </div>
-          <div className="hb-login-btn-container">
-            <Button
-              className="hb-login-btn"
-              color="success"
-              onClick={handleOnClick}
-            >
-              Login
-            </Button>
-          </div>
+    <>
+      <div class="flex-hb-container">
+        <div className="company-logo">
+          <span>COMPANY NAME</span>
         </div>
-      </>
-    )
+        <div className="sb-container">
+          <SearchBar />
+        </div>
+        <div className="flex-hb-container-right">
+          <Link className="hb-link" to={"/login"}>
+            log-in/create account
+          </Link>
+          <img
+            className="basket"
+            src={basket}
+            alt="your basket"
+            onClick={handleOnBasketClick}
+          ></img>
+          <span className="basket-count"> 0</span>
+        </div>
+      </div>
+    </>
   );
 };
 
