@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import CompanyLogo from "../common/company-logo/CompanyLogo.js";
 import { withRouter } from "react-router-dom";
 
 import "./Login.css";
@@ -58,44 +59,49 @@ const Login = (props) => {
   };
 
   return (
-    <div className="flex-login-container">
-      <div className="login-container">
-        <Form>
-          <FormGroup>
-            <Label size="lg">Log-in</Label>
-            <Input
-              className="login-input-field"
-              type="email"
-              onChange={handleEmailChange}
-              placeholder="Email Address"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              className="login-input-field"
-              type="password"
-              onChange={handlePasswordChange}
-              placeholder="Password"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Button
-              className="login-btn"
-              color="primary"
-              onClick={onLoginClick}
-            >
-              Log in
-            </Button>
-            <Button className="create-acc-btn" onClick={onCreateAccountClick}>
-              Create account
-            </Button>
-          </FormGroup>
-          <FormGroup>
-            <Alert color="danger" isOpen={showError}>
-              {errorMessage}
-            </Alert>
-          </FormGroup>
-        </Form>
+    <div className="flex-login-parent-container">
+      <div className="login-company-logo-container">
+        <CompanyLogo />
+      </div>
+      <div className="flex-login-container">
+        <div className="login-form">
+          <Form>
+            <FormGroup>
+              <Label size="lg">Log-in</Label>
+              <Input
+                className="login-input-field"
+                type="email"
+                onChange={handleEmailChange}
+                placeholder="Email Address"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                className="login-input-field"
+                type="password"
+                onChange={handlePasswordChange}
+                placeholder="Password"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Button
+                className="login-btn"
+                color="primary"
+                onClick={onLoginClick}
+              >
+                Log in
+              </Button>
+              <Button className="create-acc-btn" onClick={onCreateAccountClick}>
+                Create account
+              </Button>
+            </FormGroup>
+            <FormGroup>
+              <Alert color="danger" isOpen={showError}>
+                {errorMessage}
+              </Alert>
+            </FormGroup>
+          </Form>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
+import CompanyLogo from "../common/company-logo/CompanyLogo.js";
 import { withRouter } from "react-router-dom";
+
+import "./CreateAccount.css";
 
 const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
@@ -125,41 +128,47 @@ const CreateAccount = () => {
   };
 
   return (
-    <div>
-      <Form>
-        <FormGroup>
-          <Label>First Name</Label>
-          <Input type="text" onChange={handleFirstNameChange} />
-          <Label>Last Name</Label>
-          <Input type="text" onChange={handleLastNameChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label>Email</Label>
-          <Input type="email" onChange={handleEmailChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label>Password</Label>
-          <Input type="password" onChange={handlePasswordChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label>Confirm Password</Label>
-          <Input type="password" onChange={handleConfirmPasswordChange} />
-        </FormGroup>
-        <FormGroup>
-          <Alert color="danger" isOpen={showError}>
-            <ul>
-              {errorMessage.map((ele) => (
-                <li>{ele}</li>
-              ))}
-            </ul>
-          </Alert>
-        </FormGroup>
-        <FormGroup>
-          <Button color="primary" onClick={onSubmit}>
-            Submit
-          </Button>
-        </FormGroup>
-      </Form>
+    <div className="flex-ca-parent-container">
+      <div className="ca-company-logo-container">
+        <CompanyLogo />
+      </div>
+      <div className="flex-ca-container">
+        <div className="ca-form">
+          <Form>
+            <FormGroup>
+              <Label className="ca-title" size="lg">
+                Create account
+              </Label>
+              <Label>First Name</Label>
+              <Input type="text" onChange={handleFirstNameChange} />
+              <Label>Last Name</Label>
+              <Input type="text" onChange={handleLastNameChange} />
+              <Label>Email</Label>
+              <Input type="email" onChange={handleEmailChange} />
+              <Label>Password</Label>
+              <Input type="password" onChange={handlePasswordChange} />
+              <Label>Confirm Password</Label>
+              <Input type="password" onChange={handleConfirmPasswordChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Button color="primary" onClick={onSubmit}>
+                Submit
+              </Button>
+            </FormGroup>
+
+            <FormGroup>
+              <Alert color="danger" isOpen={showError}>
+                <ul>
+                  {errorMessage.map((ele) => (
+                    <li>{ele}</li>
+                  ))}
+                </ul>
+              </Alert>
+            </FormGroup>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 };

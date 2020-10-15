@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
+import CompanyLogo from "../common/company-logo/CompanyLogo.js";
 import SearchBar from "../common/search-bar/SearchBar.js";
 import basket from "./../../images/basket.png";
 
@@ -21,8 +22,8 @@ const HeaderBar = (props) => {
   return (
     <>
       <div class="flex-hb-container">
-        <div className="company-logo">
-          <span>COMPANY NAME</span>
+        <div className="hb-company-logo-container">
+          <CompanyLogo />
         </div>
         <div className="sb-container">
           <SearchBar />

@@ -38,9 +38,9 @@ const NavBar = () => {
   return (
     <div className="navbar-container">
       <ul className="flex-navbar">
-        {navLinks.map((link) => {
+        {navLinks.map((link, idx) => {
           return (
-            <li className="navbar-li">
+            <li key={idx} className="navbar-li">
               <Link className="navbar-link" to={link.path}>
                 {link.text}
               </Link>
