@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import CompanyLogo from "../common/company-logo/CompanyLogo.js";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import "./CreateAccount.css";
 
@@ -67,7 +67,7 @@ const CreateAccount = () => {
         //check if there is at least one . after @
         const charReg = /[@]/;
         if (email.search(charReg) === -1)
-          errorMsgArr.push("Invalid email address. Please try again.");
+          errorMsgArr.push("Invalid email address.");
       }
 
       //password validation block
@@ -165,6 +165,11 @@ const CreateAccount = () => {
                   ))}
                 </ul>
               </Alert>
+            </FormGroup>
+
+            <FormGroup>
+              <span>Already created an account?</span>
+              <Link to={"/login"}>&nbsp;Log-in</Link>
             </FormGroup>
           </Form>
         </div>
