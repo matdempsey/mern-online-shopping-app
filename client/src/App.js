@@ -5,6 +5,7 @@ import Login from "./components/login/Login.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";
 import BuildPC from "./components/build-pc/BuildPC.js";
 import Search from "./components/search/Search.js";
+import PageNotFound from "./components/page-not-found/PageNotFound.js";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/create-account" component={CreateAccount}></Route>
             <Route path="/build-pc" component={BuildPC}></Route>
             <Route path="/search" component={Search}></Route>
+            <Route component={PageNotFound}></Route>
           </Switch>
         </Router>
       </div>
