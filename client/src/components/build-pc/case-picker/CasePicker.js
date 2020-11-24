@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ImageCardDeck from "../../image-card/ImageCardDeck.js";
 
+import "./CasePicker.css";
+
 const CasePicker = (props) => {
   const { selectedCaseCostFunc } = props;
 
@@ -20,7 +22,7 @@ const CasePicker = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="case-picker-container">
       <ImageCardDeck
         selectedCaseCostFunc={selectedCaseCostFunc}
         cases={casesArr}
