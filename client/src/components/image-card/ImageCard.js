@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Input, Card, CardTitle, CardImg, CardBody } from "reactstrap";
 
-import placeHolderImage from "../../images/placeholder.png";
 import CaseInfoModal from "../modals/CaseInfoModal.js";
 
 import "./ImageCard.css";
@@ -39,8 +38,8 @@ const ImageCard = (props) => {
         <CardImg
           className="image-card"
           width=""
-          src={placeHolderImage}
-          alt={name ? name : "case"`${idx}`}
+          src="https://ipsumimage.appspot.com/280x260"
+          alt={name ? name : `case ${idx}`}
           onClick={handleOnCardImageClicked}
         />
         <CardBody>
