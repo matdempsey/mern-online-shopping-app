@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, useLocation } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import companyLogo from "../../../images/logo/company-logo.png";
 import blackCompanyLogo from "../../../images/logo/black-company-logo.png";
 
@@ -8,9 +8,13 @@ import "./CompanyLogo.css";
 //ToDo :
 // - need to use svg for scaling
 const CompanyLogo = () => {
-  const location = useLocation();
+  const history = useHistory();
 
-  const isLoginPage = location.pathname === "/login";
+  const isLoginPage = history.location.pathname === "/login";
+
+  const handleOnClick = () => {
+    history.push("/");
+  };
 
   return (
     <div>
@@ -18,6 +22,7 @@ const CompanyLogo = () => {
         className={"company-logo"}
         // src={isLoginPage ? blackCompanyLogo : companyLogo}
         alt="eBazaar Company Logo"
+        onClick={handleOnClick}
       ></img>
     </div>
   );
