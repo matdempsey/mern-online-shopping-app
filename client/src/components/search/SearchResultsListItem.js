@@ -5,7 +5,6 @@ import { Container, Col, Row } from "reactstrap";
 import "./SearchResultsListItem.css";
 import inStockImage from "./../../images/status/in-stock.png";
 import outOfStockImage from "./../../images/status/out-of-stock.png";
-import noImageFound from "./../../images/no-image-found.png";
 
 const SearchResultsListItem = (props) => {
   const { name, price, qty } = props;
@@ -20,18 +19,21 @@ const SearchResultsListItem = (props) => {
   return (
     <>
       <Container>
-        <Row id="list-item">
+        <Row className="sr-list-item">
           <Col xs="auto">
             <img
-              src={noImageFound}
-              id="img"
+              src="https://ipsumimage.appspot.com/220x200"
+              className="product-img"
               alt={name}
               onClick={handleOnProductClick}
             ></img>
           </Col>
           <Col xs="auto">
             <Row>
-              <Link id="product-name-link" onClick={handleOnProductClick}>
+              <Link
+                className="sr-product-name-link"
+                onClick={handleOnProductClick}
+              >
                 {name}
               </Link>
             </Row>
@@ -68,7 +70,7 @@ const SearchResultsListItem = (props) => {
           </Col>
           <Col xs="auto">
             <Row>
-              <p id="product-price">£{price}</p>
+              <p className="sr-product-price">£{price}</p>
             </Row>
           </Col>
         </Row>

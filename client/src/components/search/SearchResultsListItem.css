@@ -1,29 +1,25 @@
-#list-item {
-  padding-top: 10px;
-  padding-bottom: 10px;
+.sr-list-item {
+  padding: 15px 0px 15px 0px;
   background-color: #fafafa;
   border-top: solid 2px darkgrey;
 }
 
-#img {
-  color: grey;
-  width: 220px;
-  height: 220px;
+.product-img {
   cursor: pointer;
 }
 
-#product-name-link {
+.sr-product-name-link {
   font-size: 20px;
   font-weight: 500;
   color: black;
 }
 
-#product-name-link:hover {
+.sr-product-name-link:hover {
   text-decoration: none;
   color: #4a4a4a;
 }
 
-#product-price {
+.sr-product-price {
   font-size: 20px;
   font-weight: 500;
   color: black;
