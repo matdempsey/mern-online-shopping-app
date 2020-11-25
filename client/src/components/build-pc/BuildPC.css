@@ -1,7 +1,23 @@
+.flex-build-pc-parent-container {
+  margin: 40px 0px 40px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.build-pc-container {
+  width: 75vw;
+}
+
 .section-banner {
-  background-color: black;
-  color: white;
+  padding-left: 15px;
+  background-color: #000000;
+  border-radius: 5px;
+  color: #ffffff;
   width: 100%;
+}
+.section-padding {
+  padding: 0px 30px 0px 30px;
 }
 
 .button-pos {
