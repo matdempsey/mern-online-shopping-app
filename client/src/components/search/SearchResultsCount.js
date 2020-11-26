@@ -8,7 +8,7 @@ const SearchResultsCount = (props) => {
     <div className="results-count">
       <p>
         {count === 0
-          ? `sorry, we couldn't find any products matching your search :(`
+          ? `sorry, we couldn't find any products matching your search "${searchText}"`
           : `${count} products found matching your search "${searchText}"`}
       </p>
     </div>
