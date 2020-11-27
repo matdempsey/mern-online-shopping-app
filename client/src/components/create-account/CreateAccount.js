@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import CompanyLogo from "../common/company-logo/CompanyLogo.js";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./CreateAccount.css";
 
@@ -110,6 +110,7 @@ const CreateAccount = () => {
     }
   };
 
+  // need to check response -- still unfinised server side
   const createUserAccount = () => {
     fetch("/api/customers", {
       method: "POST",
@@ -178,4 +179,4 @@ const CreateAccount = () => {
   );
 };
 
-export default withRouter(CreateAccount);
+export default CreateAccount;

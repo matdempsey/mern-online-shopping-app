@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import CompanyLogo from "../common/company-logo/CompanyLogo.js";
-import { withRouter } from "react-router-dom";
 
 import "./Login.css";
 
@@ -54,7 +53,6 @@ const Login = (props) => {
   };
 
   const onCreateAccountClick = () => {
-    console.log(props);
     history.push("/create-account");
   };
 
@@ -107,4 +105,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;
