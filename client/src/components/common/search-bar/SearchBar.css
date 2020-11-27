@@ -1,2 +1,11 @@
+.flex-search-bar-container {
+  display: flex;
+  align-items: center;
+}
+
 .search-bar {
+}
+
+.search-btn {
+  margin-left: 4px;
 }

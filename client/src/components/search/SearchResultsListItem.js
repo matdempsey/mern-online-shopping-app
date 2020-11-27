@@ -31,6 +31,7 @@ const SearchResultsListItem = (props) => {
           <Col xs="auto">
             <Row>
               <Link
+                to="/404"
                 className="sr-product-name-link"
                 onClick={handleOnProductClick}
               >
