@@ -52,6 +52,7 @@ const SearchBar = () => {
           push
           to={{
             pathname: "/search",
+            search: `q=${searchText}`,
             state: { searchText: searchText, results: results },
           }}
         />
