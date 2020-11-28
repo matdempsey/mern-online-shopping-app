@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "reactstrap";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import searchButton from "../../../images/search-btn.png";
 
 import "./SearchBar.css";
@@ -8,6 +8,7 @@ import "./SearchBar.css";
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const [results, setResults] = useState([]);
+  const [redirect, setRedirect] = useState(false);
 
   const fetchProducts = (text) => {
     const query = encodeURIComponent(text);
@@ -15,6 +16,7 @@ const SearchBar = () => {
       .then((res) => res.json())
       .then((res) => {
         setResults(res);
+        setRedirect(true);
       });
   };
 
@@ -47,7 +49,7 @@ const SearchBar = () => {
         alt="search button"
         onClick={onSearchButtonClick}
       />
-      {results.length > 0 ? (
+      {redirect ? (
         <Redirect
           push
           to={{
