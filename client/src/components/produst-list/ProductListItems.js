@@ -45,14 +45,14 @@ const ProductListItems = (props) => {
         <Col className="product-list-col-3">
           <Row className="product-list-col-3-row-1">
             {inStock ? (
-              <span className="stock-status-span">
+              <span>
                 <img className="stock-status-img" src={inStockImage}></img>
-                <span className="stock-status-text">in stock</span>
+                <span className="in-stock-status-text">in stock</span>
               </span>
             ) : (
-              <span className="stock-status-span">
+              <span>
                 <img className="stock-status-img" src={outOfStockImage}></img>
-                <span className="stock-status-text">out of stock</span>
+                <span className="out-of-stock-status-text">out of stock</span>
               </span>
             )}
           </Row>

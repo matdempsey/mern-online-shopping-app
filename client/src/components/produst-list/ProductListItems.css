@@ -29,12 +29,17 @@
 .product-list-col-3 {
   flex: 15% !important;
 }
-.stock-status-span {
+
+.in-stock-status-text {
   font-size: 12px;
+  margin-left: 5px;
+  color: #339933;
 }
 
-.stock-status-text {
+.out-of-stock-status-text {
+  font-size: 12px;
   margin-left: 5px;
+  color: #bd2f2f;
 }
 
 .shipping-para {
