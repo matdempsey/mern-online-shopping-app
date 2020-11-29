@@ -22,6 +22,7 @@ const ProductListItems = (props) => {
       <Row className="product-list-row-item">
         <Col className="product-list-col-1">
           <img
+            className="product-list-image"
             src="https://ipsumimage.appspot.com/220x200"
             alt={name}
             onClick={handleOnProductClick}

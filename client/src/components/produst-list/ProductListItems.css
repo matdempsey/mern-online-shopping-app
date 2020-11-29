@@ -9,6 +9,10 @@
   flex: 5% !important;
 }
 
+.product-list-image {
+  cursor: pointer;
+}
+
 .product-list-col-2 {
   margin-left: 10px;
   flex: 80% !important;
