@@ -58,6 +58,9 @@ const ProductListItems = (props) => {
               </span>
             )}
           </Row>
+          <Row>
+            <p className="delivery-para">Free Delivery</p>
+          </Row>
           <Row className="product-list-col-3-row-2">
             {inStock && (
               <p className="shipping-para">Shipped within 48 hours</p>

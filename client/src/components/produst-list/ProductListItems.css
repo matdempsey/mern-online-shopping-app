@@ -46,9 +46,13 @@
   color: #bd2f2f;
 }
 
+.delivery-para {
+  margin: 3px 0px 0px 0px;
+}
+
 .shipping-para {
   font-size: 12px;
-  margin-top: 2px;
+  margin-bottom: 10px;
 }
 
 .product-list-col-3-row-3 {
