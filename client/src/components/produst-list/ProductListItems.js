@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Col, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
+import AddToBasketButton from "../buttons/AddToBasketButton";
 
 import inStockImage from "./../../images/status/in-stock.png";
 import outOfStockImage from "./../../images/status/out-of-stock.png";
@@ -67,9 +68,7 @@ const ProductListItems = (props) => {
             <span className="price-span">{price}</span>
           </Row>
           <Row className="product-list-col-3-row-4">
-            <Button className="add-to-basket-btn" color="success">
-              Add to Basket
-            </Button>
+            <AddToBasketButton />
           </Row>
         </Col>
       </Row>
