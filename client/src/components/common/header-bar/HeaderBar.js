@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CompanyLogo from "../../company-logo/CompanyLogo.js";
 import SearchBar from "../../search/SearchBar.js";
 import basket from "../../../images/basket.png";
@@ -9,15 +9,8 @@ import "./HeaderBar.css";
 
 //To Do:
 // - if user logged in replace link/create to "log-out"
-
-const HeaderBar = (props) => {
-  const { history } = props;
-
+const HeaderBar = () => {
   const changeLogInText = () => {};
-
-  const handleOnBasketClick = () => {
-    history.push("/basket");
-  };
 
   return (
     <>
@@ -33,12 +26,7 @@ const HeaderBar = (props) => {
         <div className="flex-hb-container-right">
           <div className="basket-container">
             <Link className="hb-link" to={"/basket"}>
-              <img
-                className="basket-icon"
-                src={basket}
-                alt="your basket"
-                onClick={handleOnBasketClick}
-              />
+              <img className="basket-icon" src={basket} alt="your basket" />
               basket
             </Link>
           </div>
@@ -55,4 +43,4 @@ const HeaderBar = (props) => {
   );
 };
 
-export default withRouter(HeaderBar);
+export default HeaderBar;
