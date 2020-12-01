@@ -1,7 +1,7 @@
 import React from "react";
-import HeaderBar from "../header-bar/HeaderBar.js";
+import HeaderBar from "../common/header-bar/HeaderBar.js";
 import NavBar from "../common/nav-bar/NavBar.js";
-import Slides from "../slides/Slides";
+import Slides from "../slides/Slides.js";
 import Footer from "../footer/Footer.js";
 
 import "./Home.css";

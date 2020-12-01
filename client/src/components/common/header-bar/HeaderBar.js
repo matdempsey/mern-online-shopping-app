@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import CompanyLogo from "../common/company-logo/CompanyLogo.js";
-import SearchBar from "../common/search-bar/SearchBar.js";
-import basket from "./../../images/basket.png";
-import logIn from "./../../images/log-in.png";
+import CompanyLogo from "../../company-logo/CompanyLogo.js";
+import SearchBar from "../../search/SearchBar.js";
+import basket from "../../../images/basket.png";
+import logIn from "../../../images/log-in.png";
 
 import "./HeaderBar.css";
 
@@ -12,7 +12,6 @@ import "./HeaderBar.css";
 
 const HeaderBar = (props) => {
   const { history } = props;
-  const [showHeader, setShowHeader] = useState(true);
 
   const changeLogInText = () => {};
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
-import CompanyLogo from "../common/company-logo/CompanyLogo.js";
+import CompanyLogo from "../company-logo/CompanyLogo.js";
 import { Link } from "react-router-dom";
 
 import "./CreateAccount.css";

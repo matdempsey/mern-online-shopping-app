@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HeaderBar from "../header-bar/HeaderBar";
+import HeaderBar from "../common/header-bar/HeaderBar";
 
 import "./PageNotFound.css";
 

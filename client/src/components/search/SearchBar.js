@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
-import searchButton from "../../../images/search-btn.png";
+import searchButton from "../../images/search-btn.png";
 
 import "./SearchBar.css";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Form, FormGroup, Label, Input } from "reactstrap";
-import CompanyLogo from "../common/company-logo/CompanyLogo.js";
+import CompanyLogo from "../company-logo/CompanyLogo.js";
 
 import "./Login.css";
 
