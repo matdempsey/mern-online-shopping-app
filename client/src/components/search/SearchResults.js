@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import HeaderBar from "../common/header-bar/HeaderBar.js";
 import NavBar from "../common/nav-bar/NavBar.js";
 import SearchResultsCount from "./SearchResultsCount.js";
-import ProductsList from "../produst-list/ProductList.js";
+import ProductsList from "../product/ProductList.js";
 import Footer from "../footer/Footer.js";
 
 const SearchResults = (props) => {
