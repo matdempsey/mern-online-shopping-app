@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link, Route } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import AddToBasketButton from "../buttons/AddToBasketButton";
 
@@ -9,13 +9,9 @@ import outOfStockImage from "./../../images/status/out-of-stock.png";
 import "./ProductListItems.css";
 
 const ProductListItems = (props) => {
-  const { name, price, qty } = props;
+  const { name, description, price, qty } = props;
 
   const inStock = qty > 0;
-
-  const handleOnProductClick = () => {
-    // history.push() here
-  };
 
   return (
     <div>
@@ -26,7 +22,6 @@ const ProductListItems = (props) => {
             className="product-list-image"
             src="https://ipsumimage.appspot.com/220x200"
             alt={name}
-            onClick={handleOnProductClick}
           ></img>
         </Col>
 
@@ -35,8 +30,16 @@ const ProductListItems = (props) => {
           <Row className="product-list-col-2-row-1">
             <Link
               className="product-item-link"
-              to="/404"
-              onClick={handleOnProductClick}
+              to={{
+                pathname: `/products/${name}`,
+                state: {
+                  img: "insert path here",
+                  name: name,
+                  description: description,
+                  price: price,
+                  inStock: inStock,
+                },
+              }}
             >
               {name}
             </Link>
@@ -70,13 +73,16 @@ const ProductListItems = (props) => {
             <span className="currency-span">£</span>
             <span className="price-span">{price}</span>
           </Row>
-          <Row className="product-list-col-3-row-4">
-            <AddToBasketButton />
-          </Row>
+
+          {inStock && (
+            <Row className="product-list-col-3-row-4">
+              <AddToBasketButton />
+            </Row>
+          )}
         </Col>
       </Row>
     </div>
   );
 };
 
-export default ProductListItems;
+export default withRouter(ProductListItems);

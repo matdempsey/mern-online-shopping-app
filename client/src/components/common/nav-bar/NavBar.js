@@ -10,27 +10,24 @@ const navLinks = [
   },
   {
     text: "Processors",
-    path: "/",
+    path: "/components/processors",
   },
   {
     text: "Graphics Cards",
-    path: "/",
+    path: "/components/graphics-cards",
   },
   {
     text: "Memory",
-    path: "/",
+    path: "/components/memory",
   },
   {
     text: "Storage",
-    path: "/",
+    path: "/components/storage",
   },
-  {
-    text: "Monitors",
-    path: "/",
-  },
+
   {
     text: "Peripherals",
-    path: "/",
+    path: "/components/peripherals",
   },
 ];
 

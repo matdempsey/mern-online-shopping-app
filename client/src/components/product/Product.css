@@ -1,0 +1,28 @@
+.product-parent-container {
+  display: flex;
+  justify-content: center;
+}
+
+.product-container {
+  margin-top: 70px;
+  width: 75vw;
+  /* background-color: greenyellow; */
+}
+
+.first-row {
+  display: flex;
+}
+
+.product-img-container {
+  width: 40%;
+}
+
+.product-info-container {
+  padding-left: 35px;
+  width: 60%;
+}
+
+.product-desc-container {
+  margin-top: 50px;
+  /* background-color: navajowhite; */
+}

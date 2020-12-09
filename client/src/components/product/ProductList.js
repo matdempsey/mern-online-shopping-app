@@ -1,22 +1,22 @@
 import React from "react";
 import ProductListItems from "./ProductListItems.js";
+import { withRouter } from "react-router-dom";
 
 import "./ProductList.css";
 
 const ProductList = (props) => {
   const { products } = props;
 
-  console.log("products list = ", products);
-
   return (
     <div className="flex-product-list-parent-container">
       <div className="product-list-container">
-        {products.map((ele, idx) => (
+        {products.map((product, idx) => (
           <ProductListItems
             key={idx}
-            name={ele.name}
-            price={ele.price}
-            qty={ele.qty}
+            name={product.name}
+            description={product.description}
+            price={product.price}
+            qty={product.qty}
           />
         ))}
       </div>
@@ -24,4 +24,4 @@ const ProductList = (props) => {
   );
 };
 
-export default ProductList;
+export default withRouter(ProductList);
