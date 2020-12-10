@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import HeaderBar from "../common/header-bar/HeaderBar";
-import NavBar from "../common/nav-bar/NavBar";
 
 import "./Product.css";
 
@@ -42,8 +40,6 @@ const Product = (props) => {
 
   return (
     <>
-      <HeaderBar />
-      <NavBar />
       <div className="product-parent-container">
         <div className="product-container">
           {/* first row */}

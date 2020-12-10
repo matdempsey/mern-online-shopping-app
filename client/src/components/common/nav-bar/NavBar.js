@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import "./NavBar.css";
 
@@ -31,22 +31,35 @@ const navLinks = [
   },
 ];
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { location } = props;
+
+  let render = true;
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/create-account"
+  ) {
+    render = false;
+  }
   return (
-    <div className="navbar-container">
-      <ul className="flex-navbar">
-        {navLinks.map((link, idx) => {
-          return (
-            <li key={idx} className="navbar-li">
-              <Link className="navbar-link" to={link.path}>
-                {link.text}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <>
+      {render && (
+        <div className="navbar-container">
+          <ul className="flex-navbar">
+            {navLinks.map((link, idx) => {
+              return (
+                <li key={idx} className="navbar-li">
+                  <Link className="navbar-link" to={link.path}>
+                    {link.text}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+    </>
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);

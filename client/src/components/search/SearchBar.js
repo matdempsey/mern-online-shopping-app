@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { Input } from "reactstrap";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import searchButton from "../../images/search-btn.png";
 
 import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const { history } = props;
+
   const [searchText, setSearchText] = useState("");
-  const [results, setResults] = useState([]);
-  const [redirect, setRedirect] = useState(false);
 
   const fetchProducts = (text) => {
     const query = encodeURIComponent(text);
+
     fetch(`/api/search/?q=${query}`)
       .then((res) => res.json())
       .then((res) => {
-        setResults(res);
-        setRedirect(true);
+        history.push({
+          pathname: "/search",
+          search: `q=${searchText}`,
+          state: { searchText: searchText, results: res },
+        });
       });
   };
 
@@ -49,18 +53,8 @@ const SearchBar = () => {
         alt="search button"
         onClick={onSearchButtonClick}
       />
-      {redirect ? (
-        <Redirect
-          push
-          to={{
-            pathname: "/search",
-            search: `q=${searchText}`,
-            state: { searchText: searchText, results: results },
-          }}
-        />
-      ) : null}
     </div>
   );
 };
 
-export default SearchBar;
+export default withRouter(SearchBar);
