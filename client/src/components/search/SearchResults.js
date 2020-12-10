@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchResultsCount from "./SearchResultsCount.js";
-import ProductsList from "../product/ProductList.js";
+import ProductsList from "../product-list/ProductList.js";
 
 const SearchResults = (props) => {
   const { location } = props;

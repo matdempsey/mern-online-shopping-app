@@ -1,7 +1,7 @@
 .flex-product-list-parent-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin: 50px 0px 50px 0px;
 }
 
 .product-list-container {

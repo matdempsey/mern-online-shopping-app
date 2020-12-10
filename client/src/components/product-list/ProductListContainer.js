@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 
-const ProductContainer = (props) => {
+const ProductListContainer = (props) => {
   const { match } = props;
   const { type } = match.params;
 
@@ -72,4 +72,4 @@ const ProductContainer = (props) => {
   );
 };
 
-export default ProductContainer;
+export default ProductListContainer;
