@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HeaderBar from "./components/common/header-bar/HeaderBar";
-import NavBar from "./components/common/nav-bar/NavBar";
+import HeaderBar from "./components/header-bar/HeaderBar.js";
+import NavBar from "./components/nav-bar/NavBar.js";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";

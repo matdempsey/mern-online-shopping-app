@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import CompanyLogo from "../../company-logo/CompanyLogo.js";
-import SearchBar from "../../search/SearchBar.js";
-import basket from "../../../images/basket.png";
-import logIn from "../../../images/log-in.png";
+import CompanyLogo from "../company-logo/CompanyLogo.js";
+import SearchBar from "../search/SearchBar.js";
+import basket from "../../images/basket.png";
+import logIn from "../../images/log-in.png";
 
 import "./HeaderBar.css";
 
