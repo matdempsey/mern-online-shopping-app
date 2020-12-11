@@ -1,0 +1,11 @@
+.in-stock-status-text {
+  font-size: 12px;
+  margin-left: 5px;
+  color: #339933;
+}
+
+.out-of-stock-status-text {
+  font-size: 12px;
+  margin-left: 5px;
+  color: #bd2f2f;
+}

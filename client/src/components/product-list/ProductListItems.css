@@ -34,18 +34,6 @@
   flex: 15% !important;
 }
 
-.in-stock-status-text {
-  font-size: 12px;
-  margin-left: 5px;
-  color: #339933;
-}
-
-.out-of-stock-status-text {
-  font-size: 12px;
-  margin-left: 5px;
-  color: #bd2f2f;
-}
-
 .delivery-para {
   margin: 3px 0px 0px 0px;
 }
@@ -60,9 +48,6 @@
   margin-bottom: 10px;
 }
 
-.currency-span {
-  font-size: 14px;
-}
 .price-span {
   font-size: 20px;
 }

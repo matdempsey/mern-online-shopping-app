@@ -2,16 +2,12 @@ import React from "react";
 import { withRouter, Link, Route } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import AddToBasketButton from "../buttons/AddToBasketButton";
-
-import inStockImage from "./../../images/status/in-stock.png";
-import outOfStockImage from "./../../images/status/out-of-stock.png";
+import StockStatus from "../labels/stock-status/StockStatus.js";
 
 import "./ProductListItems.css";
 
 const ProductListItems = (props) => {
   const { name, description, price, qty } = props;
-
-  const inStock = qty > 0;
 
   return (
     <div>
@@ -37,7 +33,7 @@ const ProductListItems = (props) => {
                   name: name,
                   description: description,
                   price: price,
-                  inStock: inStock,
+                  qty: qty,
                 },
               }}
             >
@@ -49,32 +45,21 @@ const ProductListItems = (props) => {
         {/* main col 3 */}
         <Col className="product-list-col-3">
           <Row className="product-list-col-3-row-1">
-            {inStock ? (
-              <span>
-                <img className="stock-status-img" src={inStockImage}></img>
-                <span className="in-stock-status-text">in stock</span>
-              </span>
-            ) : (
-              <span>
-                <img className="stock-status-img" src={outOfStockImage}></img>
-                <span className="out-of-stock-status-text">out of stock</span>
-              </span>
-            )}
+            <StockStatus qty={qty} />
           </Row>
           <Row>
             <p className="delivery-para">Free Delivery</p>
           </Row>
           <Row className="product-list-col-3-row-2">
-            {inStock && (
+            {qty > 0 && (
               <p className="shipping-para">Shipped within 48 hours</p>
             )}
           </Row>
           <Row className="product-list-col-3-row-3">
-            <span className="currency-span">£</span>
-            <span className="price-span">{price}</span>
+            <span className="price-span">£{price}</span>
           </Row>
 
-          {inStock && (
+          {qty > 0 && (
             <Row className="product-list-col-3-row-4">
               <AddToBasketButton />
             </Row>

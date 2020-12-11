@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import StockStatus from "../labels/stock-status/StockStatus.js";
 import AddToBasketButton from "../buttons/AddToBasketButton.js";
 
 import "./Product.css";
@@ -11,31 +12,29 @@ const Product = (props) => {
     name: "",
     description: "",
     price: null,
-    inStock: null,
+    qty: 0,
   });
   const [activeTab, setActiveTab] = useState(1);
 
   // handle user manually entering in the url
   useEffect(() => {
     if (location.state) {
-      const { name, description, price, inStock } = location.state;
+      const { name, description, price, qty } = location.state;
       setProduct({
         name: name,
         description: description,
         price: price,
-        inStock: inStock,
+        qty: qty,
       });
     } else {
       fetch(`/api/products/${match.params.name}`)
         .then((res) => res.json())
         .then((res) => {
-          const inStock = res.qty > 0 ? true : false;
-
           setProduct({
             name: res.name,
             description: res.description,
             price: res.price,
-            inStock: inStock,
+            qty: res.qty,
           });
         });
     }
@@ -47,16 +46,17 @@ const Product = (props) => {
 
   return (
     <>
-      <div className="product-parent-container">
+      <div className="flex-product-parent-container">
         <div className="product-container">
           {/* first row */}
-          <div className="first-row">
+          <div className="flex-first-row">
             <div className="product-img-container">
               <img src="" alt={`${product.name} image`} />
             </div>
             <div className="product-info-container">
               <h1>{product.name}</h1>
-              <p>{product.price}</p>
+              <span>£{product.price}</span>
+              <StockStatus qty={product.qty} />
               <div className="product-basket-container">
                 <AddToBasketButton />
               </div>
