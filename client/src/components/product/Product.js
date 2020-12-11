@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import AddToBasketButton from "../buttons/AddToBasketButton.js";
 
 import "./Product.css";
 
 const Product = (props) => {
+  const { location, match } = props;
+
   const [product, setProduct] = useState({
     name: "",
     description: "",
     price: null,
     inStock: null,
   });
-
-  const { location, match } = props;
+  const [activeTab, setActiveTab] = useState(1);
 
   // handle user manually entering in the url
   useEffect(() => {
@@ -38,6 +41,10 @@ const Product = (props) => {
     }
   }, []);
 
+  const handleActiveTabChange = (tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  };
+
   return (
     <>
       <div className="product-parent-container">
@@ -45,22 +52,47 @@ const Product = (props) => {
           {/* first row */}
           <div className="first-row">
             <div className="product-img-container">
-              <img
-                src="https://ipsumimage.appspot.com/576x500"
-                alt={`${product.name}`}
-              />
+              <img src="" alt={`${product.name} image`} />
             </div>
             <div className="product-info-container">
               <h1>{product.name}</h1>
               <p>{product.price}</p>
+              <div className="product-basket-container">
+                <AddToBasketButton />
+              </div>
             </div>
           </div>
 
-          {/* second row */}
-          <div className="product-desc-container">
-            <h2>Product Information</h2>
-            <hr />
-            <p>{product.description}</p>
+          {/* tabs */}
+          <div className="product-tab-container">
+            <Nav tabs>
+              <NavItem className={activeTab === 1 ? "active-tab" : null}>
+                <NavLink
+                  className="tab-nav-link"
+                  onClick={() => {
+                    handleActiveTabChange(1);
+                  }}
+                >
+                  Description
+                </NavLink>
+              </NavItem>
+              <NavItem className={activeTab === 2 ? "active-tab" : null}>
+                <NavLink
+                  className="tab-nav-link"
+                  onClick={() => {
+                    handleActiveTabChange(2);
+                  }}
+                >
+                  Reviews
+                </NavLink>
+              </NavItem>
+              <TabContent activeTab={activeTab}>
+                <TabPane className="tab-pane" tabId={1}>
+                  {product.description}
+                </TabPane>
+                <TabPane tabId={2}></TabPane>
+              </TabContent>
+            </Nav>
           </div>
         </div>
       </div>
