@@ -86,13 +86,15 @@ const Product = (props) => {
                   Reviews
                 </NavLink>
               </NavItem>
-              <TabContent activeTab={activeTab}>
-                <TabPane className="tab-pane" tabId={1}>
-                  {product.description}
-                </TabPane>
-                <TabPane tabId={2}></TabPane>
-              </TabContent>
             </Nav>
+            <TabContent activeTab={activeTab}>
+              <TabPane className="tab-pane" tabId={1}>
+                {product.description}
+              </TabPane>
+              <TabPane className="tab-pane" tabId={2}>
+                ss
+              </TabPane>
+            </TabContent>
           </div>
         </div>
       </div>
