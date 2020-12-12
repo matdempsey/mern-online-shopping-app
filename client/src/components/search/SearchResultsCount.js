@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../search/SearchResultsCount.css";
+import "./SearchResultsCount.css";
 
 const SearchResultsCount = (props) => {
   const { count, searchText } = props;
