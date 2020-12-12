@@ -1,8 +1,9 @@
 .product-list-row-item {
   padding: 15px 10px 15px 10px;
   background-color: #fafafa;
-  border-top: 1px solid #afafaf;
+  border: 1px solid #dee2e6;
   flex-wrap: nowrap !important;
+  margin-bottom: 10px;
 }
 
 .product-list-col-1 {
