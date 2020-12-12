@@ -24,4 +24,14 @@
 
 .ca-title {
   display: block;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.error-li {
+  list-style: square;
+}
+
+.error-li-no-ls {
+  list-style: none;
 }
