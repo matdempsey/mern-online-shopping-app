@@ -176,7 +176,7 @@ const checkAccExists = (email) => {
       .collection("customers")
       .findOne({ email: email }, (err, result) => {
         if (err) {
-          reject(err);
+          console.log(err);
         } else {
           const accExists = result !== null ? true : false;
           return resolve(accExists);
