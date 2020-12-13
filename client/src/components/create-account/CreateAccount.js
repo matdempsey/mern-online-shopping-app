@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 
 import "./CreateAccount.css";
 
-const CreateAccount = () => {
+const CreateAccount = (props) => {
+  const { history } = props;
+
   const [customer, setCustomer] = useState({
     firstName: "",
     lastName: "",
@@ -106,13 +108,26 @@ const CreateAccount = () => {
 
   // need to check response -- still unfinised server side
   const createUserAccount = () => {
-    fetch("/api/customers", {
+    fetch("/api/customer-accounts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(customer),
-    });
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("res obj", res.status);
+
+        if (res.status === 201) history.push("/login");
+
+        if (res.status === 409) {
+          errorMsgArr.push("A user with this email address already exists.");
+          setErrorMessage(errorMsgArr);
+          setShowError(true);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -149,9 +164,7 @@ const CreateAccount = () => {
                   {errorMessage.map((ele) => (
                     <li
                       className={
-                        errorMessage.length > 1
-                          ? "error-li"
-                          : "error-li-no-style"
+                        errorMessage.length > 1 ? "error-li" : "error-li-no-ls"
                       }
                       key={ele}
                     >

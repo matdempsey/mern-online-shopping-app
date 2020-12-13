@@ -8,8 +8,7 @@ const port = 3001;
 const jsonBodyParser = bodyParser.json();
 
 // mongodb constants
-const uri =
-  "mongodb+srv://mat:<password>@matCluster-tf7iy.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "";
 const databaseName = "online_shopping";
 
 // instance
@@ -30,6 +29,8 @@ const setUpDatabase = async () => {
     //console.log("[MongoDB]: connection closed!");
   }
 };
+
+/////////////////////////////////////////////// Models //////////////////////////////////////////////
 
 const createDatabase = async (client) => {
   const db = client.db(databaseName);
@@ -58,8 +59,6 @@ const createDatabase = async (client) => {
               bsonType: "string",
               description: "must be a string and is required",
             },
-
-            // embedded document for orders
           },
         },
       },
@@ -168,9 +167,27 @@ const createDatabase = async (client) => {
   }
 };
 
+/////////////////////////////////////////////// functions/middleware //////////////////////////////////////////////
+
+const checkAccExists = (email) => {
+  return new Promise((resolve, reject) => {
+    client
+      .db(databaseName)
+      .collection("customers")
+      .findOne({ email: email }, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          const accExists = result !== null ? true : false;
+          return resolve(accExists);
+        }
+      });
+  });
+};
+
 /////////////////////////////////////////////// endpoints //////////////////////////////////////////////
 
-app.post("/api/customers", jsonBodyParser, (req, res) => {
+app.post("/api/customer-accounts", jsonBodyParser, async (req, res) => {
   const customerDetails = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -178,25 +195,9 @@ app.post("/api/customers", jsonBodyParser, (req, res) => {
     password: req.body.password,
   };
 
-  // not working - need to fix
-  let r;
-  const accExist = client
-    .db(databaseName)
-    .collection("customers")
-    .findOne({ email: customerDetails.email }, (err, result) => {
-      if (err) {
-        console.log("[MongoDB]:", err.message);
-      } else {
-        r = result !== null ? true : false;
-      }
-      console.log("r = ", r);
-      return r;
-    });
+  const accExists = await checkAccExists(customerDetails.email);
 
-  console.log("accExist value = ", accExist); // undefined
-  if (accExist) {
-    res.json({ matchFound: true });
-  } else {
+  if (!accExists) {
     client
       .db(databaseName)
       .collection("customers")
@@ -204,11 +205,15 @@ app.post("/api/customers", jsonBodyParser, (req, res) => {
         if (err) {
           console.log("[MongoDB]:", err.message);
         } else {
+          res.status(201).json({ status: 201 });
           console.log(
-            "[MongoDB]: document has been inserted into the customers collection"
+            `[MongoDB]: customer with name: ${customerDetails.firstName} ${customerDetails.lastName} has been inserted into 
+            the customers collection`
           );
         }
       });
+  } else {
+    res.status(409).json({ status: 409 });
   }
 });
 
@@ -225,7 +230,7 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        //console.log("[MongoDB]: login findOne result =", result);
+        console.log("[MongoDB]: login findOne result =", result);
         result === null
           ? res.json({ matchFound: false })
           : res.json({ matchFound: true });
