@@ -122,7 +122,9 @@ const CreateAccount = (props) => {
         if (res.status === 201) history.push("/login");
 
         if (res.status === 409) {
-          errorMsgArr.push("A user with this email address already exists.");
+          errorMsgArr.push(
+            "An account with this email address already exists."
+          );
           setErrorMessage(errorMsgArr);
           setShowError(true);
         }

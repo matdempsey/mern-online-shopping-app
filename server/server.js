@@ -167,37 +167,45 @@ const createDatabase = async (client) => {
   }
 };
 
-/////////////////////////////////////////////// functions/middleware //////////////////////////////////////////////
+/////////////////////////////////////////////// middleware //////////////////////////////////////////////
 
-const checkAccExists = (email) => {
-  return new Promise((resolve, reject) => {
+async function checkAccExists(req, res, next) {
+  const promise = new Promise((resolve, reject) => {
     client
       .db(databaseName)
       .collection("customers")
-      .findOne({ email: email }, (err, result) => {
+      .findOne({ email: req.body.email }, (err, result) => {
         if (err) {
           console.log(err);
         } else {
-          const accExists = result !== null ? true : false;
-          return resolve(accExists);
+          resolve(result !== null ? true : false);
         }
       });
   });
-};
+
+  promise.then((accExists) => {
+    if (!accExists) {
+      next();
+    } else {
+      res.status(409).json({ status: 409 });
+    }
+  });
+}
 
 /////////////////////////////////////////////// endpoints //////////////////////////////////////////////
 
-app.post("/api/customer-accounts", jsonBodyParser, async (req, res) => {
-  const customerDetails = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-  };
+app.post(
+  "/api/customer-accounts",
+  jsonBodyParser,
+  checkAccExists,
+  (req, res) => {
+    const customerDetails = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+    };
 
-  const accExists = await checkAccExists(customerDetails.email);
-
-  if (!accExists) {
     client
       .db(databaseName)
       .collection("customers")
@@ -212,10 +220,8 @@ app.post("/api/customer-accounts", jsonBodyParser, async (req, res) => {
           );
         }
       });
-  } else {
-    res.status(409).json({ status: 409 });
   }
-});
+);
 
 app.post("/api/login", jsonBodyParser, (req, res) => {
   const logInDetails = {
