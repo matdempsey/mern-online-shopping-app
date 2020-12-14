@@ -169,7 +169,7 @@ const createDatabase = async (client) => {
 
 /////////////////////////////////////////////// middleware //////////////////////////////////////////////
 
-async function checkAccExists(req, res, next) {
+const checkAccExists = async (req, res, next) => {
   const promise = new Promise((resolve, reject) => {
     client
       .db(databaseName)
@@ -190,7 +190,7 @@ async function checkAccExists(req, res, next) {
       res.status(409).json({ status: 409 });
     }
   });
-}
+};
 
 /////////////////////////////////////////////// endpoints //////////////////////////////////////////////
 
