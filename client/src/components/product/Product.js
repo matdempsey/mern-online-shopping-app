@@ -27,7 +27,7 @@ const Product = (props) => {
         qty: qty,
       });
     } else {
-      fetch(`/api/products/${match.params.name}`)
+      fetch(`/api/product/${match.params.name}`)
         .then((res) => res.json())
         .then((res) => {
           setProduct({
@@ -51,11 +51,15 @@ const Product = (props) => {
           {/* first row */}
           <div className="flex-first-row">
             <div className="product-img-container">
-              <img src="" alt={`${product.name} image`} />
+              <img
+                className="product-img"
+                src="https://ipsumimage.appspot.com/700x670"
+                alt={`${product.name} image`}
+              />
             </div>
             <div className="product-info-container">
-              <h1>{product.name}</h1>
-              <span>£{product.price}</span>
+              <h1 className="product-heading">{product.name}</h1>
+              <span className="product-price">£{product.price}</span>
               <StockStatus qty={product.qty} />
               <div className="product-basket-container">
                 <AddToBasketButton />
@@ -76,6 +80,7 @@ const Product = (props) => {
                   Description
                 </NavLink>
               </NavItem>
+
               <NavItem className={activeTab === 2 ? "active-tab" : null}>
                 <NavLink
                   className="tab-nav-link"
@@ -91,9 +96,7 @@ const Product = (props) => {
               <TabPane className="tab-pane" tabId={1}>
                 {product.description}
               </TabPane>
-              <TabPane className="tab-pane" tabId={2}>
-                ss
-              </TabPane>
+              <TabPane className="tab-pane" tabId={2}></TabPane>
             </TabContent>
           </div>
         </div>
