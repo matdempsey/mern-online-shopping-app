@@ -253,7 +253,6 @@ app.get("/api/components", (req, res) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log("[MongoDB]: find all components result =", result);
         res.json(result);
       }
     });
@@ -277,7 +276,7 @@ app.get(`/api/components/:type`, (req, res) => {
     });
 });
 
-app.get("/api/products/:name", (req, res) => {
+app.get("/api/product/:name", (req, res) => {
   client
     .db(databaseName)
     .collection("components")
@@ -287,6 +286,22 @@ app.get("/api/products/:name", (req, res) => {
       } else {
         console.log("[MongoDB]: find specific product result =", result);
         return res.json(result);
+      }
+    });
+});
+
+app.get("/api/products/:name", (req, res) => {
+  const re = new RegExp(req.params.name, `i`);
+
+  client
+    .db(databaseName)
+    .collection("components")
+    .find({ name: re })
+    .toArray((err, result) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        res.json(result);
       }
     });
 });
@@ -317,7 +332,6 @@ app.get(`/api/search`, (req, res) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log("[MongoDB]: product search result =", result);
         res.json(result);
       }
     });

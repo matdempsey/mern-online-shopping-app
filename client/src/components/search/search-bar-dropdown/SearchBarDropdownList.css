@@ -1,0 +1,16 @@
+.sb-dd-list {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.sb-dd-li {
+  display: flex;
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 10px 10px 10px;
+}
+
+.sb-dd-li:hover {
+  background-color: #dddddd;
+}

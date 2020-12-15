@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
+import SearchBarDropdownContainer from "../search-bar-dropdown/SearchBarDropdownContainer.js";
+
 import searchButton from "../../../images/search-btn.png";
 
 import "./SearchBar.css";
@@ -9,6 +11,7 @@ const SearchBar = (props) => {
   const { history } = props;
 
   const [searchText, setSearchText] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const fetchProducts = (text) => {
     const query = encodeURIComponent(text);
@@ -26,6 +29,7 @@ const SearchBar = (props) => {
 
   const onSearchTextChange = (e) => {
     setSearchText(e.target.value);
+    setShowDropdown(true);
   };
 
   const onSearchButtonClick = () => {
@@ -39,21 +43,29 @@ const SearchBar = (props) => {
   };
 
   return (
-    <div className="flex-search-bar-container">
-      <Input
-        className="search-bar"
-        value={searchText}
-        placeholder="What are you looking for?"
-        onChange={onSearchTextChange}
-        onKeyDown={onEnterKey}
-      />
-      <img
-        className="search-btn"
-        src={searchButton}
-        alt="search button"
-        onClick={onSearchButtonClick}
-      />
-    </div>
+    <>
+      <div className="flex-search-bar-container">
+        <Input
+          className="search-bar"
+          value={searchText}
+          placeholder="What are you looking for?"
+          onChange={onSearchTextChange}
+          onKeyDown={onEnterKey}
+        />
+        <img
+          className="search-btn"
+          src={searchButton}
+          alt="search button"
+          onClick={onSearchButtonClick}
+        />
+      </div>
+
+      {showDropdown && (
+        <div>
+          <SearchBarDropdownContainer searchText={searchText} />
+        </div>
+      )}
+    </>
   );
 };
 
