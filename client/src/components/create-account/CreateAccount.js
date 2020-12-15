@@ -106,7 +106,6 @@ const CreateAccount = (props) => {
     }
   };
 
-  // need to check response -- still unfinised server side
   const createUserAccount = () => {
     fetch("/api/customer-accounts", {
       method: "POST",
@@ -117,8 +116,6 @@ const CreateAccount = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("res obj", res.status);
-
         if (res.status === 201) history.push("/login");
 
         if (res.status === 409) {
