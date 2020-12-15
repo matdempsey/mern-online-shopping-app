@@ -6,7 +6,7 @@ import Home from "./components/home/Home";
 import Login from "./components/login/Login.js";
 import CreateAccount from "./components/create-account/CreateAccount.js";
 import BuildPC from "./components/build-pc/BuildPC.js";
-import SearchResults from "./components/search/SearchResults.js";
+import SearchResults from "./components/search/search-results/SearchResults.js";
 import ProductListContainer from "./components/product-list/ProductListContainer";
 import Product from "./components/product/Product.js";
 import PageNotFound from "./components/page-not-found/PageNotFound.js";
