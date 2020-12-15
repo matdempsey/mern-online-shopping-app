@@ -59,12 +59,7 @@ const SearchBar = (props) => {
           onClick={onSearchButtonClick}
         />
       </div>
-
-      {showDropdown && (
-        <div>
-          <SearchBarDropdownContainer searchText={searchText} />
-        </div>
-      )}
+      {showDropdown && <SearchBarDropdownContainer searchText={searchText} />}
     </>
   );
 };
