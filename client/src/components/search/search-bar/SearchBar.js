@@ -21,8 +21,8 @@ const SearchBar = (props) => {
       .then((res) => {
         history.push({
           pathname: "/search",
-          search: `q=${searchText}`,
-          state: { searchText: searchText, results: res },
+          search: `q=${text}`,
+          state: { searchText: text, results: res },
         });
       });
   };
