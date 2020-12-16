@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import SearchBarDropdownContainer from "../search-bar-dropdown/SearchBarDropdownContainer.js";
-
 import searchButton from "../../../images/search-btn.png";
 
 import "./SearchBar.css";
@@ -32,11 +31,9 @@ const SearchBar = (props) => {
     setShowDropdown(true);
   };
 
-  const onSearchButtonClick = () => {
-    fetchProducts(searchText);
-  };
+  const onSearchButtonClick = () => fetchProducts(searchText);
 
-  const onEnterKey = (e) => {
+  const onEnterKeyPress = (e) => {
     if (e.key === "Enter") {
       fetchProducts(searchText);
     }
@@ -50,7 +47,7 @@ const SearchBar = (props) => {
           value={searchText}
           placeholder="What are you looking for?"
           onChange={onSearchTextChange}
-          onKeyDown={onEnterKey}
+          onKeyDown={onEnterKeyPress}
         />
         <img
           className="search-btn"
@@ -59,7 +56,12 @@ const SearchBar = (props) => {
           onClick={onSearchButtonClick}
         />
       </div>
-      {showDropdown && <SearchBarDropdownContainer searchText={searchText} />}
+      {showDropdown && (
+        <SearchBarDropdownContainer
+          searchText={searchText}
+          fetchProducts={fetchProducts}
+        />
+      )}
     </>
   );
 };

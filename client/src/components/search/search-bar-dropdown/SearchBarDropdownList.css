@@ -14,3 +14,21 @@
 .sb-dd-li:hover {
   background-color: #dddddd;
 }
+
+.sb-dd-show-all-results-container {
+  text-align: center;
+  border-top: 1px solid #dddddd;
+  padding: 15px;
+}
+
+.show-all-results-btn {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 7px;
+  border: 1px solid #dddddd;
+  text-transform: uppercase;
+}
+
+.show-all-results-btn:hover {
+  background-color: #dddddd;
+}
