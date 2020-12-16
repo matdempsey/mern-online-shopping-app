@@ -34,9 +34,7 @@ const SearchBar = (props) => {
   const onSearchButtonClick = () => fetchProducts(searchText);
 
   const onEnterKeyPress = (e) => {
-    if (e.key === "Enter") {
-      fetchProducts(searchText);
-    }
+    if (e.key === "Enter") fetchProducts(searchText);
   };
 
   return (
