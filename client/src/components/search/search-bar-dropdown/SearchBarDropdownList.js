@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import SearchContext from "../context/SearchContext.js";
 import { withRouter } from "react-router-dom";
 import SearchBarDropdownListItem from "../search-bar-dropdown/SearchBarDropdownListItem.js";
 
 import "./SearchBarDropdownList.css";
 
 const SearchBarDropdownList = (props) => {
-  const { predictionResults, searchText, fetchProducts, history } = props;
+  const { predictionResults, searchText, history } = props;
+
+  const { toggleDropdownVisibility, fetchProducts } = useContext(SearchContext);
+
   const maxNumOfResults = 5;
 
   const handleListItemClick = (name) => {
+    toggleDropdownVisibility();
     history.push(`/products/${name}`);
   };
 
-  const handleShowAllResultsBtnClick = () => fetchProducts(searchText);
+  const handleShowAllResultsBtnClick = () => {
+    toggleDropdownVisibility();
+    fetchProducts(searchText);
+  };
 
   return (
     <div>

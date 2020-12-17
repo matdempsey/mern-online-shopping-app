@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SearchContext from "../context/SearchContext.js";
 import { Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import SearchBarDropdownContainer from "../search-bar-dropdown/SearchBarDropdownContainer.js";
@@ -26,40 +27,49 @@ const SearchBar = (props) => {
       });
   };
 
+  const toggleDropdownVisibility = () => {
+    setShowDropdown((currState) => !currState);
+  };
+
   const onSearchTextChange = (e) => {
     setSearchText(e.target.value);
     setShowDropdown(true);
   };
 
-  const onSearchButtonClick = () => fetchProducts(searchText);
+  const onSearchButtonClick = () => {
+    toggleDropdownVisibility();
+    fetchProducts(searchText);
+  };
 
   const onEnterKeyPress = (e) => {
-    if (e.key === "Enter") fetchProducts(searchText);
+    if (e.key === "Enter") {
+      toggleDropdownVisibility();
+      fetchProducts(searchText);
+    }
   };
 
   return (
     <>
-      <div className="flex-search-bar-container">
-        <Input
-          className="search-bar"
-          value={searchText}
-          placeholder="What are you looking for?"
-          onChange={onSearchTextChange}
-          onKeyDown={onEnterKeyPress}
-        />
-        <img
-          className="search-btn"
-          src={searchButton}
-          alt="search button"
-          onClick={onSearchButtonClick}
-        />
-      </div>
-      {showDropdown && (
-        <SearchBarDropdownContainer
-          searchText={searchText}
-          fetchProducts={fetchProducts}
-        />
-      )}
+      <SearchContext.Provider
+        value={{ toggleDropdownVisibility, fetchProducts }}
+      >
+        <div className="flex-search-bar-container">
+          <Input
+            className="search-bar"
+            value={searchText}
+            placeholder="What are you looking for?"
+            onChange={onSearchTextChange}
+            onKeyDown={onEnterKeyPress}
+          />
+          <img
+            className="search-btn"
+            src={searchButton}
+            alt="search button"
+            onClick={onSearchButtonClick}
+          />
+        </div>
+        {showDropdown && <SearchBarDropdownContainer searchText={searchText} />}
+      </SearchContext.Provider>
     </>
   );
 };
