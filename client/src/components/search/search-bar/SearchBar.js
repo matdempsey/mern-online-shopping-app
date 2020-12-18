@@ -32,8 +32,14 @@ const SearchBar = (props) => {
   };
 
   const onSearchTextChange = (e) => {
-    setSearchText(e.target.value);
-    setShowDropdown(true);
+    const text = e.target.value;
+    setSearchText(text);
+
+    if (text.length === 0 && showDropdown) {
+      setShowDropdown(false);
+    } else {
+      setShowDropdown(true);
+    }
   };
 
   const onSearchButtonClick = () => {
