@@ -13,17 +13,24 @@ const SearchBar = (props) => {
   const [searchText, setSearchText] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const formatSearchText = (text) => {
+    const regex = /\s{2,}/g; // find 2 or more occurences {2,} of whitespaces \s
+    const formattedText = text.replaceAll(regex, " ").trim();
+
+    return formattedText;
+  };
+
   const fetchProducts = (text) => {
-    const trimmedText = text.trim();
-    const query = encodeURIComponent(trimmedText);
+    const formattedText = formatSearchText(text);
+    const query = encodeURIComponent(formattedText);
 
     fetch(`/api/search/?q=${query}`)
       .then((res) => res.json())
       .then((res) => {
         history.push({
           pathname: "/search",
-          search: `q=${trimmedText}`,
-          state: { searchText: trimmedText, results: res },
+          search: `q=${formattedText}`,
+          state: { searchText: formattedText, results: res },
         });
       });
   };
