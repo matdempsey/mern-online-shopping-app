@@ -14,15 +14,16 @@ const SearchBar = (props) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const fetchProducts = (text) => {
-    const query = encodeURIComponent(text);
+    const trimmedText = text.trim();
+    const query = encodeURIComponent(trimmedText);
 
     fetch(`/api/search/?q=${query}`)
       .then((res) => res.json())
       .then((res) => {
         history.push({
           pathname: "/search",
-          search: `q=${text}`,
-          state: { searchText: text, results: res },
+          search: `q=${trimmedText}`,
+          state: { searchText: trimmedText, results: res },
         });
       });
   };
