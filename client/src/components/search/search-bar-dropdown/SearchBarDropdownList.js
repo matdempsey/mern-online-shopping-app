@@ -14,7 +14,7 @@ const SearchBarDropdownList = (props) => {
 
   const handleListItemClick = (name) => {
     toggleDropdownVisibility();
-    history.push(`/products/${name}`);
+    history.push(`/products/${encodeURIComponent(name)}`);
   };
 
   const handleShowAllResultsBtnClick = () => {
