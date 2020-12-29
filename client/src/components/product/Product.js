@@ -38,7 +38,7 @@ const Product = (props) => {
           });
         });
     }
-  }, []);
+  }, [location.pathname]);
 
   const handleActiveTabChange = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
