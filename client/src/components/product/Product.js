@@ -56,7 +56,11 @@ const Product = (props) => {
             <div className="product-img-container">
               <img
                 className="product-img"
-                src={process.env.PUBLIC_URL + product.imagePath}
+                src={
+                  product.imagePath
+                    ? process.env.PUBLIC_URL + product.imagePath
+                    : "https://ipsumimage.appspot.com/648x648"
+                }
                 alt={`${product.name} image`}
               />
             </div>

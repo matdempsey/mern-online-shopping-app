@@ -16,7 +16,11 @@ const ProductListItems = (props) => {
         <Col className="product-list-col-1">
           <img
             className="product-list-image"
-            src={process.env.PUBLIC_URL + imagePath}
+            src={
+              imagePath
+                ? process.env.PUBLIC_URL + imagePath
+                : "https://ipsumimage.appspot.com/200x200"
+            }
             alt={name}
           ></img>
         </Col>

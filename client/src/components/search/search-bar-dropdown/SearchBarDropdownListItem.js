@@ -9,7 +9,11 @@ const SearchBarDropdownListItem = (props) => {
     <div>
       <img
         className="sb-dd-li-img"
-        src={process.env.PUBLIC_URL + imagePath}
+        src={
+          imagePath
+            ? process.env.PUBLIC_URL + imagePath
+            : "https://ipsumimage.appspot.com/60x60"
+        }
         alt={`${name}`}
       />
       <span>{name}</span>
