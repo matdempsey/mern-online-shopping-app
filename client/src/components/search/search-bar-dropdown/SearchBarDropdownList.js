@@ -38,6 +38,7 @@ const SearchBarDropdownList = (props) => {
                 <SearchBarDropdownListItem
                   name={result.name}
                   price={result.price}
+                  imagePath={result.imagePath}
                 />
               </li>
             );

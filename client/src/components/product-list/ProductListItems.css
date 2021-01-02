@@ -12,6 +12,8 @@
 
 .product-list-image {
   cursor: pointer;
+  width: 220px;
+  height: 200px;
 }
 
 .product-list-col-2 {

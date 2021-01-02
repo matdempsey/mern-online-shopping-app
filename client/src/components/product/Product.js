@@ -13,18 +13,20 @@ const Product = (props) => {
     description: "",
     price: null,
     qty: 0,
+    imagePath: "",
   });
   const [activeTab, setActiveTab] = useState(1);
 
   // handle user manually entering in the url
   useEffect(() => {
     if (location.state) {
-      const { name, description, price, qty } = location.state;
+      const { name, description, price, qty, imagePath } = location.state;
       setProduct({
         name: name,
         description: description,
         price: price,
         qty: qty,
+        imagePath: imagePath,
       });
     } else {
       fetch(`/api/product/${match.params.name}`)
@@ -35,6 +37,7 @@ const Product = (props) => {
             description: res.description,
             price: res.price,
             qty: res.qty,
+            imagePath: res.imagePath,
           });
         });
     }
@@ -53,7 +56,7 @@ const Product = (props) => {
             <div className="product-img-container">
               <img
                 className="product-img"
-                src="https://ipsumimage.appspot.com/700x670"
+                src={process.env.PUBLIC_URL + product.imagePath}
                 alt={`${product.name} image`}
               />
             </div>

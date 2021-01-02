@@ -3,13 +3,13 @@ import React from "react";
 import "./SearchBarDropdownListItem.css";
 
 const SearchBarDropdownListItem = (props) => {
-  const { name } = props;
+  const { name, imagePath } = props;
 
   return (
     <div>
       <img
         className="sb-dd-li-img"
-        src="https://ipsumimage.appspot.com/60x60"
+        src={process.env.PUBLIC_URL + imagePath}
         alt={`${name}`}
       />
       <span>{name}</span>

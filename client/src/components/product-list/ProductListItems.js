@@ -7,7 +7,7 @@ import StockStatus from "../labels/stock-status/StockStatus.js";
 import "./ProductListItems.css";
 
 const ProductListItems = (props) => {
-  const { name, description, price, qty } = props;
+  const { name, description, price, qty, imagePath } = props;
 
   return (
     <div>
@@ -16,7 +16,7 @@ const ProductListItems = (props) => {
         <Col className="product-list-col-1">
           <img
             className="product-list-image"
-            src="https://ipsumimage.appspot.com/220x200"
+            src={process.env.PUBLIC_URL + imagePath}
             alt={name}
           ></img>
         </Col>
@@ -29,11 +29,11 @@ const ProductListItems = (props) => {
               to={{
                 pathname: `/products/${name}`,
                 state: {
-                  img: "insert path here",
                   name: name,
                   description: description,
                   price: price,
                   qty: qty,
+                  imagePath: imagePath,
                 },
               }}
             >

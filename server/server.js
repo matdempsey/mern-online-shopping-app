@@ -30,7 +30,7 @@ const setUpDatabase = async () => {
   }
 };
 
-/////////////////////////////////////////////// Models //////////////////////////////////////////////
+/////////////////////////////////////////////// collections //////////////////////////////////////////////
 
 const createDatabase = async (client) => {
   const db = client.db(databaseName);
@@ -97,6 +97,9 @@ const createDatabase = async (client) => {
 
             price: {
               bsonType: "double",
+            },
+            imagePath: {
+              bsonType: "string",
             },
           },
         },
@@ -277,6 +280,8 @@ app.get(`/api/components/:type`, (req, res) => {
 });
 
 app.get("/api/product/:name", (req, res) => {
+  console.log("request = ", req.params.name);
+
   client
     .db(databaseName)
     .collection("components")

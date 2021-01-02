@@ -17,6 +17,7 @@ const ProductList = (props) => {
             description={product.description}
             price={product.price}
             qty={product.qty}
+            imagePath={product.imagePath}
           />
         ))}
       </div>
