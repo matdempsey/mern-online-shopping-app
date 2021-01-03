@@ -12,6 +12,12 @@ const navLinks = [
     text: "Processors",
     path: "/components/processors",
   },
+
+  {
+    text: "Motherboards",
+    path: "/components/motherboards",
+  },
+
   {
     text: "Graphics Cards",
     path: "/components/graphics-cards",
