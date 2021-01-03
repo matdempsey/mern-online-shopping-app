@@ -25,6 +25,10 @@ const navLinks = [
     path: "/components/memory",
   },
   {
+    text: "Power Supplies",
+    path: "/components/power-supplies",
+  },
+  {
     text: "Storage",
     path: "/components/storage",
   },
