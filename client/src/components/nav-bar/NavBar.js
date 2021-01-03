@@ -9,15 +9,13 @@ const navLinks = [
     path: "/build-pc",
   },
   {
-    text: "Processors",
-    path: "/components/processors",
-  },
-
-  {
     text: "Motherboards",
     path: "/components/motherboards",
   },
-
+  {
+    text: "Processors",
+    path: "/components/processors",
+  },
   {
     text: "Graphics Cards",
     path: "/components/graphics-cards",
@@ -30,7 +28,6 @@ const navLinks = [
     text: "Storage",
     path: "/components/storage",
   },
-
   {
     text: "Peripherals",
     path: "/components/peripherals",
