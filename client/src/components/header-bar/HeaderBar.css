@@ -30,12 +30,12 @@
 }
 
 .hb-link {
-  color: #ffffff;
+  color: #ffa500;
   font-size: 14px;
 }
 
 .hb-link:hover {
-  color: #b8b8b8;
+  color: #ffa500;
   text-decoration: none;
   opacity: 0.8;
 }
@@ -45,6 +45,8 @@
 }
 .basket-icon {
   margin-right: 5px;
+  width: 24px;
+  height: 24px;
 }
 
 .basket-icon:hover {
@@ -54,4 +56,6 @@
 
 .log-in-icon {
   margin-right: 5px;
+  width: 24px;
+  height: 24px;
 }
