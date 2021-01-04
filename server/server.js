@@ -240,9 +240,10 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
         console.log("[MongoDB]:", err.message);
       } else {
         console.log("[MongoDB]: login findOne result =", result);
-        result === null
-          ? res.json({ matchFound: false })
-          : res.json({ matchFound: true });
+
+        result !== null
+          ? res.status(200).json({ status: 200 })
+          : res.status(401).json({ status: 401 });
       }
     });
 });

@@ -39,12 +39,11 @@ const Login = (props) => {
         body: JSON.stringify(logInDetails),
       })
         .then((res) => res.json())
-        .then((matchFound) => {
-          const match = Object.values(matchFound)[0];
-          if (!match) {
+        .then((res) => {
+          if (res.status === 401) {
             setShowError(true);
             setErrorMessage("Incorrect details.");
-          } else {
+          } else if (res.status === 200) {
             history.push("/");
           }
         })
