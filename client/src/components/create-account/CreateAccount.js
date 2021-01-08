@@ -107,7 +107,7 @@ const CreateAccount = (props) => {
   };
 
   const createUserAccount = () => {
-    fetch("/api/customer-accounts", {
+    fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
