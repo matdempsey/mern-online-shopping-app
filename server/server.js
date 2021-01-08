@@ -1,4 +1,7 @@
 const express = require("express");
+const session = require("express-session");
+const { v4: genuuidV4 } = require("uuid");
+const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 
@@ -8,11 +11,11 @@ const port = 3001;
 const jsonBodyParser = bodyParser.json();
 
 // mongodb constants
-const uri = "";
-const databaseName = "online_shopping";
+const url = "";
+const dbName = "online_shopping";
 
 // instance
-const client = new MongoClient(uri, {
+const client = new MongoClient(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -33,7 +36,7 @@ const setUpDatabase = async () => {
 /////////////////////////////////////////////// collections //////////////////////////////////////////////
 
 const createDatabase = async (client) => {
-  const db = client.db(databaseName);
+  const db = client.db(dbName);
 
   try {
     await db.createCollection("customers", {
@@ -107,7 +110,7 @@ const createDatabase = async (client) => {
     });
     console.log("[MongoDB]: components collection created.");
 
-    await client.db(databaseName).createCollection("cases", {
+    await client.db(dbName).createCollection("cases", {
       autoIndexId: true,
       validator: {
         $jsonSchema: {
@@ -172,16 +175,16 @@ const createDatabase = async (client) => {
 
 /////////////////////////////////////////////// middleware //////////////////////////////////////////////
 
-const checkAccExists = async (req, res, next) => {
+const checkAccountExists = async (req, res, next) => {
   const promise = new Promise((resolve, reject) => {
     client
-      .db(databaseName)
+      .db(dbName)
       .collection("customers")
-      .findOne({ email: req.body.email }, (err, result) => {
+      .findOne({ email: req.body.email }, (err, customer) => {
         if (err) {
           console.log(err);
         } else {
-          resolve(result !== null ? true : false);
+          resolve(customer !== null ? true : false);
         }
       });
   });
@@ -197,60 +200,65 @@ const checkAccExists = async (req, res, next) => {
 
 /////////////////////////////////////////////// endpoints //////////////////////////////////////////////
 
-app.post(
-  "/api/customer-accounts",
-  jsonBodyParser,
-  checkAccExists,
-  (req, res) => {
-    const customerDetails = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    };
+app.use(
+  session({
+    secret: "this needs to be an environment variable",
+    resave: false,
+    saveUninitialized: false,
+    genid: () => genuuidV4(),
+    cookie: { maxAge: 60000 * 60 }, // 1 hour
+    store: new MongoStore({
+      url: url,
+      dbName: dbName,
+    }),
+  })
+);
 
-    client
-      .db(databaseName)
-      .collection("customers")
-      .insertOne(customerDetails, (err) => {
+app.post("/api/register", jsonBodyParser, checkAccountExists, (req, res) => {
+  client
+    .db(dbName)
+    .collection("customers")
+    .insertOne(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+      },
+      (err) => {
         if (err) {
           console.log("[MongoDB]:", err.message);
         } else {
           res.status(201).json({ status: 201 });
-          console.log(
-            `[MongoDB]: customer with name: ${customerDetails.firstName} ${customerDetails.lastName} has been inserted into 
-            the customers collection`
-          );
         }
-      });
-  }
-);
+      }
+    );
+});
 
 app.post("/api/login", jsonBodyParser, (req, res) => {
-  const logInDetails = {
-    email: req.body.email,
-    password: req.body.password,
-  };
-
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("customers")
-    .findOne(logInDetails, (err, result) => {
-      if (err) {
-        console.log("[MongoDB]:", err.message);
-      } else {
-        console.log("[MongoDB]: login findOne result =", result);
-
-        result !== null
-          ? res.status(200).json({ status: 200 })
-          : res.status(401).json({ status: 401 });
+    .findOne(
+      { email: req.body.email, password: req.body.password },
+      (err, user) => {
+        if (err) {
+          console.log("[MongoDB]:", err.message);
+        } else {
+          if (user) {
+            req.session.userID = user._id;
+            res.status(200).json({ status: 200 });
+          } else {
+            res.status(401).json({ status: 401 });
+          }
+        }
       }
-    });
+    );
 });
 
 app.get("/api/components", (req, res) => {
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("components")
     .find({})
     .toArray((err, result) => {
@@ -264,33 +272,26 @@ app.get("/api/components", (req, res) => {
 
 app.get(`/api/components/:type`, (req, res) => {
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("components")
     .find(req.params)
     .toArray((err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log(
-          "[MongoDB]: find components of a specific type result =",
-          result
-        );
         res.json(result);
       }
     });
 });
 
 app.get("/api/product/:name", (req, res) => {
-  console.log("request = ", req.params.name);
-
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("components")
     .findOne({ name: req.params.name }, (err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log("[MongoDB]: find specific product result =", result);
         return res.json(result);
       }
     });
@@ -300,7 +301,7 @@ app.get("/api/products/:name", (req, res) => {
   const re = new RegExp(req.params.name, `i`);
 
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("components")
     .find({ name: re })
     .toArray((err, result) => {
@@ -314,14 +315,13 @@ app.get("/api/products/:name", (req, res) => {
 
 app.get("/api/cases", (req, res) => {
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("cases")
     .find({})
     .toArray((err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
       } else {
-        console.log("[MongoDB]: find all cases result =", result);
         res.json(result);
       }
     });
@@ -331,7 +331,7 @@ app.get(`/api/search`, (req, res) => {
   const re = new RegExp(req.query.q, "i"); // the i represents case insensitive in regex
 
   client
-    .db(databaseName)
+    .db(dbName)
     .collection("components")
     .find({ name: re })
     .toArray((err, result) => {
