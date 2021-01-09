@@ -12,11 +12,6 @@ const Login = (props) => {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const logInDetails = {
-    email: email,
-    password: password,
-  };
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -36,13 +31,16 @@ const Login = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(logInDetails),
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
       })
         .then((res) => res.json())
         .then((res) => {
           if (res.status === 401) {
             setShowError(true);
-            setErrorMessage("Incorrect details.");
+            setErrorMessage("Your email and/or password is incorrect.");
           } else if (res.status === 200) {
             history.push("/");
           }
