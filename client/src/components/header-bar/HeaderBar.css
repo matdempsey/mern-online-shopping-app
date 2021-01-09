@@ -12,13 +12,13 @@
   text-align: center;
   margin: 0px 25px 0px 25px;
   color: #ffffff;
-  flex: 15%;
+  flex: 20%;
 }
 
 .sb-container {
   position: relative;
   margin: 0px 25px 0px 25px;
-  flex: 70%;
+  flex: 60%;
 }
 
 .flex-hb-container-right {
@@ -26,12 +26,12 @@
   justify-content: center;
   align-items: center;
   margin: 0px 25px 0px 25px;
-  flex: 15%;
+  flex: 20%;
 }
 
 .hb-link {
   color: #ffa500;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .hb-link:hover {
@@ -47,6 +47,7 @@
   margin-right: 5px;
   width: 24px;
   height: 24px;
+  transform: scaleX(-1);
 }
 
 .basket-icon:hover {
@@ -56,6 +57,6 @@
 
 .log-in-icon {
   margin-right: 5px;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
