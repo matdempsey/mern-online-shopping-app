@@ -11,11 +11,13 @@ import ProductListContainer from "./components/product-list/ProductListContainer
 import Product from "./components/product/Product.js";
 import PageNotFound from "./components/page-not-found/PageNotFound.js";
 
+import { GlobalProvider } from "./Provider/GlobalProvider.js";
+
 import "./App.css";
 
 const App = () => {
   return (
-    <>
+    <GlobalProvider>
       <div className="main-container">
         <Router>
           <HeaderBar />
@@ -36,7 +38,7 @@ const App = () => {
           </Switch>
         </Router>
       </div>
-    </>
+    </GlobalProvider>
   );
 };
 
