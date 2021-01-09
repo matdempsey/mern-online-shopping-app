@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import CompanyLogo from "../company-logo/CompanyLogo.js";
 import SearchBar from "../search/search-bar/SearchBar.js";
-import basket from "../../images/basket.png";
-import logIn from "../../images/log-in.png";
+import basket from "../../images/icons/basket.png";
+import logIn from "../../images/icons/log-in.png";
+
+import { GlobalContext } from "../../Provider/GlobalProvider.js";
 
 import "./HeaderBar.css";
 
-//To Do:
-// - if user logged in replace link/create to "log-out"
 const HeaderBar = (props) => {
-  const { location } = props;
+  const { history, location } = props;
+
+  const { isLoggedIn, setIsLoggedIn } = useContext(GlobalContext);
+
+  const handleLogin = () => {
+    if (isLoggedIn) {
+      fetch("/api/logout").then(setIsLoggedIn(false));
+    } else {
+      history.push("/login");
+    }
+  };
 
   let render = true;
   if (
@@ -19,7 +29,6 @@ const HeaderBar = (props) => {
   ) {
     render = false;
   }
-  const changeLogInText = () => {};
 
   return (
     <>
@@ -37,14 +46,14 @@ const HeaderBar = (props) => {
             <div className="basket-container">
               <Link className="hb-link" to={"/basket"}>
                 <img className="basket-icon" src={basket} alt="your basket" />
-                basket
+                Basket
               </Link>
             </div>
 
             <div className="log-in-container">
-              <Link className="hb-link" to={"/login"}>
+              <Link className="hb-link" onClick={handleLogin}>
                 <img className="log-in-icon" src={logIn} alt="log in" />
-                log-in
+                {isLoggedIn ? "Log Out" : "Login | Create Account"}
               </Link>
             </div>
           </div>

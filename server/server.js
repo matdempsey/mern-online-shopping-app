@@ -256,6 +256,11 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
     );
 });
 
+app.get("/api/logout", (req, res) => {
+  req.session.destroy();
+  res.status(204).end();
+});
+
 app.get("/api/components", (req, res) => {
   client
     .db(dbName)

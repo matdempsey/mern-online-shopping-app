@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import CompanyLogo from "../company-logo/CompanyLogo.js";
+import { GlobalContext } from "../../Provider/GlobalProvider.js";
 
 import "./Login.css";
 
@@ -11,6 +12,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { setIsLoggedIn } = useContext(GlobalContext);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -42,6 +44,7 @@ const Login = (props) => {
             setShowError(true);
             setErrorMessage("Your email and/or password is incorrect.");
           } else if (res.status === 200) {
+            setIsLoggedIn((currState) => !currState);
             history.push("/");
           }
         })
