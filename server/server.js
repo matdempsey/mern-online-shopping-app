@@ -68,7 +68,7 @@ const createDatabase = async (client) => {
     });
     console.log("[MongoDB]: customers collection created.");
 
-    await db.createCollection("components", {
+    await db.createCollection("products", {
       autoIndexId: true,
       validator: {
         $jsonSchema: {
@@ -87,6 +87,7 @@ const createDatabase = async (client) => {
                 "Memory",
                 "Storage",
                 "Power Supply",
+                "Peripheral",
                 "Operating System",
               ],
             },
@@ -108,7 +109,7 @@ const createDatabase = async (client) => {
         },
       },
     });
-    console.log("[MongoDB]: components collection created.");
+    console.log("[MongoDB]: products collection created.");
 
     await client.db(dbName).createCollection("cases", {
       autoIndexId: true,
@@ -266,7 +267,7 @@ app.get("/api/logout", (req, res) => {
 app.get("/api/components", (req, res) => {
   client
     .db(dbName)
-    .collection("components")
+    .collection("products")
     .find({})
     .toArray((err, result) => {
       if (err) {
@@ -280,7 +281,7 @@ app.get("/api/components", (req, res) => {
 app.get(`/api/components/:type`, (req, res) => {
   client
     .db(dbName)
-    .collection("components")
+    .collection("products")
     .find(req.params)
     .toArray((err, result) => {
       if (err) {
@@ -294,7 +295,7 @@ app.get(`/api/components/:type`, (req, res) => {
 app.get("/api/product/:name", (req, res) => {
   client
     .db(dbName)
-    .collection("components")
+    .collection("products")
     .findOne({ name: req.params.name }, (err, result) => {
       if (err) {
         console.log("[MongoDB]:", err.message);
@@ -309,7 +310,7 @@ app.get("/api/products/:name", (req, res) => {
 
   client
     .db(dbName)
-    .collection("components")
+    .collection("products")
     .find({ name: re })
     .toArray((err, result) => {
       if (err) {
@@ -339,7 +340,7 @@ app.get(`/api/search`, (req, res) => {
 
   client
     .db(dbName)
-    .collection("components")
+    .collection("products")
     .find({ name: re })
     .toArray((err, result) => {
       if (err) {
