@@ -56,6 +56,10 @@ const ProductListContainer = (props) => {
         componentType = "Power Supply";
         break;
 
+      case "peripherals":
+        componentType = "Peripheral";
+        break;
+
       default:
         break;
     }
