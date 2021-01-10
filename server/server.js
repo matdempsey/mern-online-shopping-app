@@ -230,7 +230,7 @@ app.post("/api/register", jsonBodyParser, checkAccountExists, (req, res) => {
         if (err) {
           console.log("[MongoDB]:", err.message);
         } else {
-          res.status(201).json({ status: 201 });
+          res.sendStatus(201);
         }
       }
     );
@@ -248,9 +248,9 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
         } else {
           if (user) {
             req.session.userID = user._id;
-            res.status(200).json({ status: 200 });
+            res.sendStatus(200);
           } else {
-            res.status(401).json({ status: 401 });
+            res.sendStatus(401);
           }
         }
       }

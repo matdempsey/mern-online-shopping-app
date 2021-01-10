@@ -114,10 +114,8 @@ const CreateAccount = (props) => {
       },
       body: JSON.stringify(customer),
     })
-      .then((res) => res.json())
       .then((res) => {
         if (res.status === 201) history.push("/login");
-
         if (res.status === 409) {
           errorMsgArr.push(
             "An account with this email address already exists."

@@ -38,7 +38,6 @@ const Login = (props) => {
           password: password,
         }),
       })
-        .then((res) => res.json())
         .then((res) => {
           if (res.status === 401) {
             setShowError(true);
