@@ -193,7 +193,7 @@ const checkAccountExists = async (req, res, next) => {
     if (!accExists) {
       next();
     } else {
-      res.status(409).json({ status: 409 });
+      res.sendStatus(409);
     }
   });
 };
