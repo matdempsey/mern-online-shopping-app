@@ -43,7 +43,7 @@ const Login = (props) => {
             setShowError(true);
             setErrorMessage("Your email and/or password is incorrect.");
           } else if (res.status === 200) {
-            setIsLoggedIn((currState) => !currState);
+            setIsLoggedIn(true);
             history.push("/");
           }
         })
