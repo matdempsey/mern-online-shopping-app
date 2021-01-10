@@ -202,6 +202,7 @@ const checkAccountExists = async (req, res, next) => {
 
 app.use(
   session({
+    name: "_session",
     secret: "this needs to be an environment variable",
     resave: false,
     saveUninitialized: false,
@@ -258,6 +259,7 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
 
 app.get("/api/logout", (req, res) => {
   req.session.destroy();
+  res.clearCookie("_session");
   res.status(204).end();
 });
 
