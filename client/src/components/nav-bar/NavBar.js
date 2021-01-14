@@ -38,35 +38,24 @@ const navLinks = [
   },
 ];
 
-const NavBar = (props) => {
-  const { location } = props;
-
-  let render = true;
-  if (
-    location.pathname === "/login" ||
-    location.pathname === "/create-account"
-  ) {
-    render = false;
-  }
+const NavBar = () => {
   return (
     <>
-      {render && (
-        <div className="navbar-container">
-          <ul className="flex-navbar">
-            {navLinks.map((link, idx) => {
-              return (
-                <li key={idx} className="navbar-li">
-                  <Link className="navbar-link" to={link.path}>
-                    {link.text}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+      <div className="navbar-container">
+        <ul className="flex-navbar">
+          {navLinks.map((link, idx) => {
+            return (
+              <li key={idx} className="navbar-li">
+                <Link className="navbar-link" to={link.path}>
+                  {link.text}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
 };
 
-export default withRouter(NavBar);
+export default NavBar;
