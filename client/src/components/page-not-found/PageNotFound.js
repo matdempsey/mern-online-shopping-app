@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import HeaderBar from "../header-bar/HeaderBar";
+import NavBar from "../nav-bar/NavBar";
 
 import "./PageNotFound.css";
 
 const PageNotFound = () => {
   return (
     <div>
+      <HeaderBar />
+      <NavBar />
       <div className="page-not-found-container">
         <h1 className="page-not-found-heading">404</h1>
         <h2 className="page-not-found-sub-heading">Page not found</h2>

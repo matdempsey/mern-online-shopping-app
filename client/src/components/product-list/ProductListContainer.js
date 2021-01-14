@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import HeaderBar from "../header-bar/HeaderBar";
+import NavBar from "../nav-bar/NavBar";
 import ProductList from "./ProductList";
 
 const ProductListContainer = (props) => {
@@ -71,6 +73,8 @@ const ProductListContainer = (props) => {
 
   return (
     <div>
+      <HeaderBar />
+      <NavBar />
       <ProductList products={products} />
     </div>
   );

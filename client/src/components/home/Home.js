@@ -3,10 +3,14 @@ import Slides from "../slides/Slides.js";
 import Footer from "../footer/Footer.js";
 
 import "./Home.css";
+import HeaderBar from "../header-bar/HeaderBar.js";
+import NavBar from "../nav-bar/NavBar.js";
 
 const Home = () => {
   return (
     <div>
+      <HeaderBar />
+      <NavBar />
       <Slides />
       <Footer />
     </div>

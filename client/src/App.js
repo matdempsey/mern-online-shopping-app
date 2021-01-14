@@ -11,7 +11,7 @@ import ProductListContainer from "./components/product-list/ProductListContainer
 import Product from "./components/product/Product.js";
 import PageNotFound from "./components/page-not-found/PageNotFound.js";
 
-import { GlobalProvider } from "./Provider/GlobalProvider.js";
+import { GlobalProvider } from "./provider/GlobalProvider.js";
 
 import "./App.css";
 
@@ -20,8 +20,8 @@ const App = () => {
     <GlobalProvider>
       <div className="main-container">
         <Router>
-          <HeaderBar />
-          <NavBar />
+          {/* <HeaderBar /> */}
+          {/* <NavBar /> */}
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />

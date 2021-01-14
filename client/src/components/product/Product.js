@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import HeaderBar from "../header-bar/HeaderBar.js";
+import NavBar from "../nav-bar/NavBar.js";
 import StockStatus from "../labels/stock-status/StockStatus.js";
 import AddToBasketButton from "../buttons/AddToBasketButton.js";
 
@@ -49,6 +51,8 @@ const Product = (props) => {
 
   return (
     <>
+      <HeaderBar />
+      <NavBar />
       <div className="flex-product-parent-container">
         <div className="product-container">
           {/* first row */}

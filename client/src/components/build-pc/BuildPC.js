@@ -6,6 +6,8 @@ import Summary from "./summary/Summary.js";
 import Footer from "../footer/Footer.js";
 
 import "./BuildPC.css";
+import NavBar from "../nav-bar/NavBar.js";
+import HeaderBar from "../header-bar/HeaderBar.js";
 
 const BuildPC = () => {
   const [caseCost, setCaseCost] = useState(0);
@@ -22,6 +24,8 @@ const BuildPC = () => {
 
   return (
     <>
+      <HeaderBar />
+      <NavBar />
       <div className="flex-build-pc-parent-container">
         <div className="build-pc-container">
           <Label className="section-banner" size="lg">
