@@ -3,13 +3,13 @@ import Slides from "../slides/Slides.js";
 import Footer from "../footer/Footer.js";
 
 import "./Home.css";
-import HeaderBar from "../header-bar/HeaderBar.js";
+import Header from "../header-bar/Header.js";
 import NavBar from "../nav-bar/NavBar.js";
 
 const Home = () => {
   return (
     <div>
-      <HeaderBar />
+      <Header />
       <NavBar />
       <Slides />
       <Footer />

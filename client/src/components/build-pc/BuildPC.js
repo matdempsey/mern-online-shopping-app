@@ -7,7 +7,7 @@ import Footer from "../footer/Footer.js";
 
 import "./BuildPC.css";
 import NavBar from "../nav-bar/NavBar.js";
-import HeaderBar from "../header-bar/HeaderBar.js";
+import Header from "../header-bar/Header.js";
 
 const BuildPC = () => {
   const [caseCost, setCaseCost] = useState(0);
@@ -24,7 +24,7 @@ const BuildPC = () => {
 
   return (
     <>
-      <HeaderBar />
+      <Header />
       <NavBar />
       <div className="flex-build-pc-parent-container">
         <div className="build-pc-container">

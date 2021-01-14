@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SearchResultsCount from "../search-results-count/SearchResultsCount.js";
 import ProductsList from "../../product-list/ProductList.js";
 import NavBar from "../../nav-bar/NavBar.js";
-import HeaderBar from "../../header-bar/HeaderBar.js";
+import Header from "../../header/Header.js";
 
 const SearchResults = (props) => {
   const { location } = props;
@@ -30,7 +30,7 @@ const SearchResults = (props) => {
 
   return (
     <div>
-      <HeaderBar />
+      <Header />
       <NavBar />
       <SearchResultsCount count={results.length} searchText={searchText} />
       <ProductsList products={results} />

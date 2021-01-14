@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HeaderBar from "../header-bar/HeaderBar";
+import Header from "../header-bar/Header";
 import NavBar from "../nav-bar/NavBar";
 import ProductList from "./ProductList";
 
@@ -73,7 +73,7 @@ const ProductListContainer = (props) => {
 
   return (
     <div>
-      <HeaderBar />
+      <Header />
       <NavBar />
       <ProductList products={products} />
     </div>
