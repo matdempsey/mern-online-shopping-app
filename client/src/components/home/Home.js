@@ -3,7 +3,7 @@ import Slides from "../slides/Slides.js";
 import Footer from "../footer/Footer.js";
 
 import "./Home.css";
-import Header from "../header-bar/Header.js";
+import Header from "../header/Header.js";
 import NavBar from "../nav-bar/NavBar.js";
 
 const Home = () => {

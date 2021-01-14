@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../header-bar/Header";
+import Header from "../header/Header";
 import NavBar from "../nav-bar/NavBar";
 import ProductList from "./ProductList";
 

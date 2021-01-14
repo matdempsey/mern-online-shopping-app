@@ -7,7 +7,7 @@ import Footer from "../footer/Footer.js";
 
 import "./BuildPC.css";
 import NavBar from "../nav-bar/NavBar.js";
-import Header from "../header-bar/Header.js";
+import Header from "../header/Header.js";
 
 const BuildPC = () => {
   const [caseCost, setCaseCost] = useState(0);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
-import Header from "../header-bar/Header.js";
+import Header from "../header/Header.js";
 import NavBar from "../nav-bar/NavBar.js";
 import StockStatus from "../labels/stock-status/StockStatus.js";
 import AddToBasketButton from "../buttons/AddToBasketButton.js";
