@@ -3,11 +3,14 @@ import React, { createContext, useState } from "react";
 export const GlobalContext = createContext();
 
 export const GlobalProvider = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // this initial state is required in the event user refreshes
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("_sid") !== null
+  );
   //TODO: basketItemCount
 
   return (
-    <GlobalContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <GlobalContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       {props.children}
     </GlobalContext.Provider>
   );

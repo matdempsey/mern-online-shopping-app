@@ -1,5 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Header from "./components/header/Header.js";
 import NavBar from "./components/nav-bar/NavBar.js";
 import Home from "./components/home/Home";
@@ -10,10 +15,15 @@ import SearchResults from "./components/search/search-results/SearchResults.js";
 import ProductListContainer from "./components/product-list/ProductListContainer";
 import Product from "./components/product/Product.js";
 import PageNotFound from "./components/page-not-found/PageNotFound.js";
+import PrivateRoute from "./routes/PrivateRoute.js";
+import AccountDetails from "./components/account-details/AccountDetails.js";
+import Checkout from "./components/checkout/Checkout.js";
 
 import { GlobalProvider } from "./provider/GlobalProvider.js";
 
 import "./App.css";
+
+export const AppContext = createContext();
 
 const App = () => {
   return (
@@ -23,6 +33,14 @@ const App = () => {
           {/* <Header /> */}
           {/* <NavBar /> */}
           <Switch>
+            <PrivateRoute path="/account-details">
+              <AccountDetails />
+            </PrivateRoute>
+
+            <PrivateRoute path="/checkout">
+              <Checkout />
+            </PrivateRoute>
+
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/create-account" component={CreateAccount} />

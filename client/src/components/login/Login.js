@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import CompanyLogo from "../company-logo/CompanyLogo.js";
-import { GlobalContext } from "../../Provider/GlobalProvider.js";
+import { GlobalContext } from "../../provider/GlobalProvider.js";
 
 import "./Login.css";
 
 const Login = (props) => {
-  const { history } = props;
+  const { history, location } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { setIsLoggedIn } = useContext(GlobalContext);
+  const [showError, setShowError] = useState(false);
+  const { setIsAuthenticated } = useContext(GlobalContext);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -27,7 +27,6 @@ const Login = (props) => {
       setShowError(true);
       setErrorMessage("Please enter your email address and password.");
     } else {
-      // send user log in details to server
       fetch("/api/login", {
         method: "POST",
         headers: {
@@ -38,13 +37,15 @@ const Login = (props) => {
           password: password,
         }),
       })
+        .then((res) => res.json())
         .then((res) => {
-          if (res.status === 401) {
+          if (res.status === 200) {
+            localStorage.setItem("_sid", res.sid);
+            setIsAuthenticated(true);
+            history.push(!location.state ? "/" : location.state.from);
+          } else if (res.status === 401) {
             setShowError(true);
             setErrorMessage("Your email and/or password is incorrect.");
-          } else if (res.status === 200) {
-            setIsLoggedIn(true);
-            history.push("/");
           }
         })
         .catch((err) => console.log(err));

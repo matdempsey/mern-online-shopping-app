@@ -208,7 +208,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     genid: () => genuuidV4(),
-    cookie: { maxAge: 60000 * 60 }, // 1 hour
+    cookie: { maxAge: 60000 * 60, sameSite: "strict" }, // 1 hour
     store: new MongoStore({
       url: url,
       dbName: dbName,
@@ -249,9 +249,9 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
         } else {
           if (user) {
             req.session.userID = user._id;
-            res.sendStatus(200);
+            res.status(200).json({ sid: req.session.id, status: 200 });
           } else {
-            res.sendStatus(401);
+            res.status(401).json({ status: 401 });
           }
         }
       }
@@ -261,7 +261,24 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
 app.get("/api/logout", (req, res) => {
   req.session.destroy();
   res.clearCookie("_session");
-  res.status(204).end();
+  res.sendStatus(204);
+});
+
+app.post("/api/session", jsonBodyParser, (req, res) => {
+  client
+    .db(dbName)
+    .collection("sessions")
+    .findOne({ _id: req.body.sid }, (err, session) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        if (session) {
+          res.status(200).json({ expired: false });
+        } else {
+          res.status(401).json({ expired: true });
+        }
+      }
+    });
 });
 
 app.get("/api/components", (req, res) => {
