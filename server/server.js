@@ -185,7 +185,7 @@ const checkAccountExists = async (req, res, next) => {
         if (err) {
           console.log(err);
         } else {
-          resolve(customer !== null ? true : false);
+          resolve(customer ? true : false);
         }
       });
   });
