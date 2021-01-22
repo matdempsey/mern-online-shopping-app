@@ -1,0 +1,36 @@
+.customer-review-container {
+  margin-top: 50px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 4px -2px #8d8d8d;
+}
+.review-date-container {
+}
+.review-date {
+  padding-top: 5px;
+  font-style: italic;
+  color: #b8b8b8;
+}
+
+.review-section-1 {
+  position: relative;
+  margin-bottom: 16px;
+}
+.avatar {
+  width: 24px;
+  height: 24px;
+}
+
+.review-username {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.review-section-2 {
+  font-weight: 700;
+  display: flex;
+}
+
+.review-title {
+  width: 70%;
+}

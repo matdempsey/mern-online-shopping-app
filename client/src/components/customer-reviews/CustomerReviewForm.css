@@ -1,0 +1,67 @@
+.review-form-container {
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 4px -2px #8d8d8d;
+}
+
+.fg-1 {
+  padding: 10px 0px 10px 22px;
+}
+
+.fg-1-avatar {
+  width: 24px;
+  height: 24px;
+}
+.fg-1-review-username {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fg-2 {
+  display: flex;
+  padding: 0px 22px 0px 22px;
+}
+
+.fg-2-title {
+  width: 70%;
+}
+
+.fg-2-rating {
+  margin-left: 30px;
+}
+
+.fg-2-star-img {
+  width: 12px;
+  height: 12px;
+  margin-left: 3px;
+}
+
+.fg-3 {
+  padding: 0px 22px 0px 22px;
+}
+
+#fg-3-review-textarea {
+  height: 200px;
+  resize: none;
+}
+.fg-3-char-limit {
+  font-size: 12px;
+  margin-top: 2px;
+  padding-right: 5px;
+}
+
+.submit-review-btn-container {
+  display: flex;
+  padding: 0px 0px 15px 22px;
+}
+
+.submit-review-btn {
+}
+
+.review-span-container {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dddddd;
+}

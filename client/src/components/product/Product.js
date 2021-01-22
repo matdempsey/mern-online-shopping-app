@@ -4,6 +4,7 @@ import Header from "../header/Header.js";
 import NavBar from "../nav-bar/NavBar.js";
 import StockStatus from "../labels/stock-status/StockStatus.js";
 import AddToBasketButton from "../buttons/AddToBasketButton.js";
+import CustomerReviewsContainer from "../customer-reviews/CustomerReviewsContainer.js";
 
 import "./Product.css";
 
@@ -107,7 +108,9 @@ const Product = (props) => {
               <TabPane className="tab-pane" tabId={1}>
                 {product.description}
               </TabPane>
-              <TabPane className="tab-pane" tabId={2}></TabPane>
+              <TabPane className="tab-pane" tabId={2}>
+                <CustomerReviewsContainer />
+              </TabPane>
             </TabContent>
           </div>
         </div>

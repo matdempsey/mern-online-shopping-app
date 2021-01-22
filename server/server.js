@@ -3,7 +3,7 @@ const session = require("express-session");
 const { v4: genuuidV4 } = require("uuid");
 const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectID } = require("mongodb");
 
 const app = express();
 const port = 3001;
@@ -102,6 +102,31 @@ const createDatabase = async (client) => {
             price: {
               bsonType: "double",
             },
+
+            reviews: [
+              {
+                _id: {
+                  bsonType: "objectId",
+                },
+                customerName: {
+                  bsonType: "string",
+                },
+
+                title: {
+                  bsonType: "string",
+                },
+                text: {
+                  bsonType: "string",
+                },
+                rating: {
+                  bsonType: "decimal",
+                },
+                datePosted: {
+                  bsonType: "date",
+                },
+              },
+            ],
+
             imagePath: {
               bsonType: "string",
             },
@@ -248,8 +273,13 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
           console.log("[MongoDB]:", err.message);
         } else {
           if (user) {
-            req.session.userID = user._id;
-            res.status(200).json({ sid: req.session.id, status: 200 });
+            delete user.password;
+            req.session.user = user;
+            res.status(200).json({
+              sid: req.session.id,
+              user: req.session.user,
+              status: 200,
+            });
           } else {
             res.status(401).json({ status: 401 });
           }
@@ -336,6 +366,38 @@ app.get("/api/products/:name", (req, res) => {
         res.json(result);
       }
     });
+});
+
+// TODO: finish
+app.post("/api/reviews", jsonBodyParser, (req, res) => {
+  const { productID, customerName, title, text, rating } = req.body.review;
+  const parsedRating = parseFloat(rating).toFixed(1);
+  client
+    .db(dbName)
+    .collection("products")
+    .updateOne(
+      { _id: productID },
+      {
+        //pushes/adds a review item to reviews array.
+        $push: {
+          reviews: {
+            _id: new ObjectID(),
+            customerName: customerName,
+            title: title,
+            text: text,
+            rating: parsedRating,
+            datePosted: new Date(),
+          },
+        },
+      }
+    ),
+    (err) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        res.sendStatus(201);
+      }
+    };
 });
 
 app.get("/api/cases", (req, res) => {
