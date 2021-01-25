@@ -10,9 +10,10 @@ const ProductList = (props) => {
   return (
     <div className="flex-product-list-parent-container">
       <div className="product-list-container">
-        {products.map((product, idx) => (
+        {products.map((product) => (
           <ProductListItems
-            key={idx}
+            key={product.name}
+            id={product._id}
             name={product.name}
             description={product.description}
             price={product.price}

@@ -7,7 +7,7 @@ import StockStatus from "../labels/stock-status/StockStatus.js";
 import "./ProductListItems.css";
 
 const ProductListItems = (props) => {
-  const { name, description, price, qty, imagePath } = props;
+  const { id, name, description, price, qty, imagePath } = props;
 
   return (
     <div>
@@ -33,6 +33,7 @@ const ProductListItems = (props) => {
               to={{
                 pathname: `/products/${name}`,
                 state: {
+                  id: id,
                   name: name,
                   description: description,
                   price: price,

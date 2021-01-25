@@ -12,6 +12,7 @@ const Product = (props) => {
   const { location, match } = props;
 
   const [product, setProduct] = useState({
+    id: "",
     name: "",
     description: "",
     price: null,
@@ -23,8 +24,9 @@ const Product = (props) => {
   // handle user manually entering in the url
   useEffect(() => {
     if (location.state) {
-      const { name, description, price, qty, imagePath } = location.state;
+      const { id, name, description, price, qty, imagePath } = location.state;
       setProduct({
+        id: id,
         name: name,
         description: description,
         price: price,
@@ -36,6 +38,8 @@ const Product = (props) => {
         .then((res) => res.json())
         .then((res) => {
           setProduct({
+            ...product,
+            id: res._id,
             name: res.name,
             description: res.description,
             price: res.price,
@@ -109,7 +113,7 @@ const Product = (props) => {
                 {product.description}
               </TabPane>
               <TabPane className="tab-pane" tabId={2}>
-                <CustomerReviewsContainer />
+                <CustomerReviewsContainer productID={product.id} />
               </TabPane>
             </TabContent>
           </div>
