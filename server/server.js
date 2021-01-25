@@ -277,7 +277,7 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
             req.session.user = user;
             res.status(200).json({
               sid: req.session.id,
-              user: req.session.user,
+              user: { name: `${user.firstName} ${user.lastName}` },
               status: 200,
             });
           } else {
@@ -370,13 +370,14 @@ app.get("/api/products/:name", (req, res) => {
 
 // TODO: finish
 app.post("/api/reviews", jsonBodyParser, (req, res) => {
-  const { productID, customerName, title, text, rating } = req.body.review;
+  const { productID } = req.body;
+  const { customerName, title, text, rating } = req.body.review;
   const parsedRating = parseFloat(rating).toFixed(1);
   client
     .db(dbName)
     .collection("products")
     .updateOne(
-      { _id: productID },
+      { _id: ObjectID(productID) }, // ObjectId() required to work
       {
         //pushes/adds a review item to reviews array.
         $push: {
@@ -389,15 +390,15 @@ app.post("/api/reviews", jsonBodyParser, (req, res) => {
             datePosted: new Date(),
           },
         },
+      },
+      (err) => {
+        if (err) {
+          console.log("[MongoDB]:", err.message);
+        } else {
+          res.sendStatus(201);
+        }
       }
-    ),
-    (err) => {
-      if (err) {
-        console.log("[MongoDB]:", err.message);
-      } else {
-        res.sendStatus(201);
-      }
-    };
+    );
 });
 
 app.get("/api/cases", (req, res) => {
