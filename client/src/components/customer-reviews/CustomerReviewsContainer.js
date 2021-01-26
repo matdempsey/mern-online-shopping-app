@@ -7,8 +7,6 @@ import "./CustomerReviewsContainer.css";
 const CustomerReviewsContainer = (props) => {
   const { productID } = props;
 
-  console.log("CustomerReviewsContainer rendered");
-
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {

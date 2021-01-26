@@ -10,6 +10,7 @@ const CustomerReviewsList = (props) => {
     <div className="customer-reviews-list-container">
       {reviews.map((review) => (
         <CustomerReview
+          key={review._id}
           customerName={review.customerName}
           title={review.title}
           text={review.text}
