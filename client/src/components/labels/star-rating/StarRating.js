@@ -3,10 +3,7 @@ import star from "../../../images/icons/star-rating-fill.png";
 import starNoFill from "../../../images/icons/star-rating-no-fill.png";
 
 import "./StarRating.css";
-/* 
-    TODO: 
-    - read score from props, then render that many stars
-*/
+
 const StarRating = (props) => {
   const { score } = props;
   const [starRatingArr, setStarRatingArr] = useState([]);
