@@ -368,7 +368,6 @@ app.get("/api/products/:name", (req, res) => {
     });
 });
 
-// TODO: finish
 app.post("/api/reviews", jsonBodyParser, (req, res) => {
   const { productID } = req.body;
   const { customerName, title, text, rating } = req.body.review;
@@ -399,6 +398,22 @@ app.post("/api/reviews", jsonBodyParser, (req, res) => {
         }
       }
     );
+});
+
+app.get("/api/reviews/:productID", (req, res) => {
+  const { productID } = req.params;
+  console.log("id", productID);
+  client
+    .db(dbName)
+    .collection("products")
+    .findOne({ _id: ObjectID(productID) }, (err, product) => {
+      if (err) {
+        console.log("[MongoDB]:", err.message);
+      } else {
+        const { reviews } = product;
+        res.json(reviews);
+      }
+    });
 });
 
 app.get("/api/cases", (req, res) => {
