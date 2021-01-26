@@ -1,48 +1,33 @@
 import React from "react";
-import {} from "reactstrap";
 import StarRating from "../labels/star-rating/StarRating";
 
-import avatar from "../../images/icons/avatar.png";
-
 import "./CustomerReview.css";
+import CustomerReviewBadge from "./CustomerReviewBadge";
 
-const CustomerReview = () => {
+const CustomerReview = (props) => {
+  const { customerName, title, text, rating, datePosted } = props;
   return (
     <div className="customer-review-container">
       <div className="review-date-container">
-        <label className="review-date">date reviewed here</label>
+        <label className="review-date">{datePosted}</label>
       </div>
 
       <div className="review-section-1">
-        <img className="avatar" src={avatar} alt="avatar" />
-        <span className="review-username">username</span>
+        <span className="review-username">By {customerName}</span>
       </div>
 
       <div className="review-section-2">
         <div className="review-title">
-          <label>title here</label>
+          <label>{title}</label>
         </div>
-        <StarRating score={3} />
+        <div className="star-rating-container">
+          <StarRating score={rating} />
+        </div>
       </div>
-      <div>
-        <label>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-          commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-          et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
-          felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-          consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-          nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-          venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-          Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-          vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat
-          vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
-          quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
-          laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel
-          augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
-          rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam
-          semper libero, sit amet adipiscing sem neque sed ipsum. N
-        </label>
+      <div className="review-text">
+        <label>{text}</label>
       </div>
+      <CustomerReviewBadge />
     </div>
   );
 };

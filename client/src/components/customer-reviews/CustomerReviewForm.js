@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../provider/GlobalProvider";
 import { Link } from "react-router-dom";
 import { Form, FormGroup, Input, Button } from "reactstrap";
-import avatar from "../../images/icons/avatar.png";
 import star from "../../images/icons/star-rating-fill.png";
 
 import "./CustomerReviewForm.css";
@@ -15,9 +14,9 @@ import "./CustomerReviewForm.css";
 const CustomerReviewForm = (props) => {
   const { productID } = props;
   const { isAuthenticated } = useContext(GlobalContext);
+
   const [review, setReview] = useState({
-    productID: "",
-    customerName: "",
+    customerName: localStorage.getItem("currentUser"),
     title: "",
     text: "",
     rating: null,
@@ -41,7 +40,7 @@ const CustomerReviewForm = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ review }),
+      body: JSON.stringify({ productID: productID, review }),
     });
   };
 
@@ -51,8 +50,9 @@ const CustomerReviewForm = (props) => {
         <div className="review-form-container">
           <Form>
             <FormGroup className="fg-1">
-              <img className="fg-1-avatar" src={avatar} alt="avatar" />
-              <span className="fg-1-review-username">username</span>
+              <span className="fg-1-review-username">
+                {review.customerName}
+              </span>
             </FormGroup>
 
             <FormGroup className="fg-2">
@@ -90,11 +90,7 @@ const CustomerReviewForm = (props) => {
             </FormGroup>
 
             <div className="submit-review-btn-container">
-              <Button
-                className="submit-review-btn"
-                color="success"
-                onClick={onSubmit}
-              >
+              <Button color="success" onClick={onSubmit}>
                 Submit
               </Button>
             </div>

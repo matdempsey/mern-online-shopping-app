@@ -1,19 +1,22 @@
 import React from "react";
-import StarRating from "../labels/star-rating/StarRating";
 import CustomerReview from "./CustomerReview";
-import CustomerReviewForm from "./CustomerReviewForm";
-/* 
-    TODO: 
-    - render CustomerReviewForm first
-    - map customer reviews 
-*/
+
+import "./CustomerReviewsList.css";
+
 const CustomerReviewsList = (props) => {
+  const { reviews } = props;
+
   return (
-    <div>
-      <CustomerReviewForm />
-      <CustomerReview />
-      <CustomerReview />
-      <CustomerReview />
+    <div className="customer-reviews-list-container">
+      {reviews.map((review) => (
+        <CustomerReview
+          customerName={review.customerName}
+          title={review.title}
+          text={review.text}
+          rating={review.rating}
+          datePosted={review.datePosted}
+        />
+      ))}
     </div>
   );
 };

@@ -1,20 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import CustomerReviewForm from "./CustomerReviewForm";
 import CustomerReviewsList from "./CustomerReviewsList";
-/* 
-    TODO: 
-    - render this component in Product.js
-    - get product id from props  
-    - fetch all reviews for the specific product using product id 
-    - pass review results array to CustomerReviewsList.js
-*/
-const CustomerReviewsContainer = () => {
+
+import "./CustomerReviewsContainer.css";
+
+const CustomerReviewsContainer = (props) => {
+  const { productID } = props;
+
+  console.log("CustomerReviewsContainer rendered");
+
+  const [reviews, setReviews] = useState([]);
+
   useEffect(() => {
-    //fetch
-  }, []);
+    fetch(`/api/reviews/${productID}`)
+      .then((res) => res.json())
+      .then((res) => setReviews(res));
+  }, [productID]);
 
   return (
     <div>
-      <CustomerReviewsList />
+      <CustomerReviewForm productID={productID} />
+      <div className="reviews-count-heading">
+        <span> Customer Reviews ({reviews.length})</span>
+      </div>
+      {reviews.length > 0 ? (
+        <CustomerReviewsList productID={productID} reviews={reviews} />
+      ) : (
+        <div className="no-reviews-alert">
+          <span>There are currently no customer reviews for this product.</span>
+        </div>
+      )}
     </div>
   );
 };
