@@ -242,6 +242,10 @@ app.post("/api/reviews", jsonBodyParser, (req, res) => {
             text: text,
             rating: parsedRating,
             datePosted: new Date(),
+            helpfulCount: {
+              yes: 0,
+              no: 0,
+            },
           },
         },
       },
@@ -270,6 +274,52 @@ app.get("/api/reviews/:productID", (req, res) => {
       }
     });
 });
+
+app.put(
+  "/api/products/:productID/reviews/:reviewID",
+  jsonBodyParser,
+  (req, res) => {
+    const { productID, reviewID } = req.params;
+
+    const update = () => {
+      if (req.body.helpfulCount) {
+        const key = Object.keys(req.body.helpfulCount)[0];
+        const value = Object.values(req.body.helpfulCount)[0];
+        return {
+          $set: {
+            ["reviews.$.helpfulCount." + key]: value,
+          },
+        };
+      } else {
+        // user edited their review so update
+        let obj = {};
+        Object.entries(req.body).forEach(([key, value]) => {
+          obj = { ...obj, ["reviews.$." + key]: value };
+        });
+        return { $set: obj };
+      }
+    };
+    const updateQuery = update();
+
+    client
+      .db(dbName)
+      .collection("products")
+      .updateOne(
+        {
+          _id: ObjectID(productID),
+          reviews: { $elemMatch: { _id: ObjectID(reviewID) } },
+        },
+        updateQuery,
+        (err) => {
+          if (err) {
+            console.log("[MongoDB]:", err.message);
+          } else {
+            res.sendStatus(200);
+          }
+        }
+      );
+  }
+);
 
 app.get("/api/cases", (req, res) => {
   client
