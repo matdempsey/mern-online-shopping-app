@@ -53,11 +53,15 @@
   color: #b8b8b8;
 }
 
-.submit-review-btn-container {
+.review-btn-container {
   display: flex;
   justify-content: flex-end;
   padding: 0px 40px 15px 0px;
   margin-top: 20px;
+}
+
+#cancel-edit-btn-container {
+  margin-right: 20px;
 }
 
 .review-span-container {

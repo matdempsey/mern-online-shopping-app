@@ -8,7 +8,7 @@ import "./CustomerReviewForm.css";
 
 // TODO: review character limit
 const CustomerReviewForm = (props) => {
-  const { editMode, productID, reviewID } = props;
+  const { editMode, setEditMode, productID, reviewID } = props;
   const { isAuthenticated } = useContext(GlobalContext);
 
   const [review, setReview] = useState({
@@ -95,10 +95,19 @@ const CustomerReviewForm = (props) => {
               </label>
             </FormGroup>
 
-            <div className="submit-review-btn-container">
-              <Button color="success" onClick={onSubmit}>
-                Submit
-              </Button>
+            <div className="review-btn-container">
+              {editMode && (
+                <div id="cancel-edit-btn-container">
+                  <Button color="secondary" onClick={() => setEditMode(false)}>
+                    Cancel Edit
+                  </Button>
+                </div>
+              )}
+              <div>
+                <Button color="secondary" onClick={onSubmit}>
+                  Submit
+                </Button>
+              </div>
             </div>
           </Form>
         </div>

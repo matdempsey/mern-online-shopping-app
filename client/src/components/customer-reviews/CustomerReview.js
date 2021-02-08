@@ -24,16 +24,13 @@ const CustomerReview = (props) => {
   const [editMode, setEditMode] = useState(false);
   const { isAuthenticated } = useContext(GlobalContext);
 
-  const handleEditReviewClick = () => {
-    setEditMode(true);
-  };
-
   return (
     <>
       {editMode ? (
         <div>
           <CustomerReviewForm
             editMode={editMode}
+            setEditMode={setEditMode}
             productID={productID}
             reviewID={reviewID}
           />
@@ -46,7 +43,7 @@ const CustomerReview = (props) => {
                 className="edit-review-img"
                 src={editReviewIcon}
                 alt="edit review button"
-                onClick={handleEditReviewClick}
+                onClick={() => setEditMode(true)}
               />
             </div>
           )}
