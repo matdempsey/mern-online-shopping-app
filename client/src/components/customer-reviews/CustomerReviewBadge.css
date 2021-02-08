@@ -1,0 +1,12 @@
+.customer-review-badge-container {
+  margin-top: 30px;
+}
+
+.review-badge {
+  margin-left: 8px;
+}
+
+.review-badge:hover {
+  cursor: pointer;
+  color: #ffa500;
+}
