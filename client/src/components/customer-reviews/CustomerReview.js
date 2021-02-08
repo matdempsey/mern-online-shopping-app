@@ -1,34 +1,86 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "../../provider/GlobalProvider";
 import StarRating from "../labels/star-rating/StarRating";
-
-import "./CustomerReview.css";
+import { Label } from "reactstrap";
+import CustomerReviewForm from "./CustomerReviewForm";
 import CustomerReviewBadge from "./CustomerReviewBadge";
 
+import editReviewIcon from "./../../images/icons/edit-review.png";
+
+import "./CustomerReview.css";
+
 const CustomerReview = (props) => {
-  const { customerName, title, text, rating, datePosted } = props;
+  const {
+    productID,
+    reviewID,
+    customerName,
+    title,
+    text,
+    rating,
+    datePosted,
+    helpfulCount,
+  } = props;
+
+  const [editMode, setEditMode] = useState(false);
+  const { isAuthenticated } = useContext(GlobalContext);
+
+  const handleEditReviewClick = () => {
+    setEditMode(true);
+  };
+
   return (
-    <div className="customer-review-container">
-      <div className="review-date-container">
-        <label className="review-date">{datePosted}</label>
-      </div>
-
-      <div className="review-section-1">
-        <span className="review-username">By {customerName}</span>
-      </div>
-
-      <div className="review-section-2">
-        <div className="review-title">
-          <label>{title}</label>
+    <>
+      {editMode ? (
+        <div>
+          <CustomerReviewForm
+            editMode={editMode}
+            productID={productID}
+            reviewID={reviewID}
+          />
         </div>
-        <div className="star-rating-container">
-          <StarRating score={rating} />
+      ) : (
+        <div className="customer-review-container">
+          {isAuthenticated && (
+            <div className="edit-review-container">
+              <img
+                className="edit-review-img"
+                src={editReviewIcon}
+                alt="edit review button"
+                onClick={handleEditReviewClick}
+              />
+            </div>
+          )}
+
+          <div className="review-date-container">
+            <Label className="small-text">{datePosted}</Label>
+          </div>
+
+          <div className="review-section-1">
+            <span className="review-username"> {customerName}</span>
+          </div>
+
+          <div className="review-section-2">
+            <div className="star-rating-container">
+              <StarRating score={rating} />
+            </div>
+            <div className="review-title">
+              <Label>{title}</Label>
+            </div>
+          </div>
+          <div className="review-text">
+            <Label>{text}</Label>
+          </div>
+
+          <div className="review-section-3">
+            <CustomerReviewBadge
+              productID={productID}
+              reviewID={reviewID}
+              helpfulCount={helpfulCount}
+            />
+          </div>
         </div>
-      </div>
-      <div className="review-text">
-        <label>{text}</label>
-      </div>
-      <CustomerReviewBadge />
-    </div>
+      )}
+    </>
   );
 };
 

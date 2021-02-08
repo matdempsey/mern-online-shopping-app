@@ -1,0 +1,12 @@
+.reviews-count-heading {
+  padding-left: 18px;
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  border-bottom: 1px #b8b8b8 solid;
+}
+
+.no-reviews-alert {
+  text-align: center;
+  margin-top: 10px;
+}

@@ -45,17 +45,19 @@
   resize: none;
 }
 .fg-3-char-limit {
+  display: flex;
+  justify-content: flex-end;
   font-size: 12px;
   margin-top: 2px;
   padding-right: 5px;
+  color: #b8b8b8;
 }
 
 .submit-review-btn-container {
   display: flex;
-  padding: 0px 0px 15px 22px;
-}
-
-.submit-review-btn {
+  justify-content: flex-end;
+  padding: 0px 40px 15px 0px;
+  margin-top: 20px;
 }
 
 .review-span-container {
@@ -63,5 +65,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dddddd;
+  background-color: #fff3cd;
+  color: #856404;
 }

@@ -1,18 +1,14 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../provider/GlobalProvider";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Button } from "reactstrap";
+import { Form, FormGroup, Input, Button, Label } from "reactstrap";
 import star from "../../images/icons/star-rating-fill.png";
 
 import "./CustomerReviewForm.css";
-/* 
-    TODO: 
-    - if user is logged in (isAuthenticated -- useContext()) allow user to write review 
-    - if user is not logged in, show message "Only registered customers can write a review. log-in or create account? "     
-    - review character limit
-*/
+
+// TODO: review character limit
 const CustomerReviewForm = (props) => {
-  const { productID } = props;
+  const { editMode, productID, reviewID } = props;
   const { isAuthenticated } = useContext(GlobalContext);
 
   const [review, setReview] = useState({
@@ -35,13 +31,23 @@ const CustomerReviewForm = (props) => {
   };
 
   const onSubmit = () => {
-    fetch("/api/reviews", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ productID: productID, review }),
-    });
+    if (editMode) {
+      fetch(`/api/products/${productID}/reviews/${reviewID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(review),
+      });
+    } else {
+      fetch("/api/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productID: productID, review }),
+      });
+    }
   };
 
   return (
@@ -57,7 +63,7 @@ const CustomerReviewForm = (props) => {
 
             <FormGroup className="fg-2">
               <div className="fg-2-title">
-                <label>Title</label>
+                <Label for="title">Title</Label>
                 <Input onChange={onReviewTitleChange} />
               </div>
               <div className="fg-2-rating">

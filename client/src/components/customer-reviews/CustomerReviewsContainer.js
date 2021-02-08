@@ -13,10 +13,10 @@ const CustomerReviewsContainer = (props) => {
     fetch(`/api/reviews/${productID}`)
       .then((res) => res.json())
       .then((res) => setReviews(res));
-  }, [productID]);
+  }, []);
 
   return (
-    <div>
+    <div className="customer-reviews-main-container">
       <CustomerReviewForm productID={productID} />
       <div className="reviews-count-heading">
         <span> Customer Reviews ({reviews.length})</span>
