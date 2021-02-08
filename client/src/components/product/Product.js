@@ -21,7 +21,7 @@ const Product = (props) => {
   });
   const [activeTab, setActiveTab] = useState(1);
 
-  // handle user manually entering in the url
+  // handle user manually entering in the url i.e. no location state
   useEffect(() => {
     if (location.state) {
       const { id, name, description, price, qty, imagePath } = location.state;
@@ -113,7 +113,9 @@ const Product = (props) => {
                 {product.description}
               </TabPane>
               <TabPane className="tab-pane" tabId={2}>
-                <CustomerReviewsContainer productID={product.id} />
+                {product.id && (
+                  <CustomerReviewsContainer productID={product.id} />
+                )}
               </TabPane>
             </TabContent>
           </div>
