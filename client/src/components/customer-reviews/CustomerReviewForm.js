@@ -39,6 +39,7 @@ const CustomerReviewForm = (props) => {
         },
         body: JSON.stringify(review),
       });
+      setEditMode(false);
     } else {
       fetch("/api/reviews", {
         method: "POST",
