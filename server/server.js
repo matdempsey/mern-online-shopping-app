@@ -296,6 +296,9 @@ app.put(
         Object.entries(req.body).forEach(([key, value]) => {
           obj = { ...obj, ["reviews.$." + key]: value };
         });
+
+        obj = { ...obj, "reviews.$.datePosted": new Date() };
+
         return { $set: obj };
       }
     };
