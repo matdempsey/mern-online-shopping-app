@@ -36,11 +36,9 @@ const CustomerReviewForm = (props) => {
     const currentLength = e.target.value.length;
     setCharCount(maxLength - currentLength);
 
-    if (currentLength === maxLength) {
-      setCharLimitReached(true);
-    } else {
-      setCharLimitReached(false);
-    }
+    if (currentLength === maxLength) setCharLimitReached(true);
+
+    if (charLimitReached) setCharLimitReached(false);
   };
 
   const onSubmit = () => {
