@@ -44,13 +44,20 @@
   height: 200px;
   resize: none;
 }
-.fg-3-char-limit {
+
+.fg-3-char-limit-container {
   display: flex;
   justify-content: flex-end;
   font-size: 12px;
   margin-top: 2px;
   padding-right: 5px;
+}
+.fg-3-char-limit {
   color: #b8b8b8;
+}
+
+.fg-3-char-limit-max {
+  color: #ff0000;
 }
 
 .review-btn-container {

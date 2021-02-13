@@ -18,6 +18,9 @@ const CustomerReviewForm = (props) => {
     rating: null,
   });
 
+  const [charCount, setCharCount] = useState(1000);
+  const [charLimitReached, setCharLimitReached] = useState(false);
+
   const onReviewTitleChange = (e) => {
     setReview({ ...review, title: e.target.value });
   };
@@ -28,6 +31,16 @@ const CustomerReviewForm = (props) => {
 
   const onReviewTextChange = (e) => {
     setReview({ ...review, text: e.target.value });
+
+    const maxLength = e.target.maxLength;
+    const currentLength = e.target.value.length;
+    setCharCount(maxLength - currentLength);
+
+    if (currentLength === maxLength) {
+      setCharLimitReached(true);
+    } else {
+      setCharLimitReached(false);
+    }
   };
 
   const onSubmit = () => {
@@ -91,9 +104,15 @@ const CustomerReviewForm = (props) => {
                 maxLength="1000"
                 onChange={onReviewTextChange}
               />
-              <label className="fg-3-char-limit">
-                Characters remaining: 1000{" "}
-              </label>
+              <div className="fg-3-char-limit-container">
+                <label
+                  className={
+                    charLimitReached ? "fg-3-char-limit-max" : "fg-3-char-limit"
+                  }
+                >
+                  Characters remaining: {charCount}
+                </label>
+              </div>
             </FormGroup>
 
             <div className="review-btn-container">
