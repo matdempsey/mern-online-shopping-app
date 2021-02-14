@@ -24,6 +24,8 @@ const CustomerReview = (props) => {
   const [editMode, setEditMode] = useState(false);
   const { isAuthenticated } = useContext(GlobalContext);
 
+  const formattedDate = new Date(datePosted).toLocaleDateString();
+
   return (
     <>
       {editMode ? (
@@ -49,7 +51,7 @@ const CustomerReview = (props) => {
           )}
 
           <div className="review-date-container">
-            <Label className="small-text">{datePosted}</Label>
+            <Label className="small-text">{formattedDate}</Label>
           </div>
 
           <div className="review-section-1">
