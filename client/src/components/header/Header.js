@@ -38,6 +38,7 @@ const Header = (props) => {
     if (isAuthenticated) {
       fetch("/api/logout").then(() => {
         localStorage.removeItem("_sid");
+        localStorage.removeItem("currentUser");
         setIsAuthenticated(false);
       });
     } else {
