@@ -41,7 +41,7 @@ const CustomerReview = (props) => {
         </div>
       ) : (
         <div className="customer-review-container">
-          {isAuthenticated && user.id === customerID ? (
+          {isAuthenticated && user.id === customerID && (
             <div className="edit-review-container">
               <img
                 className="edit-review-img"
@@ -50,7 +50,7 @@ const CustomerReview = (props) => {
                 onClick={() => setEditMode(true)}
               />
             </div>
-          ) : null}
+          )}
 
           <div className="review-date-container">
             <Label className="small-text">{formattedDate}</Label>
