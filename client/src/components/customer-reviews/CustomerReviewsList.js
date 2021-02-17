@@ -13,6 +13,7 @@ const CustomerReviewsList = (props) => {
           productID={productID}
           key={review._id}
           reviewID={review._id}
+          customerID={review.customerID}
           customerName={review.customerName}
           title={review.title}
           text={review.text}

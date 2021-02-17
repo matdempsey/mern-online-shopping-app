@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useReducer } from "react";
 import { GlobalContext } from "../../provider/GlobalProvider";
 import StarRating from "../labels/star-rating/StarRating";
 import { Label } from "reactstrap";
@@ -13,6 +13,7 @@ const CustomerReview = (props) => {
   const {
     productID,
     reviewID,
+    customerID,
     customerName,
     title,
     text,
@@ -24,6 +25,7 @@ const CustomerReview = (props) => {
   const [editMode, setEditMode] = useState(false);
   const { isAuthenticated } = useContext(GlobalContext);
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
   const formattedDate = new Date(datePosted).toLocaleDateString();
 
   return (
@@ -39,7 +41,7 @@ const CustomerReview = (props) => {
         </div>
       ) : (
         <div className="customer-review-container">
-          {isAuthenticated && (
+          {isAuthenticated && user.id === customerID ? (
             <div className="edit-review-container">
               <img
                 className="edit-review-img"
@@ -48,7 +50,7 @@ const CustomerReview = (props) => {
                 onClick={() => setEditMode(true)}
               />
             </div>
-          )}
+          ) : null}
 
           <div className="review-date-container">
             <Label className="small-text">{formattedDate}</Label>
