@@ -11,8 +11,9 @@ const CustomerReviewForm = (props) => {
   const { editMode, setEditMode, productID, reviewID } = props;
   const { isAuthenticated } = useContext(GlobalContext);
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
   const [review, setReview] = useState({
-    customerName: localStorage.getItem("currentUser"),
     title: "",
     text: "",
     rating: null,
@@ -57,7 +58,7 @@ const CustomerReviewForm = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productID: productID, review }),
+        body: JSON.stringify({ productID: productID, user, review }),
       });
     }
   };
@@ -68,9 +69,7 @@ const CustomerReviewForm = (props) => {
         <div className="review-form-container">
           <Form>
             <FormGroup className="fg-1">
-              <span className="fg-1-review-username">
-                {review.customerName}
-              </span>
+              <span className="fg-1-review-username">{user.name}</span>
             </FormGroup>
 
             <FormGroup className="fg-2">
