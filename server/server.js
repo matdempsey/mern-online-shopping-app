@@ -132,7 +132,10 @@ app.post("/api/login", jsonBodyParser, (req, res) => {
             req.session.user = user;
             res.status(200).json({
               sid: req.session.id,
-              user: { name: `${user.firstName} ${user.lastName}` },
+              user: {
+                id: user._id,
+                name: `${user.firstName} ${user.lastName}`,
+              },
               status: 200,
             });
           } else {
@@ -225,7 +228,8 @@ app.get("/api/products/:name", (req, res) => {
 
 app.post("/api/reviews", jsonBodyParser, (req, res) => {
   const { productID } = req.body;
-  const { customerName, title, text, rating } = req.body.review;
+  const { id, name } = req.body.user;
+  const { title, text, rating } = req.body.review;
   const parsedRating = parseFloat(rating).toFixed(1);
   client
     .db(dbName)
@@ -237,7 +241,8 @@ app.post("/api/reviews", jsonBodyParser, (req, res) => {
         $push: {
           reviews: {
             _id: new ObjectID(),
-            customerName: customerName,
+            customerID: id,
+            customerName: name,
             title: title,
             text: text,
             rating: parsedRating,
