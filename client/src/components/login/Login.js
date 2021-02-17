@@ -41,6 +41,10 @@ const Login = (props) => {
         .then((res) => {
           if (res.status === 200) {
             localStorage.setItem("_sid", res.sid);
+            localStorage.setItem(
+              "currentUser",
+              JSON.stringify({ id: res.user.id, name: res.user.name })
+            );
             setIsAuthenticated(true);
             history.push(!location.state ? "/" : location.state.from);
           } else if (res.status === 401) {
