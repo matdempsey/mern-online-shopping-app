@@ -1,5 +1,5 @@
 # mern-online-shopping-app
-An e-commerce app utilising the MERN web stack (WIP)
+An e-commerce app utilising the MERN web stack
 
 <b>In its current state the project includes: </b>
   * Product search functionality
